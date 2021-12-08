@@ -4,16 +4,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import FoodsRecipes from './pages/FoodsRecipes';
+import { Provider } from './Context/Context';
 
 function App() {
   return (
     <div className="meals">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ Login } />
-          <Route path="/comidas" component={ FoodsRecipes } />
-        </Switch>
-      </BrowserRouter>
+      <Provider>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ Login } />
+            <Route path="/comidas" component={ FoodsRecipes } />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }

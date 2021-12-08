@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { Context } from '../Context/Context';
 
 const getDisabled = (email, password) => {
   const checkEmail = () => {
@@ -13,7 +14,7 @@ const getDisabled = (email, password) => {
 };
 
 function Login({ history }) {
-  const [email, setEmail] = useState('');
+  const { email, setEmail } = useContext(Context);
   const [password, setPassword] = useState('');
 
   const handleClick = (event) => {
