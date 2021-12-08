@@ -18,6 +18,7 @@ function Profile({ history }) {
       <button
         type="button"
         data-testid="profile-favorite-btn"
+        onClick={ () => history.push('/receitas-favoritas') }
       >
         Receitas Favoritas
 
@@ -38,4 +39,5 @@ Profile.propTypes = {
     push: PropTypes.func,
   }).isRequired,
 };
+
 export default Profile;
