@@ -7,6 +7,7 @@ import FoodsRecipes from './pages/FoodsRecipes';
 import { Provider } from './context/Context';
 import Profile from './pages/Profile';
 import RecipesMade from './pages/RecipesMade';
+import FavoritesRecipes from './pages/FavoritesRecipes';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/comidas" component={ FoodsRecipes } />
             <Route path="/perfil" component={ Profile } />
             <Route path="/receitas-feitas" component={ RecipesMade } />
+            <Route path="/receitas-favoritas" component={ FavoritesRecipes } />
           </Switch>
         </BrowserRouter>
       </Provider>
