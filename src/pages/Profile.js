@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-function Profile() {
+function Profile({ history }) {
   const emailByLocalStorage = JSON.parse(localStorage.getItem('user')).email;
   return (
     <section>
@@ -9,6 +10,7 @@ function Profile() {
       <button
         type="button"
         data-testid="profile-done-btn"
+        onClick={ () => history.push('/receitas-feitas') }
       >
         Receitas Feitas
 
@@ -31,4 +33,9 @@ function Profile() {
   );
 }
 
+Profile.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 export default Profile;
