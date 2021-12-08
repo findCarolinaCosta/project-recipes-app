@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
-import { Context } from '../context/Context';
+import React from 'react';
 
 function Profile() {
-  const { email } = useContext(Context);
+  const emailByLocalStorage = JSON.parse(localStorage.getItem('user')).email;
   return (
     <section>
       <h1> Página de perfil</h1>
-      <p data-testid="profile-email">{email}</p>
+      <p data-testid="profile-email">{emailByLocalStorage}</p>
       <button
         type="button"
         data-testid="profile-done-btn"
