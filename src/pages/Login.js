@@ -15,6 +15,11 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+  };
+
   return (
     <form className="container form-group">
       <label htmlFor="email">
@@ -39,6 +44,7 @@ function Login() {
         type="submit"
         data-testid="login-submit-btn"
         disabled={ !getDisabled(email, password) }
+        onClick={ handleClick }
       >
         Entrar
 
