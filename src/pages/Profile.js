@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import getExit from '../helpers/getExit';
 
 function Profile({ history }) {
   const emailByLocalStorage = JSON.parse(localStorage.getItem('user')).email;
@@ -26,6 +27,7 @@ function Profile({ history }) {
       <button
         type="button"
         data-testid="profile-logout-btn"
+        onClick={ () => getExit(history) }
       >
         Sair
 
