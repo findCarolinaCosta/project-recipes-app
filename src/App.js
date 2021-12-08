@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import FoodsRecipes from './pages/FoodsRecipes';
-import { Provider } from './Context/Context';
+import { Provider } from './context/Context';
 
 function App() {
   return (

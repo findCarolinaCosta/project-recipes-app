@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
-import { Context } from '../Context/Context';
+import { Context } from '../context/Context';
 
 const getDisabled = (email, password) => {
   const checkEmail = () => {
