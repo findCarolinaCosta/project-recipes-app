@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import FoodsRecipes from './pages/FoodsRecipes';
 import { Provider } from './context/Context';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={ Login } />
             <Route path="/comidas" component={ FoodsRecipes } />
+            <Route path="/perfil" component={ Profile } />
           </Switch>
         </BrowserRouter>
       </Provider>
