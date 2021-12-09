@@ -19,7 +19,7 @@ function Header() {
         </Link>
       </div>
       <div>
-        <p data_testid="page-title">
+        <p data-testid="page-title">
           Titulo do Header
         </p>
       </div>
@@ -32,6 +32,12 @@ function Header() {
             data-testid="search-top-btn"
           />
         </button>
+        <input
+          id="search-input"
+          type="text"
+          data-testid="search-input"
+          placeholder="Busca..."
+        />
       </div>
     </section>
   );
