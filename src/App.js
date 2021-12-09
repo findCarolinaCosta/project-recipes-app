@@ -10,6 +10,7 @@ import RecipesMade from './pages/RecipesMade';
 import FavoritesRecipes from './pages/FavoritesRecipes';
 import ExploreScreen from './pages/ExploreScreen';
 import ExploreFoods from './pages/ExploreFoods';
+import ExploreDrinks from './pages/ExploreDrinks';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/receitas-favoritas" component={ FavoritesRecipes } />
             <Route path="/explorar" component={ ExploreScreen } />
             <Route path="/explorar/comidas" component={ ExploreFoods } />
+            <Route path="/explorar/bebidas" component={ ExploreDrinks } />
           </Switch>
         </BrowserRouter>
       </Provider>
