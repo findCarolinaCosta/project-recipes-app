@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import RecipesMade from './pages/RecipesMade';
 import FavoritesRecipes from './pages/FavoritesRecipes';
 import ExploreScreen from './pages/ExploreScreen';
+import ExploreFoods from './pages/ExploreFoods';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/receitas-feitas" component={ RecipesMade } />
             <Route path="/receitas-favoritas" component={ FavoritesRecipes } />
             <Route path="/explorar" component={ ExploreScreen } />
+            <Route path="/explorar/comidas" component={ ExploreFoods } />
           </Switch>
         </BrowserRouter>
       </Provider>
