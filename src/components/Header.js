@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header() {
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <section>
       <div>
@@ -37,7 +40,12 @@ function Header() {
           type="text"
           data-testid="search-input"
           placeholder="Busca..."
+          value={ searchTerm }
+          onChange={ ({ target }) => setSearchTerm(target.value) }
         />
+      </div>
+      <div>
+        <SearchBar searchTerm={ searchTerm } />
       </div>
     </section>
   );
