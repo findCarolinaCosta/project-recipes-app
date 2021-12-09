@@ -1,8 +1,12 @@
 import React from 'react';
+import RecipeCard from '../components/RecipeCard';
 
 function FoodsRecipes() {
   return (
-    <div> FoodsRecipes </div>
+    <div>
+      <h1>Receitas de comidas</h1>
+      <RecipeCard itemToMap="meals" />
+    </div>
   );
 }
 
