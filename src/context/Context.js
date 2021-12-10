@@ -5,6 +5,7 @@ import fetchAreas from '../services/fetchAreas';
 import fetchIngredients from '../services/fetchIngredients';
 import fetchMeals from '../services/fetchMeals';
 import fetchDrinks from '../services/fetchDrinks';
+import fetchDrinksCategories from '../services/fetchDrinksCategories';
 
 const Context = createContext();
 const { Provider, Consumer } = Context;
@@ -16,6 +17,7 @@ function RecipesProvider({ children }) {
   const [mealsCategories, setMealsCategories] = useState([]);
   const [areas, setAreas] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [drinksCategories, setDrinksCategories] = useState([]);
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
@@ -23,6 +25,7 @@ function RecipesProvider({ children }) {
     fetchMealsCategories().then((response) => setMealsCategories(response.meals));
     fetchAreas().then((response) => setAreas(response.meals));
     fetchIngredients().then((response) => setIngredients(response.meals));
+    fetchDrinksCategories().then((categories) => setDrinksCategories(categories));
   }, []);
 
   const context = {
@@ -38,6 +41,7 @@ function RecipesProvider({ children }) {
     setMealsCategories,
     setAreas,
     setIngredients,
+    drinksCategories,
   };
 
   return (
