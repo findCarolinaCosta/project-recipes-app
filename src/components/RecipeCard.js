@@ -31,11 +31,11 @@ function RecipeCard({ itemToMap }) {
               <section data-testid={ `${index}-recipe-card` } key={ drink.idDrink }>
                 <img
                   src={ drink.strDrinkThumb }
-                  alt={ drink.strGlass }
+                  alt={ drink.strDrink }
                   data-testid={ `${index}-card-img` }
                   width="100px"
                 />
-                <h1 data-testid={ `${index}-card-name` }>{drink.strGlass}</h1>
+                <h1 data-testid={ `${index}-card-name` }>{drink.strDrink}</h1>
               </section>
             );
           }
