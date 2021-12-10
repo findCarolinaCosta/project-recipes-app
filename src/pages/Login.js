@@ -32,6 +32,7 @@ function Login({ history }) {
           id="email"
           type="email"
           data-testid="email-input"
+          name="emailInput"
           value={ email }
           onChange={ ({ target }) => setEmail(target.value) }
         />
