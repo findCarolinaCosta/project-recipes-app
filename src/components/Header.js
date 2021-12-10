@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header() {
+  const [isVisible, setIsVisible] = useState(false);
+  function handleClick() {
+    return !isVisible ? setIsVisible(true) : setIsVisible(false);
+  }
   return (
     <section>
       <div>
@@ -24,7 +28,10 @@ function Header() {
         </p>
       </div>
       <div>
-        <button type="button">
+        <button
+          type="button"
+          onClick={ handleClick }
+        >
           <img
             src={ searchIcon }
             alt="search-icon"
@@ -32,12 +39,12 @@ function Header() {
             data-testid="search-top-btn"
           />
         </button>
-        <input
+        { isVisible && (<input
           id="search-input"
           type="text"
           data-testid="search-input"
           placeholder="Busca..."
-        />
+        />) }
       </div>
     </section>
   );
