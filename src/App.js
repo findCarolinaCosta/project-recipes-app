@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import FoodsRecipes from './pages/FoodsRecipes';
 import { Provider } from './context/Context';
@@ -16,18 +16,16 @@ function App() {
   return (
     <div className="meals">
       <Provider>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={ Login } />
-            <Route path="/comidas" component={ FoodsRecipes } />
-            <Route path="/perfil" component={ Profile } />
-            <Route path="/receitas-feitas" component={ RecipesMade } />
-            <Route path="/receitas-favoritas" component={ FavoritesRecipes } />
-            <Route path="/explorar" component={ ExploreScreen } />
-            <Route path="/explorar/comidas" component={ ExploreFoods } />
-            <Route path="/explorar/bebidas" component={ ExploreDrinks } />
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route path="/comidas" component={ FoodsRecipes } />
+          <Route path="/perfil" component={ Profile } />
+          <Route path="/receitas-feitas" component={ RecipesMade } />
+          <Route path="/receitas-favoritas" component={ FavoritesRecipes } />
+          <Route path="/explorar" component={ ExploreScreen } />
+          <Route path="/explorar/comidas" component={ ExploreFoods } />
+          <Route path="/explorar/bebidas" component={ ExploreDrinks } />
+        </Switch>
       </Provider>
     </div>
   );
