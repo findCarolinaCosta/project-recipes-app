@@ -2,18 +2,18 @@ import React from 'react';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 
-function FoodsRecipes(props) {
+function DrinksRecipes(props) {
   return (
     <>
-      <header className="header">
+      <header>
         <Header props={ props } />
       </header>
-      <div>
+      <div className="meals">
         <h1>Receitas de comidas</h1>
-        <RecipeCard itemToMap="meals" />
+        <RecipeCard itemToMap="drinks" />
       </div>
     </>
   );
 }
 
-export default FoodsRecipes;
+export default DrinksRecipes;
