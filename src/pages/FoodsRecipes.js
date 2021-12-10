@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function FoodsRecipes() {
+function FoodsRecipes(props) {
   return (
     <div>
-      <Header />
+      <Header props={ props } />
     </div>
   );
 }

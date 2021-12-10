@@ -5,6 +5,7 @@ import fetchMealsByIngredient from '../services/fetchMealsByIngredient';
 import fetchMealsByName from '../services/fetchMealsByName';
 
 function SearchBar(props) {
+  const { props: { match: { path } } } = props;
   const [chosenSearch, setSearch] = useState({});
   const [foundMeals, setFoundMeals] = useState([]);
 
@@ -24,8 +25,13 @@ function SearchBar(props) {
     return foundMeals;
   };
 
+  const searchRecipes = async (receivedTerm) => {
+    if (path === '/comidas') {
+      await searchMeals(receivedTerm);
+    }
+  };
+
   const handleRadioClick = ({ value }) => {
-    console.log(value);
     setSearch(value);
   };
 
@@ -70,7 +76,7 @@ function SearchBar(props) {
       <button
         data-testid="exec-search-btn"
         type="button"
-        onClick={ () => searchMeals(props.searchTerm) }
+        onClick={ () => searchRecipes(props.searchTerm) }
       >
         Buscar
       </button>
@@ -80,6 +86,7 @@ function SearchBar(props) {
 
 SearchBar.propTypes = {
   searchTerm: PropTypes.string.isRequired,
+  props: PropTypes.shape().isRequired,
 };
 
 export default SearchBar;
