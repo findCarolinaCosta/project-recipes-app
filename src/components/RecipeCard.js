@@ -8,7 +8,7 @@ function RecipeCard({ itemToMap }) {
   const { meals, drinks } = useContext(Context);
   const renderedQuantity = 12;
   return (
-    <div className="meals">
+    <div className="meals row">
       { (itemToMap === 'meals' && meals) ? meals.map((meal, index) => {
         if (index < renderedQuantity) {
           return (

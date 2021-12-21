@@ -9,7 +9,7 @@ function Header({ props }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <section className="header row">
+    <section className="meals row">
       <div>
         <Link to="/perfil">
           <button type="button">
