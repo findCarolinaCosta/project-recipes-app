@@ -9,7 +9,7 @@ function RecipeCard({ itemToMap }) {
   const renderedQuantity = 12;
   return (
     <div className="meals">
-      { itemToMap === 'meals' ? meals.map((meal, index) => {
+      { (itemToMap === 'meals' && meals) ? meals.map((meal, index) => {
         if (index < renderedQuantity) {
           return (
             <section data-testid={ `${index}-recipe-card` } key={ meal.idMeal }>

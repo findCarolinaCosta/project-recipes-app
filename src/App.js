@@ -15,7 +15,7 @@ import DrinksRecipes from './pages/DrinksRecipes';
 
 function App() {
   return (
-    <div className="meals">
+    <div className="container-sm">
       <Provider>
         <BrowserRouter>
           <Switch>

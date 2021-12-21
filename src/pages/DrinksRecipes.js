@@ -9,7 +9,7 @@ function DrinksRecipes(props) {
         <Header props={ props } />
       </header>
       <div className="meals">
-        <h1>Receitas de comidas</h1>
+        <h1>Receitas de bebidas</h1>
         <RecipeCard itemToMap="drinks" />
       </div>
     </>
