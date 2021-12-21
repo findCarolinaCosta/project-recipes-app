@@ -61,7 +61,7 @@ function SearchBar(props) {
   return (
     <form>
       <div className="row">
-        <div className="col-sm-4">
+        <div className="col-sm-3">
           <label htmlFor="ingredient-search">
             <input
               data-testid="ingredient-search-radio"
@@ -97,14 +97,15 @@ function SearchBar(props) {
             />
             Primeira letra
           </label>
-
-          <button
-            data-testid="exec-search-btn"
-            type="button"
-            onClick={ () => searchRecipes(props.searchTerm) }
-          >
-            Buscar
-          </button>
+          <div className="col-sm-1">
+            <button
+              data-testid="exec-search-btn"
+              type="button"
+              onClick={ () => searchRecipes(props.searchTerm) }
+            >
+              Buscar
+            </button>
+          </div>
         </div>
       </div>
     </form>
