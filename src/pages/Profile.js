@@ -3,11 +3,12 @@ import React from 'react';
 import getExit from '../helpers/getExit';
 import Header from '../components/Header';
 
-function Profile({ history }) {
+function Profile(props) {
+  const { history } = props;
   const emailByLocalStorage = JSON.parse(localStorage.getItem('user')).email;
   return (
     <section>
-      <Header />
+      <Header props={ props } />
       <h1> Página de perfil</h1>
       <p data-testid="profile-email">{emailByLocalStorage}</p>
       <button

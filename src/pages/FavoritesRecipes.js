@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function FavoritesRecipes() {
+function FavoritesRecipes(props) {
   return (
     <div>
-      <Header />
+      <Header props={ props } />
       <h1>Receitas favoritas</h1>
     </div>
   );
