@@ -10,7 +10,7 @@ function FoodsRecipes(props) {
       </header>
       <div>
         <h1>Receitas de comidas</h1>
-        <RecipeCard itemToMap="meals" />
+        <RecipeCard itemToMap="meals" props={ props } />
       </div>
     </>
   );

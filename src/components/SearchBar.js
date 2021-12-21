@@ -9,21 +9,36 @@ import fetchMealsByIngredient from '../services/fetchMealsByIngredient';
 import fetchMealsByName from '../services/fetchMealsByName';
 
 function SearchBar(props) {
-  const { props: { match: { path } } } = props;
+  const { props: { match: { path }, history } } = props;
   const [chosenSearch, setSearch] = useState({});
   const { meals, setMeals, drinks, setDrinks } = useContext(Context);
 
-  const searchMeals = async (searchTerm) => {
+  const redirectToDetails = async (receivedResponse) => {
+    if (Object.keys(receivedResponse[0]).includes('idMeal')) {
+      await setMeals(receivedResponse);
+      if (receivedResponse.length === 1) {
+        history.push(`/comidas/${receivedResponse[0].idMeal}`);
+      }
+    }
+    if (Object.keys(receivedResponse[0]).includes('idDrink')) {
+      await setDrinks(receivedResponse);
+      if (receivedResponse.length === 1) {
+        history.push(`/bebidas/${receivedResponse[0].idDrink}`);
+      }
+    }
+  };
+
+  const searchMeals = (searchTerm) => {
     if (chosenSearch === 'ingredient') {
-      fetchMealsByIngredient(searchTerm).then((response) => setMeals(response));
+      fetchMealsByIngredient(searchTerm).then((response) => redirectToDetails(response));
     } else if (chosenSearch === 'name') {
-      fetchMealsByName(searchTerm).then((response) => setMeals(response));
+      fetchMealsByName(searchTerm).then(async (response) => redirectToDetails(response));
     } else if (chosenSearch === 'firstletter') {
       if (searchTerm.length > 1) {
         global.alert('Sua busca deve conter somente 1 (um) caracter');
       } else {
         const letter = searchTerm.slice(0, 1);
-        fetchMealsByFirstLetter(letter).then((response) => setMeals(response));
+        fetchMealsByFirstLetter(letter).then((response) => redirectToDetails(response));
       }
     }
     return meals;
@@ -31,15 +46,15 @@ function SearchBar(props) {
 
   const searchDrinks = async (searchTerm) => {
     if (chosenSearch === 'ingredient') {
-      fetchDrinksByIngredient(searchTerm).then((response) => setDrinks(response));
+      fetchDrinksByIngredient(searchTerm).then((response) => redirectToDetails(response));
     } else if (chosenSearch === 'name') {
-      fetchDrinksByName(searchTerm).then((response) => setDrinks(response));
+      fetchDrinksByName(searchTerm).then((response) => redirectToDetails(response));
     } else if (chosenSearch === 'firstletter') {
       if (searchTerm.length > 1) {
         global.alert('Sua busca deve conter somente 1 (um) caracter');
       } else {
         const letter = searchTerm.slice(0, 1);
-        fetchDrinksByFirstLetter(letter).then((response) => setDrinks(response));
+        fetchDrinksByFirstLetter(letter).then((response) => redirectToDetails(response));
       }
     }
     return drinks;

@@ -12,6 +12,7 @@ import ExploreScreen from './pages/ExploreScreen';
 import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
 import DrinksRecipes from './pages/DrinksRecipes';
+import RecipeDetails from './components/RecipeDetails';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={ Login } />
             <Route path="/comidas" component={ FoodsRecipes } />
+            <Route path="/comidas/:id" component={ RecipeDetails } />
             <Route path="/bebidas" component={ DrinksRecipes } />
             <Route path="/perfil" component={ Profile } />
             <Route path="/receitas-feitas" component={ RecipesMade } />
