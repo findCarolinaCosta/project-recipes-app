@@ -74,7 +74,7 @@ function SearchBar(props) {
   };
 
   return (
-    <form>
+    <form className="container">
       <div className="row">
         <div className="col-sm-3">
           <label htmlFor="ingredient-search">
