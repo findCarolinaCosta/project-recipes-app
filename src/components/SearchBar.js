@@ -14,6 +14,11 @@ function SearchBar(props) {
   const { meals, setMeals, drinks, setDrinks } = useContext(Context);
 
   const redirectToDetails = async (receivedResponse) => {
+    if (receivedResponse === null) {
+      return global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
+    }
     if (Object.keys(receivedResponse[0]).includes('idMeal')) {
       await setMeals(receivedResponse);
       if (receivedResponse.length === 1) {
