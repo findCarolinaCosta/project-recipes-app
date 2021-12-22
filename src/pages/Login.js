@@ -26,36 +26,54 @@ function Login({ history }) {
   };
 
   return (
-    <form className="container form-group">
-      <label htmlFor="email">
-        <input
-          id="email"
-          type="email"
-          data-testid="email-input"
-          name="emailInput"
-          value={ email }
-          onChange={ ({ target }) => setEmail(target.value) }
-        />
-      </label>
-      <label htmlFor="password">
-        <input
-          id="password"
-          type="password"
-          data-testid="password-input"
-          value={ password }
-          onChange={ ({ target }) => setPassword(target.value) }
-        />
-      </label>
-      <button
-        type="submit"
-        data-testid="login-submit-btn"
-        disabled={ !getDisabled(email, password) }
-        onClick={ handleClick }
-      >
-        Entrar
-
-      </button>
-    </form>
+    <main
+      className="row justify-content-center align-items-center meals"
+      style={ { height: '100vh', width: '100vw' } }
+    >
+      <section>
+        <h1 className="text-center">Login</h1>
+        <form>
+          {/* <div className="col-sm-12"> */}
+          <label htmlFor="email">
+            Email:
+            <input
+              className="form-control"
+              id="email"
+              type="email"
+              data-testid="email-input"
+              name="emailInput"
+              value={ email }
+              onChange={ ({ target }) => setEmail(target.value) }
+            />
+          </label>
+          {/* </div> */}
+          {/* <div className="col-sm-12"> */}
+          <label htmlFor="password">
+            Senha:
+            <input
+              className="form-control"
+              id="password"
+              type="password"
+              data-testid="password-input"
+              value={ password }
+              onChange={ ({ target }) => setPassword(target.value) }
+            />
+          </label>
+          {/* </div> */}
+          {/* <div className="col-sm-12"> */}
+          <button
+            className="btn-recipes-green"
+            type="submit"
+            data-testid="login-submit-btn"
+            disabled={ !getDisabled(email, password) }
+            onClick={ handleClick }
+          >
+            Entrar
+          </button>
+          {/* </div> */}
+        </form>
+      </section>
+    </main>
   );
 }
 

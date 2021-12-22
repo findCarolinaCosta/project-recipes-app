@@ -47,6 +47,15 @@
   font-weight: 900;
 }
 
+.btn-recipes-green {
+  align-self: center;
+  background-color: #6ce34f;
+  border: none;
+  border-radius: 10px;
+  height: 45px;
+  width: 85%;
+}
+
 @keyframes shake {
 
   0% {
