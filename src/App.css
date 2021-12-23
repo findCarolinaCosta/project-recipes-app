@@ -1,87 +1,52 @@
-.meals-container {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.meals {
+.recipes-container {
   align-items: center;
   background: #0fa36b;
-  color: #464646;
+  color: #c7e4cc;
   display: flex;
-  flex-direction: column;
-  font-family: sans-serif;
   height: 100vh;
   justify-content: center;
+  text-align: center;
+
+  /* border: 2px solid red; para destacar o container, retirar depois */
+
+  /* margin: 10px; para destacar, retirar depois */
+}
+
+.recipes-row {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  min-width: 90%;
+  width: 95vw;
+
+  /* border: 2px solid blue; para destacar, retirar depois */
+}
+
+.recipes-row label {
+  margin: 10px 0;
   width: 100%;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+.recipes-row input {
+  background-color: #d6e7d6;
+  border: none;
+  border-radius: 5px;
+  min-width: 90%;
+  padding: 7px;
 }
 
-.header {
-  background: #0fa36b;
-  color: #464646;
-}
-
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
-}
-
-.btn-recipes-green {
-  align-self: center;
+.recipes-button {
   background-color: #6ce34f;
   border: none;
-  border-radius: 10px;
-  height: 45px;
-  width: 85%;
+  border-radius: 5px;
+  color: #396340;
+  margin: 20px 10px;
+  padding: 7px;
+  width: 90%;
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
-}
-
-@keyframes clink {
-
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
+.recipes-button[ disabled ] {
+  background-color: #99b09d;
+  color: #c7e4cc;
 }

@@ -16,10 +16,7 @@ import RecipeDetails from './components/RecipeDetails';
 
 function App() {
   return (
-    <div
-      className="container-sm"
-      style={ { height: '100vh' } }
-    >
+    <div className="recipes-container">
       <Provider>
         <BrowserRouter>
           <Switch>

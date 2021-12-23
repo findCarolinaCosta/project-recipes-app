@@ -27,17 +27,14 @@ function Login({ history }) {
 
   return (
     <main
-      className="row justify-content-center align-items-center meals"
-      style={ { height: '100vh', width: '100vw' } }
+      className="recipes-row"
     >
       <section>
-        <h1 className="text-center">Login</h1>
+        <h1>Login</h1>
         <form>
-          {/* <div className="col-sm-12"> */}
           <label htmlFor="email">
             Email:
             <input
-              className="form-control"
               id="email"
               type="email"
               data-testid="email-input"
@@ -46,12 +43,9 @@ function Login({ history }) {
               onChange={ ({ target }) => setEmail(target.value) }
             />
           </label>
-          {/* </div> */}
-          {/* <div className="col-sm-12"> */}
           <label htmlFor="password">
             Senha:
             <input
-              className="form-control"
               id="password"
               type="password"
               data-testid="password-input"
@@ -59,10 +53,8 @@ function Login({ history }) {
               onChange={ ({ target }) => setPassword(target.value) }
             />
           </label>
-          {/* </div> */}
-          {/* <div className="col-sm-12"> */}
           <button
-            className="btn-recipes-green"
+            className="recipes-button"
             type="submit"
             data-testid="login-submit-btn"
             disabled={ !getDisabled(email, password) }
@@ -70,7 +62,6 @@ function Login({ history }) {
           >
             Entrar
           </button>
-          {/* </div> */}
         </form>
       </section>
     </main>
