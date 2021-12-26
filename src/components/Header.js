@@ -37,16 +37,15 @@ function Header({ props }) {
           />
         </button>
         <input
+          data-testid="search-input"
           id="search-input"
           type="text"
-          data-testid="search-input"
           placeholder="Busca..."
+          className="recipes-search-input"
           value={ searchTerm }
           onChange={ ({ target }) => setSearchTerm(target.value) }
         />
       </div>
-      {/* </div> */}
-      {/* <div className="row"> */}
       <SearchBar searchTerm={ searchTerm } props={ props } />
     </div>
   );

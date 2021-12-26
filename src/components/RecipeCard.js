@@ -9,9 +9,16 @@ function RecipeCard({ itemToMap }) {
   const renderedQuantity = 12;
   return (
     <div className="container-fluid d-flex flex-wrap justify-content-center">
-      <div className="row">
-        <h1 className="text-center">Receitas de comidas</h1>
-      </div>
+      {itemToMap === 'meals' && meals
+        ? (
+          <div className="row">
+            <h1 className="text-center">Receitas de comidas</h1>
+          </div>)
+        : (
+          <div className="row">
+            <h1 className="text-center">Receitas de bebidas</h1>
+          </div>)}
+
       <div className="d-flex row w-100">
         <div className="d-flex flex-wrap justify-content-center">
           {(itemToMap === 'meals' && meals) ? meals.map((meal, index) => {
@@ -34,7 +41,6 @@ function RecipeCard({ itemToMap }) {
                     {meal.strMeal}
                   </h4>
                 </div>
-
               );
             }
             return null;
@@ -42,15 +48,23 @@ function RecipeCard({ itemToMap }) {
             : drinks.map((drink, index) => {
               if (index < renderedQuantity) {
                 return (
-                  <section data-testid={ `${index}-recipe-card` } key={ drink.idDrink }>
+                  <div
+                    className="custom-card col-sm-6 col-md-3"
+                    style={ { width: '40vw' } }
+                    data-testid={ `${index}-recipe-card` }
+                    key={ drink.idDrink }
+                  >
                     <img
+                      className="img-thumbnail"
                       src={ drink.strDrinkThumb }
                       alt={ drink.strDrink }
                       data-testid={ `${index}-card-img` }
                       width="100px"
                     />
-                    <h1 data-testid={ `${index}-card-name` }>{drink.strDrink}</h1>
-                  </section>
+                    <h4 className="card-title" data-testid={ `${index}-card-name` }>
+                      {drink.strDrink}
+                    </h4>
+                  </div>
                 );
               }
               return null;

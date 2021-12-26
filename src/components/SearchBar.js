@@ -82,7 +82,7 @@ function SearchBar(props) {
     <form className="container-fluid">
       <div className="row">
         <div className="col-sm-12">
-          <label htmlFor="ingredient-search">
+          <label className="recipes-radio" htmlFor="ingredient-search">
             <input
               data-testid="ingredient-search-radio"
               type="radio"
@@ -94,7 +94,7 @@ function SearchBar(props) {
             Ingrediente
           </label>
 
-          <label htmlFor="name-search">
+          <label className="recipes-radio" htmlFor="name-search">
             <input
               data-testid="name-search-radio"
               type="radio"
@@ -106,7 +106,7 @@ function SearchBar(props) {
             Nome
           </label>
 
-          <label htmlFor="first-letter-search">
+          <label className="recipes-radio" htmlFor="first-letter-search">
             <input
               data-testid="first-letter-search-radio"
               type="radio"
@@ -121,6 +121,7 @@ function SearchBar(props) {
             <button
               data-testid="exec-search-btn"
               type="button"
+              className="recipes-search-btn"
               onClick={ () => searchRecipes(props.searchTerm) }
             >
               Buscar
