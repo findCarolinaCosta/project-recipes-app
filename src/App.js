@@ -16,13 +16,16 @@ import RecipeDetails from './components/RecipeDetails';
 
 function App() {
   return (
-    <div className="recipes-container">
+    <div
+      className="container-fluid align-items-center d-flex flex-wrap"
+      style={ { height: '100vh' } }
+    >
       <Provider>
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={ Login } />
-            <Route path="/comidas" component={ FoodsRecipes } />
             <Route path="/comidas/:id" component={ RecipeDetails } />
+            <Route path="/comidas" component={ FoodsRecipes } />
             <Route path="/bebidas" component={ DrinksRecipes } />
             <Route path="/perfil" component={ Profile } />
             <Route path="/receitas-feitas" component={ RecipesMade } />

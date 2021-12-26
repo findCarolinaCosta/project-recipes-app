@@ -9,8 +9,8 @@ function Header({ props }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <section className="row">
-      <div>
+    <div className="row">
+      <div className="col-sm-2">
         <Link to="/perfil">
           <button type="button">
             <img
@@ -22,12 +22,12 @@ function Header({ props }) {
           </button>
         </Link>
       </div>
-      <div className="row">
-        <p data-testid="page-title">
+      <div className="col-sm-4">
+        <h3 data-testid="page-title">
           Titulo do Header
-        </p>
+        </h3>
       </div>
-      <div className="row">
+      <div className="col-sm-6">
         <button type="button">
           <img
             src={ searchIcon }
@@ -45,10 +45,10 @@ function Header({ props }) {
           onChange={ ({ target }) => setSearchTerm(target.value) }
         />
       </div>
-      <div className="row">
-        <SearchBar searchTerm={ searchTerm } props={ props } />
-      </div>
-    </section>
+      {/* </div> */}
+      {/* <div className="row"> */}
+      <SearchBar searchTerm={ searchTerm } props={ props } />
+    </div>
   );
 }
 

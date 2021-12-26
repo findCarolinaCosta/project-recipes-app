@@ -4,15 +4,18 @@ import RecipeCard from '../components/RecipeCard';
 
 function FoodsRecipes(props) {
   return (
-    <>
-      <header className="header">
-        <Header props={ props } />
+    <div className="recipes-container container-fluid">
+      <header className="row">
+        <Header className="container-fluid" props={ props } />
       </header>
-      <div>
-        <h1>Receitas de comidas</h1>
-        <RecipeCard itemToMap="meals" props={ props } />
+      <div className="row">
+        <RecipeCard
+          className="container-fluid"
+          itemToMap="meals"
+          props={ props }
+        />
       </div>
-    </>
+    </div>
   );
 }
 

@@ -79,9 +79,9 @@ function SearchBar(props) {
   };
 
   return (
-    <form className="container">
+    <form className="container-fluid">
       <div className="row">
-        <div className="col-sm-3">
+        <div className="col-sm-12">
           <label htmlFor="ingredient-search">
             <input
               data-testid="ingredient-search-radio"
@@ -117,7 +117,7 @@ function SearchBar(props) {
             />
             Primeira letra
           </label>
-          <div className="col-sm-1">
+          <div className="col-sm-12">
             <button
               data-testid="exec-search-btn"
               type="button"

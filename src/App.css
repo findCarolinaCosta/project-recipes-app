@@ -1,11 +1,13 @@
-.recipes-container {
-  align-items: center;
+* {
   background: #0fa36b;
   color: #c7e4cc;
-  display: flex;
-  height: 100vh;
+}
+
+.recipes-container {
+  align-items: center;
   justify-content: center;
   text-align: center;
+  width: 100%;
 
   /* border: 2px solid red; para destacar o container, retirar depois */
 
@@ -16,8 +18,9 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
+  justify-content: center;
   min-width: 90%;
+  text-align: center;
   width: 95vw;
 
   /* border: 2px solid blue; para destacar, retirar depois */
@@ -25,6 +28,7 @@
 
 .recipes-row label {
   margin: 10px 0;
+  text-align: left;
   width: 100%;
 }
 
@@ -32,8 +36,9 @@
   background-color: #d6e7d6;
   border: none;
   border-radius: 5px;
-  min-width: 90%;
-  padding: 7px;
+  color: #051101;
+  padding: 10px 10px 10px 12px;
+  width: 100%;
 }
 
 .recipes-button {
@@ -41,12 +46,45 @@
   border: none;
   border-radius: 5px;
   color: #396340;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin: 20px 10px;
   padding: 7px;
-  width: 90%;
+  width: 95%;
 }
 
 .recipes-button[ disabled ] {
   background-color: #99b09d;
-  color: #c7e4cc;
+  color: #c9f0cf;
+}
+
+.custom-card {
+  align-items: center;
+  background-color: #f01c0559;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  margin: 3px;
+  padding: 10px;
+}
+
+.custom-card h4 {
+  background: none;
+}
+
+.custom-card img {
+  align-self: center;
+  border: none;
+  margin-top: 7px;
+}
+
+/* Para telas com largura menor que 365px */
+
+@media screen and ( max-width : 365px ) {
+
+  * {
+    font-size: 0.85rem;
+  }
 }
