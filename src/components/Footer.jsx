@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCompass, faCocktail, faUtensils } from '@fortawesome/free-solid-svg-icons';
+import DrinkIcon from '../images/drinkIcon.svg';
+import ExploreIcon from '../images/exploreIcon.svg';
+import MealIcon from '../images/mealIcon.svg';
 
 function Footer({ history }) {
   return (
@@ -10,30 +11,29 @@ function Footer({ history }) {
       data-testid="footer"
     >
       <button
-        className="btn btn-secondary"
-        type="button"
-        onClick={ () => history.push('/teste') }
-        data-testid="explore-bottom-btn"
-      >
-        <FontAwesomeIcon icon={ faCompass } />
-      </button>
-      <button
-        className="btn btn-secondary"
-        data-testid="drinks-bottom-btn"
-        type="button"
-        onClick={ () => history.push('/teste') }
-      >
-        <FontAwesomeIcon icon={ faCocktail } />
-      </button>
-      <button
-        className="btn btn-secondary"
+        className="btn btn-secondary mb-2 mr-1"
         data-testid="food-bottom-btn"
         type="button"
         onClick={ () => history.push('') }
       >
-        <FontAwesomeIcon icon={ faUtensils } />
+        <img src={ MealIcon } alt="Exibe Comidas" />
       </button>
-
+      <button
+        className="btn btn-secondary mb-2 mr-1"
+        data-testid="drinks-bottom-btn"
+        type="button"
+        onClick={ () => history.push('/teste') }
+      >
+        <img src={ DrinkIcon } alt="Exibe Drinks" />
+      </button>
+      <button
+        className="btn btn-secondary mb-2 mr-1"
+        type="button"
+        onClick={ () => history.push('/teste') }
+        data-testid="explore-bottom-btn"
+      >
+        <img src={ ExploreIcon } alt="Exibe a localização" />
+      </button>
     </footer>
   );
 }
