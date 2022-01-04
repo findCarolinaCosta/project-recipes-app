@@ -1,9 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Footer from '../components/Footer';
 
-function FoodsRecipes() {
+function FoodsRecipes({ history }) {
   return (
-    <div> FoodsRecipes </div>
+    <div>
+      FoodsRecipes
+      <Footer history={ history } />
+    </div>
   );
 }
+
+FoodsRecipes.propTypes = {
+  history: PropTypes.func.isRequired,
+};
 
 export default FoodsRecipes;
