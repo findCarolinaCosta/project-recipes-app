@@ -29,23 +29,35 @@ function FoodsRecipes(props) {
       <header className="row">
         <Header className="container-fluid" props={ props } />
       </header>
-      { mealsCategories.map((categorieMeal, index) => {
+      { mealsCategories.map((categorizeiMeal, index) => {
         if (index < maxCategories) {
           return (
             <button
-              data-testid={ `${categorieMeal.strCategory}-category-filter` }
+              data-testid={ `${categorizeiMeal.strCategory}-category-filter` }
               type="button"
-              key={ categorieMeal.strCategory }
-              name={ categorieMeal.strCategory }
-              onClick={ (event) => filteredByCategory(categorieMeal.strCategory, event) }
+              key={ categorizeiMeal.strCategory }
+              name={ categorizeiMeal.strCategory }
+              onClick={
+                (event) => filteredByCategory(categorizeiMeal.strCategory, event)
+              }
             >
-              {categorieMeal.strCategory}
+              {categorizeiMeal.strCategory}
 
             </button>
           );
         }
         return null;
       })}
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={
+          () => fetchMeals()
+            .then((response) => setMeals(response.meals))
+        }
+      >
+        All
+      </button>
       <div className="row">
         <RecipeCard
           className="container-fluid"
