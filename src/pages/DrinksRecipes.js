@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
+import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import { Context } from '../context/Context';
 
-function DrinksRecipes() {
+function DrinksRecipes(props) {
   const { drinksCategories } = useContext(Context);
   const maxCategories = 5;
   return (
-    <div>
+    <div className="recipes-container container-fluid">
       <h1>Receitas de comidas</h1>
+      <header className="row">
+        <Header className="container-fluid" props={ props } />
+      </header>
       {drinksCategories.map((categorieDrink, index) => {
         if (index < maxCategories) {
           return (
@@ -22,7 +26,13 @@ function DrinksRecipes() {
         }
         return null;
       })}
-      <RecipeCard itemToMap="drinks" />
+      <div className="row">
+        <RecipeCard
+          className="container-fluid"
+          itemToMap="drinks"
+          props={ props }
+        />
+      </div>
     </div>
   );
 }
