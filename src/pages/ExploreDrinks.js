@@ -1,7 +1,8 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function ExploreDrinks() {
-  return (<h1>Página de explorar bebidas</h1>);
+  return (<Header />);
 }
 
 export default ExploreDrinks;
