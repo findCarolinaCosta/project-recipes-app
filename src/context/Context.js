@@ -22,7 +22,6 @@ function RecipesProvider({ children }) {
     fetchDrinks().then((response) => setDrinks(response.drinks));
     fetchDrinksCategories().then((response) => setDrinksCategories(response));
     fetchMealsCategories().then((response) => setMealsCategories(response));
-    // retirei as funções de requisição abaixo por parecer não necessitar delas por hora
   }, []);
 
   const context = {

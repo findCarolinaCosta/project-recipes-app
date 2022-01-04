@@ -7,7 +7,7 @@ import MealIcon from '../images/mealIcon.svg';
 function Footer({ history }) {
   return (
     <footer
-      className="fixed-bottom center d-flex justify-content-center"
+      className="fixed-bottom center d-flex justify-content-center mt-3"
       data-testid="footer"
     >
       <button
