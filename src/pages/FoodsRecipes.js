@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
+import { Context } from '../context/Context';
 
 function FoodsRecipes(props) {
-  const { history } = props;
+  const { setSharedProps } = useContext(Context);
+  useEffect(() => setSharedProps(props), [props, setSharedProps]);
   return (
     <div className="recipes-container container-fluid">
       <header className="row">
@@ -14,19 +16,14 @@ function FoodsRecipes(props) {
         <RecipeCard
           className="container-fluid"
           itemToMap="meals"
-          props={ props }
         />
       </div>
       <div>
         FoodsRecipes
-        <Footer history={ history } />
+        <Footer />
       </div>
     </div>
   );
 }
-
-FoodsRecipes.propTypes = {
-  history: PropTypes.func.isRequired,
-};
 
 export default FoodsRecipes;
