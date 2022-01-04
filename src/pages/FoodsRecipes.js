@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import RecipeCard from '../components/RecipeCard';
 import { Context } from '../context/Context';
+import Footer from '../components/Footer';
 
-function FoodsRecipes() {
+function FoodsRecipes({ history }) {
   const { mealsCategories } = useContext(Context);
   const maxCategories = 5;
   return (
@@ -24,8 +26,13 @@ function FoodsRecipes() {
         return null;
       })}
       <RecipeCard itemToMap="meals" />
+      <Footer history={ history } />
     </div>
   );
 }
+
+FoodsRecipes.propTypes = {
+  history: PropTypes.func.isRequired,
+};
 
 export default FoodsRecipes;
