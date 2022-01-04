@@ -1,17 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import { Context } from '../context/Context';
+import fetchDrinks from '../services/fetchDrinks';
 import fetchDrinksByCategory from '../services/fetchDrinksByCategory';
 
 function DrinksRecipes(props) {
-  const { drinksCategories } = useContext(Context);
+  const { drinksCategories, setDrinks } = useContext(Context);
   const maxCategories = 5;
-  const { setDrinks } = useContext(Context);
+  const [nameBtn, setnameBtn] = useState('');
 
-  const filteredByCategory = (categoryName) => {
-    fetchDrinksByCategory(categoryName)
-      .then((response) => setDrinks(response));
+  const filteredByCategory = (categoryName, event) => {
+    if (nameBtn === event.target.name) {
+      fetchDrinks().then((response) => setDrinks(response.drinks));
+      setnameBtn('');
+    } else {
+      fetchDrinksByCategory(categoryName)
+        .then((response) => setDrinks(response));
+      setnameBtn(event.target.name);
+    }
   };
 
   return (
@@ -27,7 +35,8 @@ function DrinksRecipes(props) {
               data-testid={ `${categorieDrink.strCategory}-category-filter` }
               type="button"
               key={ categorieDrink.strCategory }
-              onClick={ () => filteredByCategory(categorieDrink.strCategory) }
+              name={ categorieDrink.strCategory }
+              onClick={ (event) => filteredByCategory(categorieDrink.strCategory, event) }
             >
               {categorieDrink.strCategory}
             </button>
