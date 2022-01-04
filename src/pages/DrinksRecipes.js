@@ -2,10 +2,18 @@ import React, { useContext } from 'react';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import { Context } from '../context/Context';
+import fetchDrinksByCategory from '../services/fetchDrinksByCategory';
 
 function DrinksRecipes(props) {
   const { drinksCategories } = useContext(Context);
   const maxCategories = 5;
+  const { setDrinks } = useContext(Context);
+
+  const filteredByCategory = (categoryName) => {
+    fetchDrinksByCategory(categoryName)
+      .then((response) => setDrinks(response));
+  };
+
   return (
     <div className="recipes-container container-fluid">
       <h1>Receitas de comidas</h1>
@@ -19,6 +27,7 @@ function DrinksRecipes(props) {
               data-testid={ `${categorieDrink.strCategory}-category-filter` }
               type="button"
               key={ categorieDrink.strCategory }
+              onClick={ () => filteredByCategory(categorieDrink.strCategory) }
             >
               {categorieDrink.strCategory}
             </button>
