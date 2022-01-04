@@ -4,11 +4,17 @@ import RecipeCard from '../components/RecipeCard';
 import { Context } from '../context/Context';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import fetchMealsByCategories from '../services/fetchMealsByCategories';
 
 function FoodsRecipes(props) {
   const { history } = props;
-  const { mealsCategories } = useContext(Context);
+  const { mealsCategories, setMeals } = useContext(Context);
   const maxCategories = 5;
+
+  const filteredByCategory = (categoryName) => {
+    fetchMealsByCategories(categoryName)
+      .then((response) => setMeals(response));
+  };
   return (
     <div className="recipes-container container-fluid">
       <header className="row">
@@ -21,6 +27,7 @@ function FoodsRecipes(props) {
               data-testid={ `${categorieMeal.strCategory}-category-filter` }
               type="button"
               key={ categorieMeal.strCategory }
+              onClick={ () => filteredByCategory(categorieMeal.strCategory) }
             >
               {categorieMeal.strCategory}
 
