@@ -26,41 +26,45 @@ function Login({ history }) {
   };
 
   return (
-    <form className="container form-group d-flex flex-column align-items-center">
-      <label htmlFor="email">
-        <input
-          className="form-control"
-          id="email"
-          type="email"
-          data-testid="email-input"
-          name="emailInput"
-          placeholder="E-mail"
-          value={ email }
-          onChange={ ({ target }) => setEmail(target.value) }
-        />
-      </label>
-      <label htmlFor="password">
-        <input
-          className="form-control"
-          id="password"
-          type="password"
-          data-testid="password-input"
-          value={ password }
-          placeholder="Senha"
-          onChange={ ({ target }) => setPassword(target.value) }
-        />
-      </label>
-      <button
-        type="submit"
-        className="btn btn-dark"
-        data-testid="login-submit-btn"
-        disabled={ !getDisabled(email, password) }
-        onClick={ handleClick }
-      >
-        Entrar
-
-      </button>
-    </form>
+    <main
+      className="recipes-row"
+    >
+      <section>
+        <h1>Login</h1>
+        <form>
+          <label htmlFor="email">
+            Email:
+            <input
+              id="email"
+              type="email"
+              data-testid="email-input"
+              name="emailInput"
+              value={ email }
+              onChange={ ({ target }) => setEmail(target.value) }
+            />
+          </label>
+          <label htmlFor="password">
+            Senha:
+            <input
+              id="password"
+              type="password"
+              data-testid="password-input"
+              value={ password }
+              onChange={ ({ target }) => setPassword(target.value) }
+            />
+          </label>
+          <button
+            className="recipes-button"
+            type="submit"
+            data-testid="login-submit-btn"
+            disabled={ !getDisabled(email, password) }
+            onClick={ handleClick }
+          >
+            Entrar
+          </button>
+        </form>
+      </section>
+    </main>
   );
 }
 

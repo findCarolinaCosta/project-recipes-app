@@ -1,10 +1,8 @@
 import React from 'react';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 
-function FoodsRecipes(props) {
-  const { history } = props;
+function DrinksRecipes(props) {
   return (
     <div className="recipes-container container-fluid">
       <header className="row">
@@ -13,20 +11,12 @@ function FoodsRecipes(props) {
       <div className="row">
         <RecipeCard
           className="container-fluid"
-          itemToMap="meals"
+          itemToMap="drinks"
           props={ props }
         />
-      </div>
-      <div>
-        FoodsRecipes
-        <Footer history={ history } />
       </div>
     </div>
   );
 }
 
-FoodsRecipes.propTypes = {
-  history: PropTypes.func.isRequired,
-};
-
-export default FoodsRecipes;
+export default DrinksRecipes;
