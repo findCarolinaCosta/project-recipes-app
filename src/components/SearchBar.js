@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Context } from '../context/Context';
 import fetchDrinksByFirstLetter from '../services/fetchDrinksByFirstLetter';
 import fetchDrinksByIngredient from '../services/fetchDrinksByIngredient';
@@ -131,5 +132,9 @@ function SearchBar(props) {
     </form>
   );
 }
+
+SearchBar.propTypes = {
+  searchTerm: PropTypes.string.isRequired,
+};
 
 export default SearchBar;
