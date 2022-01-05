@@ -6,7 +6,7 @@ import { Context } from '../context/Context';
 
 function FoodsRecipes(props) {
   const { setSharedProps } = useContext(Context);
-  useEffect(() => setSharedProps(props), [props, setSharedProps]);
+  setSharedProps(props);
   return (
     <div className="recipes-container container-fluid">
       <header className="row">

@@ -46,7 +46,7 @@ function Header({ props }) {
           onChange={ ({ target }) => setSearchTerm(target.value) }
         />
       </div>
-      <SearchBar searchTerm={ searchTerm } props={ props } />
+      <SearchBar searchTerm={ searchTerm } />
     </div>
   );
 }
