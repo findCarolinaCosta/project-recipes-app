@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function ExploreScreen({ history }) {
@@ -22,6 +23,7 @@ function ExploreScreen({ history }) {
         Explorar Bebidas
 
       </button>
+      <Footer />
     </div>
   );
 }

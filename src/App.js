@@ -21,21 +21,19 @@ function App() {
       style={ { height: '100vh' } }
     >
       <Provider>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={ Login } />
-            <Route path="/comidas/:id" component={ RecipeDetails } />
-            <Route path="/comidas" component={ FoodsRecipes } />
-            <Route path="/bebidas/:id" component={ RecipeDetails } />
-            <Route path="/bebidas" component={ DrinksRecipes } />
-            <Route path="/perfil" component={ Profile } />
-            <Route path="/receitas-feitas" component={ RecipesMade } />
-            <Route path="/receitas-favoritas" component={ FavoritesRecipes } />
-            <Route exact path="/explorar" component={ ExploreScreen } />
-            <Route path="/explorar/comidas" component={ ExploreFoods } />
-            <Route path="/explorar/bebidas" component={ ExploreDrinks } />
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route path="/comidas/:id" component={ RecipeDetails } />
+          <Route path="/comidas" component={ FoodsRecipes } />
+          <Route path="/bebidas/:id" component={ RecipeDetails } />
+          <Route path="/bebidas" component={ DrinksRecipes } />
+          <Route path="/perfil" component={ Profile } />
+          <Route path="/receitas-feitas" component={ RecipesMade } />
+          <Route path="/receitas-favoritas" component={ FavoritesRecipes } />
+          <Route exact path="/explorar" component={ ExploreScreen } />
+          <Route path="/explorar/comidas" component={ ExploreFoods } />
+          <Route path="/explorar/bebidas" component={ ExploreDrinks } />
+        </Switch>
       </Provider>
     </div>
   );
