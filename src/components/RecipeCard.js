@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 
 // renderiza card simples
@@ -23,11 +24,12 @@ function RecipeCard({ itemToMap }) {
           {(itemToMap === 'meals' && meals) ? meals.map((meal, index) => {
             if (index < renderedQuantity) {
               return (
-                <div
+                <Link
                   className="custom-card col-sm-6 col-md-3"
                   style={ { width: '40vw' } }
                   data-testid={ `${index}-recipe-card` }
                   key={ meal.idMeal }
+                  to={ `/comidas/${meal.idMeal}` }
                 >
                   <img
                     className="img-thumbnail"
@@ -39,7 +41,7 @@ function RecipeCard({ itemToMap }) {
                   <h4 className="card-title" data-testid={ `${index}-card-name` }>
                     {meal.strMeal}
                   </h4>
-                </div>
+                </Link>
               );
             }
             return null;
@@ -47,11 +49,12 @@ function RecipeCard({ itemToMap }) {
             : drinks.map((drink, index) => {
               if (index < renderedQuantity) {
                 return (
-                  <div
+                  <Link
                     className="custom-card col-sm-6 col-md-3"
                     style={ { width: '40vw' } }
                     data-testid={ `${index}-recipe-card` }
                     key={ drink.idDrink }
+                    to={ `/bebidas/${drink.idDrink}` }
                   >
                     <img
                       className="img-thumbnail"
@@ -63,7 +66,7 @@ function RecipeCard({ itemToMap }) {
                     <h4 className="card-title" data-testid={ `${index}-card-name` }>
                       {drink.strDrink}
                     </h4>
-                  </div>
+                  </Link>
                 );
               }
               return null;
