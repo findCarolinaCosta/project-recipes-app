@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
@@ -7,9 +7,11 @@ import fetchDrinks from '../services/fetchDrinks';
 import fetchDrinksByCategory from '../services/fetchDrinksByCategory';
 
 function DrinksRecipes(props) {
-  const { drinksCategories, setDrinks } = useContext(Context);
+  const { drinksCategories, setDrinks, setSharedProps } = useContext(Context);
   const maxCategories = 5;
   const [nameBtn, setnameBtn] = useState('');
+
+  useEffect(() => setSharedProps(props), [props, setSharedProps]);
 
   const filteredByCategory = (categoryName, event) => {
     if (nameBtn === event.target.name) {
