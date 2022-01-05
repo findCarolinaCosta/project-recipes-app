@@ -2,6 +2,8 @@ import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchMeals from '../services/fetchMeals';
 import fetchDrinks from '../services/fetchDrinks';
+import fetchDrinksCategories from '../services/fetchDrinksCategories';
+import fetchMealsCategories from '../services/fetchMealsCategories';
 
 const Context = createContext();
 const { Provider, Consumer } = Context;
@@ -11,6 +13,7 @@ function RecipesProvider({ children }) {
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [mealsCategories, setMealsCategories] = useState([]);
+  const [drinksCategories, setDrinksCategories] = useState([]);
   const [areas, setAreas] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [sharedProps, setSharedProps] = useState({});
@@ -18,7 +21,8 @@ function RecipesProvider({ children }) {
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
     fetchDrinks().then((response) => setDrinks(response.drinks));
-    // retirei as funções de requisição abaixo por parecer não necessitar delas por hora
+    fetchDrinksCategories().then((response) => setDrinksCategories(response));
+    fetchMealsCategories().then((response) => setMealsCategories(response));
   }, []);
 
   const context = {
@@ -36,6 +40,7 @@ function RecipesProvider({ children }) {
     setMealsCategories,
     setAreas,
     setIngredients,
+    drinksCategories,
   };
 
   return (
