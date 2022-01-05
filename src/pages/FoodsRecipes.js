@@ -7,8 +7,22 @@ import fetchMealsByCategories from '../services/fetchMealsByCategories';
 import fetchMeals from '../services/fetchMeals';
 
 function FoodsRecipes(props) {
-  const { setSharedProps } = useContext(Context);
-  setSharedProps(props);
+  const { mealsCategories, setMeals, setSharedProps } = useContext(Context);
+  const maxCategories = 5;
+  const [nameBtn, setnameBtn] = useState('');
+
+  useEffect(() => setSharedProps(props), [props, setSharedProps]);
+
+  const filteredByCategory = (categoryName, event) => {
+    if (nameBtn === event.target.name) {
+      fetchMeals().then((response) => setMeals(response.meals));
+      setnameBtn('');
+    } else {
+      fetchMealsByCategories(categoryName)
+        .then((response) => setMeals(response));
+      setnameBtn(event.target.name);
+    }
+  };
   return (
     <div className="recipes-container container-fluid">
       <header className="row">
