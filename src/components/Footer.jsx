@@ -8,7 +8,7 @@ function Footer() {
   const { sharedProps: { history } } = useContext(Context);
   return (
     <footer
-      className="fixed-bottom center d-flex justify-content-center"
+      className="fixed-bottom center d-flex justify-content-center mt-3"
       data-testid="footer"
     >
       <button
