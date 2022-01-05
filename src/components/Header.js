@@ -1,11 +1,10 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 
-function Header({ props }) {
+function Header() {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
@@ -46,13 +45,9 @@ function Header({ props }) {
           onChange={ ({ target }) => setSearchTerm(target.value) }
         />
       </div>
-      <SearchBar searchTerm={ searchTerm } props={ props } />
+      <SearchBar searchTerm={ searchTerm } />
     </div>
   );
 }
-
-Header.propTypes = {
-  props: PropTypes.shape().isRequired,
-};
 
 export default Header;
