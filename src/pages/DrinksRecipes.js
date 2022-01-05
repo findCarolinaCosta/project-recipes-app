@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import { Context } from '../context/Context';
+import Footer from '../components/Footer';
 import fetchDrinks from '../services/fetchDrinks';
 import fetchDrinksByCategory from '../services/fetchDrinksByCategory';
 
@@ -65,6 +66,7 @@ function DrinksRecipes(props) {
           props={ props }
         />
       </div>
+      <Footer />
     </div>
   );
 }
