@@ -1,13 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
+import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import { Context } from '../context/Context';
 import Footer from '../components/Footer';
-import Header from '../components/Header';
-import fetchMealsByCategories from '../services/fetchMealsByCategories';
-import fetchMeals from '../services/fetchMeals';
+import fetchDrinks from '../services/fetchDrinks';
+import fetchDrinksByCategory from '../services/fetchDrinksByCategory';
 
-function FoodsRecipes(props) {
-  const { mealsCategories, setMeals, setSharedProps } = useContext(Context);
+function DrinksRecipes(props) {
+  const { drinksCategories, setDrinks, setSharedProps } = useContext(Context);
   const maxCategories = 5;
   const [nameBtn, setnameBtn] = useState('');
 
@@ -15,34 +16,34 @@ function FoodsRecipes(props) {
 
   const filteredByCategory = (categoryName, event) => {
     if (nameBtn === event.target.name) {
-      fetchMeals().then((response) => setMeals(response.meals));
+      fetchDrinks().then((response) => setDrinks(response.drinks));
       setnameBtn('');
     } else {
-      fetchMealsByCategories(categoryName)
-        .then((response) => setMeals(response));
+      fetchDrinksByCategory(categoryName)
+        .then((response) => setDrinks(response));
       setnameBtn(event.target.name);
     }
   };
+
   return (
     <div className="recipes-container container-fluid">
+      <h1>Receitas de comidas</h1>
       <header className="row">
         <Header className="container-fluid" props={ props } />
       </header>
-      { mealsCategories.length !== 0
-      && mealsCategories.map((categorizeiMeal, index) => {
+      {drinksCategories.map((categoriseDrink, index) => {
         if (index < maxCategories) {
           return (
             <button
-              data-testid={ `${categorizeiMeal.strCategory}-category-filter` }
+              data-testid={ `${categoriseDrink.strCategory}-category-filter` }
               type="button"
-              key={ categorizeiMeal.strCategory }
-              name={ categorizeiMeal.strCategory }
+              key={ categoriseDrink.strCategory }
+              name={ categoriseDrink.strCategory }
               onClick={
-                (event) => filteredByCategory(categorizeiMeal.strCategory, event)
+                (event) => filteredByCategory(categoriseDrink.strCategory, event)
               }
             >
-              {categorizeiMeal.strCategory}
-
+              {categoriseDrink.strCategory}
             </button>
           );
         }
@@ -52,8 +53,8 @@ function FoodsRecipes(props) {
         type="button"
         data-testid="All-category-filter"
         onClick={
-          () => fetchMeals()
-            .then((response) => setMeals(response.meals))
+          () => fetchDrinks()
+            .then((response) => setDrinks(response.drinks))
         }
       >
         All
@@ -61,14 +62,13 @@ function FoodsRecipes(props) {
       <div className="row">
         <RecipeCard
           className="container-fluid"
-          itemToMap="meals"
+          itemToMap="drinks"
+          props={ props }
         />
       </div>
-      <div>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }
 
-export default FoodsRecipes;
+export default DrinksRecipes;

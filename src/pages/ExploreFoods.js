@@ -1,7 +1,14 @@
 import React from 'react';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function ExploreFoods() {
-  return (<h1>Página de explorar comidas</h1>);
+  return (
+    <>
+      <Header />
+      <Footer />
+    </>
+  );
 }
 
 export default ExploreFoods;

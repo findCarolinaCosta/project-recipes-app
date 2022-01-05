@@ -1,11 +1,20 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import getExit from '../helpers/getExit';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { Context } from '../context/Context';
 
-function Profile({ history }) {
-  const emailByLocalStorage = JSON.parse(localStorage.getItem('user')).email;
+function Profile(props) {
+  const { history } = props;
+  const emailByLocalStorage = JSON.parse(localStorage.getItem('user'))
+    ? JSON.parse(localStorage.getItem('user')).email : 'usuário não identificado';
+  const { setSharedProps } = useContext(Context);
+  useEffect(() => setSharedProps(props), [props, setSharedProps]);
+
   return (
     <section>
+      <Header props={ props } />
       <h1> Página de perfil</h1>
       <p data-testid="profile-email">{emailByLocalStorage}</p>
       <button
@@ -32,6 +41,7 @@ function Profile({ history }) {
         Sair
 
       </button>
+      <Footer />
     </section>
   );
 }
