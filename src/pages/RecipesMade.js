@@ -1,10 +1,11 @@
 import React from 'react';
 import CardRecipesMade from '../components/CardRecipesMade';
+import Header from '../components/Header';
 
-function RecipesMade() {
-  // pode ser modificado
+function RecipesMade(props) {
   return (
     <div>
+      <Header props={ props } />
       <h1>Receitas feitas</h1>
       <button
         type="button"
