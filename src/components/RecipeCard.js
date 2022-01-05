@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-
 import { Context } from '../context/Context';
 
 // renderiza card simples
