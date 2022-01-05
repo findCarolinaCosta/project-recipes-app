@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useState, useEffect } from 'react';
 import RecipeCard from '../components/RecipeCard';
 import { Context } from '../context/Context';
 import Footer from '../components/Footer';
@@ -8,10 +7,11 @@ import fetchMealsByCategories from '../services/fetchMealsByCategories';
 import fetchMeals from '../services/fetchMeals';
 
 function FoodsRecipes(props) {
-  const { history } = props;
-  const { mealsCategories, setMeals } = useContext(Context);
+  const { mealsCategories, setMeals, setSharedProps } = useContext(Context);
   const maxCategories = 5;
   const [nameBtn, setnameBtn] = useState('');
+
+  useEffect(() => setSharedProps(props), [props, setSharedProps]);
 
   const filteredByCategory = (categoryName, event) => {
     if (nameBtn === event.target.name) {
@@ -62,18 +62,13 @@ function FoodsRecipes(props) {
         <RecipeCard
           className="container-fluid"
           itemToMap="meals"
-          props={ props }
         />
       </div>
       <div>
-        <Footer history={ history } />
+        <Footer />
       </div>
     </div>
   );
 }
-
-FoodsRecipes.propTypes = {
-  history: PropTypes.func.isRequired,
-};
 
 export default FoodsRecipes;

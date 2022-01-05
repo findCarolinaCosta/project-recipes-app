@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Context } from '../context/Context';
 import fetchDrinksByFirstLetter from '../services/fetchDrinksByFirstLetter';
 import fetchDrinksByIngredient from '../services/fetchDrinksByIngredient';
@@ -9,9 +9,9 @@ import fetchMealsByIngredient from '../services/fetchMealsByIngredient';
 import fetchMealsByName from '../services/fetchMealsByName';
 
 function SearchBar(props) {
-  const { props: { match: { path }, history } } = props;
   const [chosenSearch, setSearch] = useState({});
-  const { meals, setMeals, drinks, setDrinks } = useContext(Context);
+  const { meals, setMeals, drinks, setDrinks,
+    sharedProps: { history, match } } = useContext(Context);
 
   const redirectToDetails = async (receivedResponse) => {
     if (receivedResponse === null) {
@@ -66,10 +66,10 @@ function SearchBar(props) {
   };
 
   const searchRecipes = async (receivedTerm) => {
-    if (path === '/comidas') {
+    if (match.path === '/comidas') {
       await searchMeals(receivedTerm);
     }
-    if (path === '/bebidas') {
+    if (match.path === '/bebidas') {
       await searchDrinks(receivedTerm);
     }
   };
@@ -135,7 +135,6 @@ function SearchBar(props) {
 
 SearchBar.propTypes = {
   searchTerm: PropTypes.string.isRequired,
-  props: PropTypes.shape().isRequired,
 };
 
 export default SearchBar;

@@ -16,6 +16,7 @@ function RecipesProvider({ children }) {
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [areas, setAreas] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [sharedProps, setSharedProps] = useState({});
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
@@ -25,6 +26,8 @@ function RecipesProvider({ children }) {
   }, []);
 
   const context = {
+    sharedProps,
+    setSharedProps,
     email,
     meals,
     drinks,

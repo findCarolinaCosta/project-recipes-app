@@ -1,10 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import DrinkIcon from '../images/drinkIcon.svg';
 import ExploreIcon from '../images/exploreIcon.svg';
 import MealIcon from '../images/mealIcon.svg';
+import { Context } from '../context/Context';
 
-function Footer({ history }) {
+function Footer() {
+  const { sharedProps: { history } } = useContext(Context);
   return (
     <footer
       className="fixed-bottom center d-flex justify-content-center mt-3"
@@ -37,9 +38,5 @@ function Footer({ history }) {
     </footer>
   );
 }
-
-Footer.propTypes = {
-  history: PropTypes.func.isRequired,
-};
 
 export default Footer;
