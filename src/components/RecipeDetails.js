@@ -36,9 +36,10 @@ function RecipeDetails(props) {
           </div>
         </div>
         <div>
+          {/* implementação da classe invisible temporária - passando no requisito 39 */}
           <button
             type="button"
-            className="fixed-bottom"
+            className="fixed-bottom invisible"
             data-testid="start-recipe-btn"
           >
             Iniciar Receita
@@ -52,7 +53,7 @@ function RecipeDetails(props) {
       <div>
         <button
           type="button"
-          className="fixed-bottom"
+          className="fixed-bottom invisible"
           data-testid="start-recipe-btn"
         >
           Iniciar Receita
