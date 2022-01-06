@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import FoodsRecipes from './pages/FoodsRecipes';
 import { Provider } from './context/Context';
@@ -13,6 +13,8 @@ import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
 import DrinksRecipes from './pages/DrinksRecipes';
 import RecipeDetails from './components/RecipeDetails';
+import MealsRecipesInProgress from './pages/MealsRecipesInProgress';
+import DrinksRecipesInProgress from './pages/DrinksRecipesInProgress';
 
 function App() {
   return (
@@ -23,8 +25,10 @@ function App() {
       <Provider>
         <Switch>
           <Route exact path="/" component={ Login } />
+          <Route path="/comidas/:id/in-progress" component={ MealsRecipesInProgress } />
           <Route path="/comidas/:id" component={ RecipeDetails } />
           <Route path="/comidas" component={ FoodsRecipes } />
+          <Route path="/bebidas/:id/in-progress" component={ DrinksRecipesInProgress } />
           <Route path="/bebidas/:id" component={ RecipeDetails } />
           <Route path="/bebidas" component={ DrinksRecipes } />
           <Route path="/perfil" component={ Profile } />

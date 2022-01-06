@@ -8,7 +8,8 @@ import fetchMealsCategories from '../services/fetchMealsCategories';
 const Context = createContext();
 const { Provider, Consumer } = Context;
 
-function RecipesProvider({ children }) {
+function RecipesProvider(props) {
+  const { children } = props;
   const [email, setEmail] = useState('');
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
@@ -16,7 +17,7 @@ function RecipesProvider({ children }) {
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [areas, setAreas] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const [sharedProps, setSharedProps] = useState({});
+  const [sharedProps, setSharedProps] = useState(props);
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
@@ -43,11 +44,7 @@ function RecipesProvider({ children }) {
     drinksCategories,
   };
 
-  return (
-    <Provider value={ context }>
-      {children}
-    </Provider>
-  );
+  return <Provider value={ context }>{children}</Provider>;
 }
 
 export { RecipesProvider as Provider, Consumer, Context };
