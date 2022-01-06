@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Context } from '../context/Context';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
+import '../styles/RecipeDetails.css';
 
 function RecipeDetails(props) {
   const { setSharedProps } = useContext(Context);
@@ -31,9 +32,32 @@ function RecipeDetails(props) {
             <img
               className="img-fluid w-100"
               src={ recipeId.strMealThumb }
+              alt=""
             />
           </div>
         </div>
+        <div>
+          <button
+            type="button"
+            className="btn-start-recipe"
+            data-testid="start-recipe-btn"
+          >
+            Iniciar Receita
+          </button>
+        </div>
+      </div>
+    );
+  }
+  if (pathname.includes('bebidas')) {
+    return (
+      <div>
+        <button
+          type="button"
+          className="btn-start-recipe"
+          data-testid="start-recipe-btn"
+        >
+          Iniciar Receita
+        </button>
       </div>
     );
   }
