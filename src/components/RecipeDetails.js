@@ -11,26 +11,32 @@ function RecipeDetails(props) {
 
   useEffect(() => {
     if (pathname.includes('comidas')) {
-      fetchMealRecipeDetailsById(id).then((response) => setRecipeId(response));
+      fetchMealRecipeDetailsById(id).then((response) => setRecipeId(response[0]));
     }
     if (pathname.includes('bebidas')) {
-      fetchDrinkRecipeDetailsById(id).then((response) => setRecipeId(response));
+      fetchDrinkRecipeDetailsById(id).then((response) => setRecipeId(response[0]));
     }
     setSharedProps(props);
   }, [props, setSharedProps, id, pathname]);
 
-  return (
-    <div
-      className="container recipes-container"
-      style={ { height: '100vh' } }
-    >
-      <div className="row">
-        <div className="col-sm-12">
-          <img />
+  if (pathname.includes('comidas')) {
+    console.log(recipeId);
+    return (
+      <div
+        className="container-sm-fluid"
+        style={ { height: '100vh', width: '100vw' } }
+      >
+        <div className="row w-100">
+          <div className="col-12 w-100">
+            <img
+              className="img-fluid w-100"
+              src={ recipeId.strMealThumb }
+            />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 RecipeDetails.propTypes = {
