@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Context } from '../context/Context';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
-import '../styles/RecipeDetails.css';
 
 function RecipeDetails(props) {
   const { setSharedProps } = useContext(Context);
@@ -39,7 +38,7 @@ function RecipeDetails(props) {
         <div>
           <button
             type="button"
-            className="btn-start-recipe"
+            className="fixed-bottom"
             data-testid="start-recipe-btn"
           >
             Iniciar Receita
@@ -53,7 +52,7 @@ function RecipeDetails(props) {
       <div>
         <button
           type="button"
-          className="btn-start-recipe"
+          className="fixed-bottom"
           data-testid="start-recipe-btn"
         >
           Iniciar Receita
