@@ -37,13 +37,26 @@ function RecipeDetails(props) {
         </div>
         <div>
           {/* implementação da classe invisible temporária - passando no requisito 39 */}
-          <button
-            type="button"
-            className="fixed-bottom invisible"
-            data-testid="start-recipe-btn"
-          >
-            Iniciar Receita
-          </button>
+          {
+            inProgress ? (
+              <button
+                type="button"
+                className="fixed-bottom invisible"
+                data-testid="start-recipe-btn"
+              >
+                Continuar Receita
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="fixed-bottom invisible"
+                data-testid="start-recipe-btn"
+                onClick={ handleClick }
+              >
+                Iniciar Receita
+              </button>
+            )
+          }
         </div>
       </div>
     );
@@ -51,13 +64,26 @@ function RecipeDetails(props) {
   if (pathname.includes('bebidas')) {
     return (
       <div>
-        <button
-          type="button"
-          className="fixed-bottom invisible"
-          data-testid="start-recipe-btn"
-        >
-          Iniciar Receita
-        </button>
+        {
+          inProgress ? (
+            <button
+              type="button"
+              className="fixed-bottom"
+              data-testid="start-recipe-btn"
+            >
+              Continuar receita
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="fixed-bottom"
+              data-testid="start-recipe-btn"
+              onClick={ handleClick }
+            >
+              Iniciar Receita
+            </button>
+          )
+        }
       </div>
     );
   }
