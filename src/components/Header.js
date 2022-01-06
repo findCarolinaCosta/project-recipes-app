@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header() {
+  const [searchTerm, setSearchTerm] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   function handleClick() {
     return !isVisible ? setIsVisible(true) : setIsVisible(false);
   }
+
   return (
-    <section>
-      <div>
+    <div className="row">
+      <div className="col-sm-2">
         <Link to="/perfil">
           <button type="button">
             <img
@@ -22,12 +25,12 @@ function Header() {
           </button>
         </Link>
       </div>
-      <div>
-        <p data-testid="page-title">
-          Titulo do Header
-        </p>
+      <div className="col-sm-4">
+        {/* <h3 data-testid="page-title">
+          Comidas
+        </h3> */}
       </div>
-      <div>
+      <div className="col-sm-6">
         <button
           type="button"
           onClick={ handleClick }
@@ -39,14 +42,18 @@ function Header() {
             data-testid="search-top-btn"
           />
         </button>
-        { isVisible && (<input
+        { isVisible && <input
+          data-testid="search-input"
           id="search-input"
           type="text"
-          data-testid="search-input"
           placeholder="Busca..."
-        />) }
+          className="recipes-search-input"
+          value={ searchTerm }
+          onChange={ ({ target }) => setSearchTerm(target.value) }
+        /> }
       </div>
-    </section>
+      <SearchBar searchTerm={ searchTerm } />
+    </div>
   );
 }
 

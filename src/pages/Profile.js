@@ -1,14 +1,33 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
 import getExit from '../helpers/getExit';
-import Header from '../components/Header';
+import Footer from '../components/Footer';
+import { Context } from '../context/Context';
+import profileIcon from '../images/profileIcon.svg';
 
-function Profile({ history }) {
-  const emailByLocalStorage = JSON.parse(localStorage.getItem('user')).email;
+function Profile(props) {
+  const { history } = props;
+  const emailByLocalStorage = JSON.parse(localStorage.getItem('user'))
+    ? JSON.parse(localStorage.getItem('user')).email : 'usuário não identificado';
+  const { setSharedProps } = useContext(Context);
+  useEffect(() => setSharedProps(props), [props, setSharedProps]);
+
   return (
-    <section>
-      <Header />
-      <h1> Página de perfil</h1>
+    <div className="row">
+      <div className="col-sm-2">
+        <Link to="/perfil">
+          <button type="button">
+            <img
+              src={ profileIcon }
+              alt="profile-icon"
+              className="header-profile-icon"
+              data-testid="profile-top-btn"
+            />
+          </button>
+        </Link>
+      </div>
+      <h3 className="text-center" data-testid="page-title">Perfil</h3>
       <p data-testid="profile-email">{emailByLocalStorage}</p>
       <button
         type="button"
@@ -34,7 +53,8 @@ function Profile({ history }) {
         Sair
 
       </button>
-    </section>
+      <Footer />
+    </div>
   );
 }
 

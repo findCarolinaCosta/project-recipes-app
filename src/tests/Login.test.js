@@ -39,12 +39,19 @@ describe('Tela de Login', () => {
     expect(buttonSubmit).not.toBeDisabled();
   });
 
+<<<<<<< HEAD
   test('Após a submissão verifica se os dois tokens estão salvos no localStorage', () => {
     renderWithRouter(<App />);
+=======
+  test('Verifica se o e-mail está salvo na chave user após a submissão', () => {
+    const { history } = renderWithRouter(<App />);
+    console.log(history.location.pathname);
+>>>>>>> bea039d4152c296118ecddc31e056ab2c6bca749
     const { inputEmail, inputPassword, buttonSubmit } = returnInfo();
     userEvent.type(inputEmail, VALID_EMAIL);
     userEvent.type(inputPassword, VALID_PASSWORD);
     userEvent.click(buttonSubmit);
+<<<<<<< HEAD
     const mealsToken = localStorage.getItem('mealsToken');
     const cocktailsToken = localStorage.getItem('cocktailsToken');
     expect(mealsToken).toBe('1');
@@ -52,14 +59,29 @@ describe('Tela de Login', () => {
   });
 
   test('Verifica se o e-mail está salvo na chave user após a submissão', () => {
+=======
+    const user = localStorage.getItem('user');
+    const { email } = JSON.parse(user);
+    expect(email).toBe(VALID_EMAIL);
+  });
+
+  test('Após a submissão verifica se os dois tokens estão salvos no localStorage', () => {
+>>>>>>> bea039d4152c296118ecddc31e056ab2c6bca749
     renderWithRouter(<App />);
     const { inputEmail, inputPassword, buttonSubmit } = returnInfo();
     userEvent.type(inputEmail, VALID_EMAIL);
     userEvent.type(inputPassword, VALID_PASSWORD);
     userEvent.click(buttonSubmit);
+<<<<<<< HEAD
     const user = localStorage.getItem('user');
     const { email } = JSON.parse(user);
     expect(email).toBe(VALID_EMAIL);
+=======
+    const mealsToken = localStorage.getItem('mealsToken');
+    const cocktailsToken = localStorage.getItem('cocktailsToken');
+    expect(mealsToken).toBe('1');
+    expect(cocktailsToken).toBe('1');
+>>>>>>> bea039d4152c296118ecddc31e056ab2c6bca749
   });
 
   test('Verifica se o usuario é redirecionado para a tela principal após validar', () => {
