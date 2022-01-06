@@ -19,6 +19,16 @@ function RecipeDetails(props) {
     setSharedProps(props);
   }, [props, setSharedProps, id, pathname]);
 
+  useEffect(() => {
+    if (localStorage.getItem('inProgressRecipes') === null) {
+      localStorage.setItem('inProgressRecipes',
+        JSON.stringify({
+          cocktails: {
+            id: [],
+          },
+        }));
+    }
+  }, []);
   if (pathname.includes('comidas')) {
     console.log(recipeId);
     return (
