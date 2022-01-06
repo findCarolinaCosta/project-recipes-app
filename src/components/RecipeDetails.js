@@ -5,8 +5,8 @@ import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
 
 function RecipeDetails(props) {
-  const { setSharedProps } = useContext(Context);
-  const { match: { params: { id } }, location: { pathname } } = props;
+  const { setSharedProps, inProgress, setInprogress } = useContext(Context);
+  const { match: { params: { id } }, location: { pathname }, history } = props;
   const [recipeId, setRecipeId] = useState('');
 
   useEffect(() => {
@@ -29,8 +29,41 @@ function RecipeDetails(props) {
         }));
     }
   }, []);
+
+  useEffect(() => {
+    const gettingRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
+      .cocktails;
+    const currentRecipeId = pathname.split('/')[2];
+
+    if (localStorage.getItem('inProgressRecipes') !== null) {
+      setInprogress(gettingRecipes
+        ? Object.keys(gettingRecipes)
+          .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
+        : false);
+    }
+  }, []);
+
+  const handleClick = () => {
+    const progressRecipesIds = {
+      cocktails: {
+        [id]: [],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(progressRecipesIds));
+    const gettingRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
+      .cocktails;
+    const currentRecipeId = pathname.split('/')[2];
+
+    if (localStorage.getItem('inProgressRecipes') !== null) {
+      history.push(history.push(`/bebidas/${currentRecipeId}/in-progress`));
+      setInprogress(gettingRecipes
+        ? Object.keys(gettingRecipes)
+          .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
+        : false);
+    }
+  };
+
   if (pathname.includes('comidas')) {
-    console.log(recipeId);
     return (
       <div
         className="container-sm-fluid"
