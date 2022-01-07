@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Context } from '../context/Context';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
+import ButtonFavorite from './ButtonFavorite';
+import ButtonShare from './ButtonShare';
 
 function RecipeDetails(props) {
   const { setSharedProps, recipesInProgress, setRecipeInProgress } = useContext(Context);
@@ -61,6 +63,10 @@ function RecipeDetails(props) {
         className="container-sm-fluid"
         style={ { height: '100vh', width: '100vw' } }
       >
+        <nav className="in-progress-butons">
+          <ButtonShare props={ props } />
+          <ButtonFavorite props={ props } />
+        </nav>
         <div className="row w-100">
           <div className="col-12 w-100">
             <img
