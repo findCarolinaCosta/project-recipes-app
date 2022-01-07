@@ -5,9 +5,15 @@ import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
 
 function RecipeDetails(props) {
-  const { setSharedProps, inProgress, setInprogress } = useContext(Context);
+  const { setSharedProps, recipesInProgress, setRecipeInProgress } = useContext(Context);
   const { match: { params: { id } }, location: { pathname }, history } = props;
   const [recipeId, setRecipeId] = useState('');
+  const [inProgress, setInProgress] = useState(false);
+
+  const currentRecipeName = pathname.split('/')[1];
+
+  const gettingRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
+    .currentRecipeName === 'comida' ? 'meals' : 'cocktails';
 
   useEffect(() => {
     if (pathname.includes('comidas')) {
@@ -19,44 +25,36 @@ function RecipeDetails(props) {
     setSharedProps(props);
   }, [props, setSharedProps, id, pathname]);
 
-  useEffect(() => {
-    if (localStorage.getItem('inProgressRecipes') === null) {
-      localStorage.setItem('inProgressRecipes',
-        JSON.stringify({
-          cocktails: {
-            id: [],
-          },
-        }));
-    }
-  }, []);
+  useEffect(() => (localStorage.getItem('inProgressRecipes') !== null
+    ? setRecipeInProgress(JSON.parse(localStorage.getItem('inProgressRecipes')))
+    : localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress))), []);
 
   useEffect(() => {
-    const gettingRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-      .cocktails;
     const currentRecipeId = pathname.split('/')[2];
+    const verifyRecipe = currentRecipeName === 'comidas'
+      ? 'meals' : 'cocktails';
 
+    const gettingProgressRecipes = JSON.parse(localStorage
+      .getItem('inProgressRecipes'))[verifyRecipe];
     if (localStorage.getItem('inProgressRecipes') !== null) {
-      setInprogress(gettingRecipes
-        ? Object.keys(gettingRecipes)
+      setInProgress(gettingRecipes
+        ? Object.keys(gettingProgressRecipes)
           .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
         : false);
     }
-  }, []);
+  }, [pathname]);
 
   const handleClick = () => {
-    const progressRecipesIds = {
-      cocktails: {
-        [id]: [],
-      },
-    };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(progressRecipesIds));
-    const gettingRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-      .cocktails;
+    const gettingRoute = currentRecipeName === 'comida' ? 'meals' : 'cocktails';
     const currentRecipeId = pathname.split('/')[2];
+    setRecipeInProgress((state) => ({ ...state,
+      [gettingRoute]: { [currentRecipeId]: [] } }));
 
+    localStorage.setItem('inProgressRecipes', JSON.stringify(({ ...recipesInProgress,
+      [gettingRoute]: { [currentRecipeId]: [] } })));
+    history.push(`/${currentRecipeName}/${currentRecipeId}/in-progress`);
     if (localStorage.getItem('inProgressRecipes') !== null) {
-      history.push(history.push(`/bebidas/${currentRecipeId}/in-progress`));
-      setInprogress(gettingRecipes
+      setInProgress(gettingRecipes
         ? Object.keys(gettingRecipes)
           .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
         : false);
@@ -84,15 +82,16 @@ function RecipeDetails(props) {
             inProgress ? (
               <button
                 type="button"
-                className="fixed-bottom invisible"
+                className="fixed-bottom"
                 data-testid="start-recipe-btn"
+                onClick={ handleClick }
               >
                 Continuar Receita
               </button>
             ) : (
               <button
                 type="button"
-                className="fixed-bottom invisible"
+                className="fixed-bottom"
                 data-testid="start-recipe-btn"
                 onClick={ handleClick }
               >
@@ -113,8 +112,9 @@ function RecipeDetails(props) {
               type="button"
               className="fixed-bottom"
               data-testid="start-recipe-btn"
+              onClick={ handleClick }
             >
-              Continuar receita
+              Continuar Receita
             </button>
           ) : (
             <button
