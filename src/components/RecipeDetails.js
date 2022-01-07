@@ -10,11 +10,6 @@ function RecipeDetails(props) {
   const [recipeId, setRecipeId] = useState('');
   const [inProgress, setInProgress] = useState(false);
 
-  const currentRecipeName = pathname.split('/')[1];
-
-  const gettingRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-    .currentRecipeName === 'comida' ? 'meals' : 'cocktails';
-
   useEffect(() => {
     if (pathname.includes('comidas')) {
       fetchMealRecipeDetailsById(id).then((response) => setRecipeId(response[0]));
@@ -30,8 +25,11 @@ function RecipeDetails(props) {
     : localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress))), []);
 
   useEffect(() => {
+    const currentRouteName = pathname.split('/')[1];
     const currentRecipeId = pathname.split('/')[2];
-    const verifyRecipe = currentRecipeName === 'comidas'
+    const gettingRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
+      .currentRouteName === 'comida' ? 'meals' : 'cocktails';
+    const verifyRecipe = currentRouteName === 'comidas'
       ? 'meals' : 'cocktails';
 
     const gettingProgressRecipes = JSON.parse(localStorage
@@ -45,7 +43,8 @@ function RecipeDetails(props) {
   }, [pathname]);
 
   const handleClick = () => {
-    const gettingRoute = currentRecipeName === 'comidas' ? 'meals' : 'cocktails';
+    const currentRouteName = pathname.split('/')[1];
+    const gettingRoute = currentRouteName === 'comidas' ? 'meals' : 'cocktails';
     const currentRecipeId = pathname.split('/')[2];
     setRecipeInProgress((state) => ({ ...state,
       [gettingRoute]: { [currentRecipeId]: [] } }));
@@ -53,7 +52,7 @@ function RecipeDetails(props) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(({ ...recipesInProgress,
       [gettingRoute]: { [currentRecipeId]: [] } })));
 
-    history.push(`/${currentRecipeName}/${currentRecipeId}/in-progress`);
+    history.push(`/${currentRouteName}/${id}/in-progress`);
   };
 
   if (pathname.includes('comidas')) {
