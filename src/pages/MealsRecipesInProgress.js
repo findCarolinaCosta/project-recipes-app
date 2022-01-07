@@ -7,7 +7,6 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function MealsRecipesInProgress({ match: { params } }) {
   const recipeID = params.id;
-
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [favoriteStorage, setFavoriteStorage] = useState(localStorage
@@ -59,7 +58,6 @@ export default function MealsRecipesInProgress({ match: { params } }) {
   useEffect(() => {
     fetchRecipe(recipeID);
   }, [recipeID]);
-
   return (
     <div className="meal-in-progress">
       <img
@@ -73,12 +71,22 @@ export default function MealsRecipesInProgress({ match: { params } }) {
       >
         { recipe.strMeal }
       </h4>
-      <nav className="in-progress-butons">
+      <h5
+        data-testid="recipe-category"
+      >
+        { recipe.strCategory }
+      </h5>
+      <nav className="in-progress-butons mb-36">
         <button
           type="button"
           className="btn"
+          onClick={ () => { navigator.clipboard.writeText(window.location.href); } }
         >
-          <img src={ shareIcon } alt="Botão de compartilhamento" />
+          <img
+            data-testid="share-btn"
+            src={ shareIcon }
+            alt="Botão de compartilhamento"
+          />
         </button>
         <button
           type="button"
@@ -86,6 +94,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
           onClick={ handleFavoriteButton }
         >
           <img
+            data-testid="favorite-btn"
             src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
             alt="Botão de compartilhamento"
           />
@@ -96,16 +105,19 @@ export default function MealsRecipesInProgress({ match: { params } }) {
           {
             ingredients.map((ingredient, index) => (
               <li
-                key={ index }
+                key={ ingredient }
                 className="listIngredients"
               >
-                <label htmlFor={ index } className="form-check-label">
+                <label htmlFor={ ingredient } className="form-check-label">
                   <input
                     type="checkbox"
                     className="form-check-input"
-                    id={ index }
+                    id={ ingredient }
                   />
-                  <p className="ingredients-label">
+                  <p
+                    className="ingredients-label"
+                    data-testid={ `${index}-ingredient-step` }
+                  >
                     { ingredient }
                   </p>
                 </label>
@@ -113,6 +125,16 @@ export default function MealsRecipesInProgress({ match: { params } }) {
             ))
           }
         </ul>
+      </div>
+      <div className="row col-md-4 card-box text-center">
+        <section>
+          <p
+            data-testid="instructions"
+            className="paragraph-recipe-instructions"
+          >
+            { recipe.strInstructions }
+          </p>
+        </section>
       </div>
     </div>
   );
