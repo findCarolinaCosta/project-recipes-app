@@ -17,7 +17,7 @@ function RecipesProvider({ children }) {
   const [areas, setAreas] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [sharedProps, setSharedProps] = useState({});
-  const [inProgress, setInprogress] = useState(false);
+  const [recipesInProgress, setRecipeInProgress] = useState({ cocktails: {}, meals: {} });
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
@@ -42,8 +42,8 @@ function RecipesProvider({ children }) {
     setAreas,
     setIngredients,
     drinksCategories,
-    inProgress,
-    setInprogress,
+    recipesInProgress,
+    setRecipeInProgress,
   };
 
   return (
