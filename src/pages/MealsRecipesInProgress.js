@@ -4,6 +4,7 @@ import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import checkTarget from '../helpers/checkTarget';
 
 export default function MealsRecipesInProgress({ match: { params } }) {
   const recipeID = params.id;
@@ -102,8 +103,10 @@ export default function MealsRecipesInProgress({ match: { params } }) {
                 <label htmlFor={ index } className="form-check-label">
                   <input
                     type="checkbox"
+                    name="check"
                     className="form-check-input"
                     id={ index }
+                    onClick={ (e) => checkTarget(e) }
                   />
                   <p className="ingredients-label">
                     { ingredient }
@@ -114,6 +117,12 @@ export default function MealsRecipesInProgress({ match: { params } }) {
           }
         </ul>
       </div>
+      <button
+        type="button"
+        disabled
+      >
+        Finalizar Receita
+      </button>
     </div>
   );
 }
