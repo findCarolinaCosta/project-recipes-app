@@ -45,20 +45,15 @@ function RecipeDetails(props) {
   }, [pathname]);
 
   const handleClick = () => {
-    const gettingRoute = currentRecipeName === 'comida' ? 'meals' : 'cocktails';
+    const gettingRoute = currentRecipeName === 'comidas' ? 'meals' : 'cocktails';
     const currentRecipeId = pathname.split('/')[2];
     setRecipeInProgress((state) => ({ ...state,
       [gettingRoute]: { [currentRecipeId]: [] } }));
 
     localStorage.setItem('inProgressRecipes', JSON.stringify(({ ...recipesInProgress,
       [gettingRoute]: { [currentRecipeId]: [] } })));
+
     history.push(`/${currentRecipeName}/${currentRecipeId}/in-progress`);
-    if (localStorage.getItem('inProgressRecipes') !== null) {
-      setInProgress(gettingRecipes
-        ? Object.keys(gettingRecipes)
-          .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
-        : false);
-    }
   };
 
   if (pathname.includes('comidas')) {
@@ -77,28 +72,14 @@ function RecipeDetails(props) {
           </div>
         </div>
         <div>
-          {/* implementação da classe invisible temporária - passando no requisito 39 */}
-          {
-            inProgress ? (
-              <button
-                type="button"
-                className="fixed-bottom"
-                data-testid="start-recipe-btn"
-                onClick={ handleClick }
-              >
-                Continuar Receita
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="fixed-bottom"
-                data-testid="start-recipe-btn"
-                onClick={ handleClick }
-              >
-                Iniciar Receita
-              </button>
-            )
-          }
+          <button
+            type="button"
+            className="fixed-bottom"
+            data-testid="start-recipe-btn"
+            onClick={ handleClick }
+          >
+            {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+          </button>
         </div>
       </div>
     );
@@ -106,27 +87,14 @@ function RecipeDetails(props) {
   if (pathname.includes('bebidas')) {
     return (
       <div>
-        {
-          inProgress ? (
-            <button
-              type="button"
-              className="fixed-bottom"
-              data-testid="start-recipe-btn"
-              onClick={ handleClick }
-            >
-              Continuar Receita
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="fixed-bottom"
-              data-testid="start-recipe-btn"
-              onClick={ handleClick }
-            >
-              Iniciar Receita
-            </button>
-          )
-        }
+        <button
+          type="button"
+          className="fixed-bottom"
+          data-testid="start-recipe-btn"
+          onClick={ handleClick }
+        >
+          {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+        </button>
       </div>
     );
   }
