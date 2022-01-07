@@ -17,7 +17,7 @@ function RecipesProvider(props) {
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [areas, setAreas] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const [sharedProps, setSharedProps] = useState(props);
+  const [sharedProps, setSharedProps] = useState({});
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
