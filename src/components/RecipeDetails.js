@@ -91,16 +91,23 @@ function RecipeDetails(props) {
   }
   if (pathname.includes('bebidas')) {
     return (
-      <div>
-        <button
-          type="button"
-          className="fixed-bottom"
-          data-testid="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-        </button>
-      </div>
+      <>
+        <nav className="in-progress-butons">
+          <ButtonShare props={ props } />
+          <ButtonFavorite props={ props } />
+        </nav>
+        <div>
+          <button
+            type="button"
+            className="fixed-bottom"
+            data-testid="start-recipe-btn"
+            onClick={ handleClick }
+          >
+            {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+          </button>
+        </div>
+
+      </>
     );
   }
 }
