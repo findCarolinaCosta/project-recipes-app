@@ -26,6 +26,7 @@ function RecipesProvider(props) {
   const [favoriteStorage, setFavoriteStorage] = useState(INICIAL_FAVORITE_STORAGE);
   const [isFavorite, setIsFavorite] = useState(favoriteStorage);
   const [recipe, setRecipe] = useState({});
+  const [inProgress, setInProgress] = useState(false);
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
@@ -58,6 +59,8 @@ function RecipesProvider(props) {
     setFavoriteStorage,
     recipe,
     setRecipe,
+    inProgress,
+    setInProgress,
   };
 
   return <Provider value={ context }>{children}</Provider>;

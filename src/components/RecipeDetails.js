@@ -5,21 +5,19 @@ import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
 import ButtonFavorite from './ButtonFavorite';
 import ButtonShare from './ButtonShare';
+import DrinksDetails from './DrinksDetails';
 
 function RecipeDetails(props) {
-  const { setSharedProps, recipesInProgress, setRecipeInProgress } = useContext(Context);
+  const { setSharedProps, recipesInProgress,
+    setRecipeInProgress, inProgress, setInProgress } = useContext(Context);
   const { match: { params: { id } }, location: { pathname }, history } = props;
   const [recipeId, setRecipeId] = useState('');
-  const [inProgress, setInProgress] = useState(false);
 
   useEffect(() => {
-    if (pathname.includes('comidas')) {
-      fetchMealRecipeDetailsById(id).then((response) => setRecipeId(response[0]));
-    }
-    if (pathname.includes('bebidas')) {
-      fetchDrinkRecipeDetailsById(id).then((response) => setRecipeId(response[0]));
-    }
     setSharedProps(props);
+    return () => (pathname.includes('bebidas')
+      ? fetchDrinkRecipeDetailsById(id).then((response) => setRecipeId(response[0]))
+      : fetchMealRecipeDetailsById(id).then((response) => setRecipeId(response[0])));
   }, [props, setSharedProps, id, pathname]);
 
   useEffect(() => (localStorage.getItem('inProgressRecipes') !== null
@@ -29,19 +27,16 @@ function RecipeDetails(props) {
   useEffect(() => {
     const currentRouteName = pathname.split('/')[1];
     const currentRecipeId = pathname.split('/')[2];
-    const gettingRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-      .currentRouteName === 'comida' ? 'meals' : 'cocktails';
     const verifyRecipe = currentRouteName === 'comidas'
       ? 'meals' : 'cocktails';
-
     const gettingProgressRecipes = JSON.parse(localStorage
       .getItem('inProgressRecipes'))[verifyRecipe];
-    if (localStorage.getItem('inProgressRecipes') !== null) {
-      setInProgress(gettingRecipes
+
+    return (localStorage.getItem('inProgressRecipes') !== null
+      && setInProgress(gettingProgressRecipes
         ? Object.keys(gettingProgressRecipes)
           .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
-        : false);
-    }
+        : false));
   }, [pathname]);
 
   const handleClick = () => {
@@ -57,8 +52,8 @@ function RecipeDetails(props) {
     history.push(`/${currentRouteName}/${id}/in-progress`);
   };
 
-  if (pathname.includes('comidas')) {
-    return (
+  return (
+    pathname.includes('comidas') ? (
       <div
         className="container-sm-fluid"
         style={ { height: '100vh', width: '100vw' } }
@@ -87,34 +82,18 @@ function RecipeDetails(props) {
           </button>
         </div>
       </div>
-    );
-  }
-  if (pathname.includes('bebidas')) {
-    return (
-      <>
-        <nav className="in-progress-butons">
-          <ButtonShare props={ props } />
-          <ButtonFavorite props={ props } />
-        </nav>
-        <div>
-          <button
-            type="button"
-            className="fixed-bottom"
-            data-testid="start-recipe-btn"
-            onClick={ handleClick }
-          >
-            {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-          </button>
-        </div>
-
-      </>
-    );
-  }
+    ) : <DrinksDetails handleClick={ handleClick } Props={ props } />
+  );
 }
 
 RecipeDetails.propTypes = {
-  match: PropTypes.shape().isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
   location: PropTypes.shape().isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape(),
+  }).isRequired,
 };
 
 export default RecipeDetails;
