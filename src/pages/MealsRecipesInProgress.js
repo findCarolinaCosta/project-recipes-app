@@ -107,19 +107,18 @@ export default function MealsRecipesInProgress({ match: { params } }) {
             ingredients.map((ingredient, index) => (
               <li
                 key={ ingredient }
-                className="listIngredients"
+                data-testid={ `${index}-ingredient-step` }
               >
                 <label htmlFor={ ingredient } className="form-check-label">
                   <input
-                    type="checkbox"
                     name="check"
                     className="form-check-input"
                     id={ index }
-                    onClick={ (e) => checkTarget(e) }
+                    onClick={ checkTarget }
+                    type="checkbox"
                   />
                   <p
                     className="ingredients-label"
-                    data-testid={ `${index}-ingredient-step` }
                   >
                     { ingredient }
                   </p>
@@ -142,6 +141,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
       <button
         type="button"
         className="btn btn-outline-danger btn-lg"
+        data-testid="finish-recipe-btn"
         disabled
       >
         Finalizar Receita

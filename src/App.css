@@ -1,6 +1,6 @@
 * {
   background: #F2F2F2;
-  color: #2D3540;
+  color: rgb(0, 0, 0);
 }
 
 .recipes-container {
@@ -143,6 +143,10 @@
   text-transform: capitalize;
 }
 
-.line-class {
-  text-decoration: line-through;
+li > * {
+  text-decoration: none solid rgb(0, 0, 0);
+}
+
+.line-class, .line-class > * {
+  text-decoration: line-through solid rgb(0, 0, 0);
 }

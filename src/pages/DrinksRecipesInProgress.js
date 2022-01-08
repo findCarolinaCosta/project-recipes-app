@@ -128,6 +128,7 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
           <img
             src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
             alt="Botão de compartilhamento"
+            data-testid="favorite-btn"
           />
         </button>
       </nav>
@@ -137,19 +138,19 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
             ingredients.map((ingredient, index) => (
               <li
                 key={ ingredient }
-                className="listIngredients"
+                className={ checkTarget(checkedList[index]) }
+                data-testid={ `${index}-ingredient-step` }
               >
                 <label htmlFor={ ingredient } className="form-check-label">
                   <input
-                    type="checkbox"
                     className="form-check-input"
                     id={ ingredient }
                     checked={ checkedList[index] }
                     onClick={ () => toggleChecked(index) }
+                    type="checkbox"
                   />
                   <p
-                    className={ checkTarget(checkedList[index]) }
-                    data-testid={ `${index}-ingredient-step` }
+                    className="ingredients-label"
                   >
                     { ingredient }
                   </p>
@@ -169,6 +170,14 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
           </p>
         </section>
       </div>
+      <button
+        type="button"
+        className="btn btn-outline-danger btn-lg"
+        data-testid="finish-recipe-btn"
+        disabled
+      >
+        Finalizar Receita
+      </button>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 function checkTarget(check) {
   if (check) {
-    return 'ingredients-label line-class';
+    return 'listIngredients line-class';
   }
-  return 'ingredients-label';
+  return 'listIngredients ingredients-label';
 }
 
 export default checkTarget;
