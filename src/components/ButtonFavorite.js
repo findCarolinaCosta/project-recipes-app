@@ -31,14 +31,15 @@ function ButtonFavorite(props) {
         setIsFavorite(false);
         return newState;
       });
+    } else {
+      const newState = [
+        ...favoriteStorage,
+        getRecipeObj(currentRouteName, recipeID, recipe),
+      ];
+      setFavoriteStorage(newState);
+      setIsFavorite(true);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newState));
     }
-
-    const newState = [...favoriteStorage,
-      getRecipeObj(currentRouteName, recipeID, recipe),
-    ];
-    setFavoriteStorage(newState);
-    setIsFavorite(true);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newState));
   };
 
   const teste = async () => {
