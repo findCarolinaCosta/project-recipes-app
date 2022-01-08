@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Context } from '../context/Context';
-import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import fetchDrinksRecipeDetailsById from '../services/fetchDrinksRecipeDetailsById';
+import getRecipe from '../helpers/getRecipe';
+import getRecipeObj from '../helpers/getRecipeObj';
 
 function ButtonFavorite(props) {
   const { props: { match: { params: { id } }, location: { pathname } } } = props;
@@ -22,17 +22,6 @@ function ButtonFavorite(props) {
     }
   }, [id, setIsFavorite]);
 
-  const fetchRecipe = async (ID) => {
-    const currentRouteName = pathname.split('/')[1];
-    if (currentRouteName === 'comidas') {
-      const responseMeals = await fetchMealRecipeDetailsById(ID);
-      setRecipe(responseMeals[0]);
-    }
-    if (currentRouteName === 'bebidas') {
-      const responseDrinks = await fetchDrinksRecipeDetailsById(ID);
-      setRecipe(responseDrinks[0]);
-    }
-  };
   const handleFavoriteButton = () => {
     const currentRouteName = pathname.split('/')[1];
     if (isFavorite) {
@@ -42,38 +31,20 @@ function ButtonFavorite(props) {
         setIsFavorite(false);
         return newState;
       });
-    } else {
-      const recipeObj = currentRouteName === 'comidas' ? (
-        {
-          id: recipeID,
-          type: 'comida',
-          area: recipe.strArea ? recipe.strArea : '',
-          category: recipe.strCategory ? recipe.strCategory : '',
-          alcoholicOrNot: '',
-          name: recipe.strMeal,
-          image: recipe.strMealThumb,
-        }
-      ) : (
-        {
-          id: recipeID,
-          type: 'bebidas',
-          area: '',
-          category: recipe.strCategory ? recipe.strCategory : '',
-          alcoholicOrNot: recipe.strAlcoholic ? recipe.strAlcoholic : '',
-          name: recipe.strDrink,
-          image: recipe.strDrinkThumb,
-        }
-      );
-
-      const newState = [...favoriteStorage, recipeObj];
-      setFavoriteStorage(newState);
-      setIsFavorite(true);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newState));
     }
+
+    const newState = [...favoriteStorage,
+      getRecipeObj(currentRouteName, recipeID, recipe)];
+    setFavoriteStorage(newState);
+    setIsFavorite(true);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newState));
   };
 
   useEffect(() => {
-    fetchRecipe(recipeID);
+    const currentRouteName = pathname.split('/')[1];
+    return currentRouteName === 'comidas'
+      ? setRecipe(getRecipe(recipeID, currentRouteName))
+      : setRecipe(getRecipe(recipeID, currentRouteName));
   }, [recipeID]);
 
   return (
