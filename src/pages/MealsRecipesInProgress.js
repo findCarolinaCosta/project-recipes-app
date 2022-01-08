@@ -115,6 +115,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
                     name="check"
                     className="form-check-input"
                     id={ index }
+                    onClick={ (e) => checkTarget(e) }
                   />
                   <p
                     className="ingredients-label"
@@ -140,6 +141,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
       </div>
       <button
         type="button"
+        className="btn btn-outline-danger btn-lg"
         disabled
       >
         Finalizar Receita

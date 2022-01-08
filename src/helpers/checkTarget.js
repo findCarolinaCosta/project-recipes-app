@@ -1,11 +1,8 @@
-function checkTarget({ target }) {
-  const elementToCheck = target.parentElement;
-  if (target.checked) {
-    elementToCheck.style.textDecoration = 'line-through';
+function checkTarget(check) {
+  if (check) {
+    return 'ingredients-label line-class';
   }
-  if (!target.checked) {
-    elementToCheck.style.textDecoration = 'none';
-  }
+  return 'ingredients-label';
 }
 
 export default checkTarget;

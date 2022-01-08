@@ -1,6 +1,6 @@
 * {
-  background: #0fa36b;
-  color: #c7e4cc;
+  background: #F2F2F2;
+  color: #2D3540;
 }
 
 .recipes-container {
@@ -143,6 +143,6 @@
   text-transform: capitalize;
 }
 
-.paragraph-recipe-instructions{
-
+.line-class {
+  text-decoration: line-through;
 }

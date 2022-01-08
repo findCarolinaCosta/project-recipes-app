@@ -4,12 +4,28 @@ import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import checkTarget from '../helpers/checkTarget';
 
-export default function DrinksRecipesInProgress({ match: { params }, history }) {
+const setStorage = (listIngredients, id) => {
+  const inProgress = localStorage.getItem('inProgressRecipes')
+    ? JSON.parse(localStorage.getItem('inProgressRecipes'))
+    : {
+      cocktails: {
+        [id]: [],
+      },
+    };
+  inProgress.cocktails[id] = listIngredients;
+  localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+};
+
+export default function DrinksRecipesInProgress({ match: { params } }) {
   const recipeID = params.id;
-
+  const [checkedList, setCheckedList] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState({});
+  const [ingredientsList, setIngredientsList] = useState(localStorage
+    .getItem('inProgressRecipes') ? JSON.parse(localStorage
+      .getItem('inProgressRecipes')).cocktails[recipeID] : []);
   const [favoriteStorage, setFavoriteStorage] = useState(localStorage
     .getItem('favoriteRecipes')
     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
@@ -27,6 +43,22 @@ export default function DrinksRecipesInProgress({ match: { params }, history }) 
         [...prev, `${curr[1]} - ${ingredientMensure[index][1]}`]
       ), []);
     setIngredients(ingredientSetting);
+    setCheckedList(ingredientSetting.map((ingredient) => (
+      ingredientsList.includes(ingredient)
+    )));
+  };
+
+  const toggleChecked = (index) => {
+    setCheckedList((prev) => {
+      const newList = [...prev];
+      newList[index] = !newList[index];
+      const IngredientsList = ingredients.filter((ingredient, innerIndex) => (
+        newList[innerIndex]
+      ));
+      setIngredientsList(IngredientsList);
+      setStorage(IngredientsList, recipeID);
+      return newList;
+    });
   };
 
   const handleFavoriteButton = () => {
@@ -58,7 +90,6 @@ export default function DrinksRecipesInProgress({ match: { params }, history }) 
   useEffect(() => {
     fetchRecipe(recipeID);
   }, [recipeID]);
-  console.log(recipe);
   return (
     <div className="drinks-in-progress">
       <img
@@ -81,7 +112,7 @@ export default function DrinksRecipesInProgress({ match: { params }, history }) 
         <button
           type="button"
           className="btn"
-          onClick={ () => { navigator.clipboard.writeText(history.location.pathname); } }
+          onClick={ () => { navigator.clipboard.writeText(window.location.href); } }
         >
           <img
             src={ shareIcon }
@@ -113,9 +144,11 @@ export default function DrinksRecipesInProgress({ match: { params }, history }) 
                     type="checkbox"
                     className="form-check-input"
                     id={ ingredient }
+                    checked={ checkedList[index] }
+                    onClick={ () => toggleChecked(index) }
                   />
                   <p
-                    className="ingredients-label"
+                    className={ checkTarget(checkedList[index]) }
                     data-testid={ `${index}-ingredient-step` }
                   >
                     { ingredient }
@@ -143,10 +176,5 @@ export default function DrinksRecipesInProgress({ match: { params }, history }) 
 DrinksRecipesInProgress.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape().isRequired,
-  }).isRequired,
-  history: PropTypes.shape({
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }).isRequired,
   }).isRequired,
 };
