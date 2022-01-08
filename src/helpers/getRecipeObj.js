@@ -1,24 +1,26 @@
 export default function getRecipeObj(currentRouteName, recipeID, recipe) {
+  const recipeItem = recipe[0];
   const recipeObj = currentRouteName === 'comidas' ? (
     {
       id: recipeID,
       type: 'comida',
-      area: recipe.strArea ? recipe.strArea : '',
-      category: recipe.strCategory ? recipe.strCategory : '',
+      area: recipeItem.strArea,
+      category: recipeItem.strCategory,
       alcoholicOrNot: '',
-      name: recipe.strMeal,
-      image: recipe.strMealThumb,
+      name: recipeItem.strMeal,
+      image: recipeItem.strMealThumb,
     }
   ) : (
     {
       id: recipeID,
-      type: 'bebidas',
+      type: 'bebida',
       area: '',
-      category: recipe.strCategory ? recipe.strCategory : '',
-      alcoholicOrNot: recipe.strAlcoholic ? recipe.strAlcoholic : '',
-      name: recipe.strDrink,
-      image: recipe.strDrinkThumb,
+      category: recipeItem.strCategory ? recipeItem.strCategory : '',
+      alcoholicOrNot: recipeItem.strAlcoholic ? recipeItem.strAlcoholic : '',
+      name: recipeItem.strDrink,
+      image: recipeItem.strDrinkThumb,
     }
   );
+  console.log(currentRouteName);
   return recipeObj;
 }

@@ -34,17 +34,22 @@ function ButtonFavorite(props) {
     }
 
     const newState = [...favoriteStorage,
-      getRecipeObj(currentRouteName, recipeID, recipe)];
+      getRecipeObj(currentRouteName, recipeID, recipe),
+    ];
     setFavoriteStorage(newState);
     setIsFavorite(true);
     localStorage.setItem('favoriteRecipes', JSON.stringify(newState));
   };
 
-  useEffect(() => {
+  const teste = async () => {
     const currentRouteName = pathname.split('/')[1];
     return currentRouteName === 'comidas'
-      ? setRecipe(getRecipe(recipeID, currentRouteName))
-      : setRecipe(getRecipe(recipeID, currentRouteName));
+      ? setRecipe(await getRecipe(recipeID, currentRouteName))
+      : setRecipe(await getRecipe(recipeID, currentRouteName));
+  };
+
+  useEffect(() => {
+    teste();
   }, [recipeID]);
 
   return (
