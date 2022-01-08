@@ -21,6 +21,5 @@ export default function getRecipeObj(currentRouteName, recipeID, recipe) {
       image: recipeItem.strDrinkThumb,
     }
   );
-  console.log(currentRouteName);
   return recipeObj;
 }

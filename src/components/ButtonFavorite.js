@@ -42,16 +42,15 @@ function ButtonFavorite(props) {
     }
   };
 
-  const teste = async () => {
-    const currentRouteName = pathname.split('/')[1];
-    return currentRouteName === 'comidas'
-      ? setRecipe(await getRecipe(recipeID, currentRouteName))
-      : setRecipe(await getRecipe(recipeID, currentRouteName));
-  };
-
   useEffect(() => {
-    teste();
-  }, [recipeID]);
+    const setRecipes = async () => {
+      const currentRouteName = pathname.split('/')[1];
+      return currentRouteName === 'comidas'
+        ? setRecipe(await getRecipe(recipeID, currentRouteName))
+        : setRecipe(await getRecipe(recipeID, currentRouteName));
+    };
+    setRecipes();
+  }, [recipeID, pathname, setRecipe]);
 
   return (
     <button

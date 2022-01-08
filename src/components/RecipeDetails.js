@@ -37,7 +37,7 @@ function RecipeDetails(props) {
         ? Object.keys(gettingProgressRecipes)
           .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
         : false));
-  }, [pathname]);
+  }, [pathname, setInProgress]);
 
   const handleClick = () => {
     const currentRouteName = pathname.split('/')[1];
