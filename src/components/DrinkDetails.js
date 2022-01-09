@@ -7,13 +7,15 @@ import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import ButtonShare from './ButtonShare';
 import ButtonFavorite from './ButtonFavorite';
 import makeIngredientsList from '../helpers/makeIngredientsList';
+import ButtonProgress from './ButtonProgress';
 
-function DrinkDetails({ props, handleClick }) {
+function DrinkDetails({ props }) {
   const { setSharedProps,
-    inProgress,
     setInProgress,
     recipesInProgress,
     setRecipeInProgress,
+    setIsRecipesDone,
+    recipesDone,
   } = useContext(Context);
   const { match: { params: { id } }, location: { pathname } } = props;
   const [recipe, setRecipe] = useState('');
@@ -52,6 +54,17 @@ function DrinkDetails({ props, handleClick }) {
           .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
         : false));
   }, [pathname, setInProgress]);
+
+  useEffect(() => {
+    const currentRecipeId = pathname.split('/')[2];
+    const gettingRecipesDone = JSON.parse(localStorage
+      .getItem('doneRecipes'));
+    return localStorage.getItem('inProgressRecipes') !== null
+      && setIsRecipesDone(gettingRecipesDone
+        ? Array.from(gettingRecipesDone)
+          .some((recipeDoneIdStorage) => recipeDoneIdStorage.id === currentRecipeId)
+        : false);
+  }, [setIsRecipesDone, pathname, recipesDone]);
 
   return (
     <div
@@ -145,14 +158,7 @@ function DrinkDetails({ props, handleClick }) {
       </div>
 
       <div className="row">
-        <button
-          type="button"
-          className="fixed-bottom"
-          data-testid="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-        </button>
+        <ButtonProgress props={ props } />
       </div>
 
     </div>
@@ -167,7 +173,6 @@ DrinkDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.string.isRequired,
   }).isRequired,
-  handleClick: PropTypes.func.isRequired,
 };
 
 export default DrinkDetails;
