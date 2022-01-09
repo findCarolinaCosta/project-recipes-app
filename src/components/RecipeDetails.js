@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
@@ -10,17 +11,7 @@ function RecipeDetails(props) {
   const { setSharedProps } = useContext(Context);
   const { match: { params: { id } }, location: { pathname } } = props;
   const [recipe, setRecipe] = useState('');
-  const [ingredients, setIngredients] = useState('teste');
-
-  const makeIngredientsList = () => {
-    const keys = Object.keys(recipe);
-    console.log(keys);
-    return keys;
-    // recipe.map((recipeAttribute, index) => {
-    //   if (recipeAttribute === `strIngredient${index + 1}`
-    //   && )
-    // });
-  };
+  const [ingredients, setIngredients] = useState();
 
   useEffect(() => {
     if (pathname.includes('comidas')) {
@@ -33,13 +24,22 @@ function RecipeDetails(props) {
   }, [props, setSharedProps, id, pathname]);
 
   useEffect(() => {
+    const makeIngredientsList = () => {
+      const MAX_INGREDIENTS_NUMBER = 20;
+      const ingredientsList = [];
+      for (let index = 1; index <= MAX_INGREDIENTS_NUMBER; index += 1) {
+        const ingredientName = recipe[`strIngredient${index}`];
+        const ingredientMeasure = recipe[`strMeasure${index}`];
+        const objectToPush = { ingredientName, ingredientMeasure };
+        if (ingredientName) ingredientsList.push(objectToPush);
+      }
+      return ingredientsList;
+    };
     setIngredients(makeIngredientsList());
-  }, []);
+  }, [recipe]);
 
   if (pathname.includes('comidas')) {
-    if (recipe) {
-      makeIngredientsList(recipe);
-    }
+    console.log(recipe.strDrinkAlternate);
     return (
       <div
         className="container-fluid"
@@ -83,10 +83,68 @@ function RecipeDetails(props) {
 
         <div className="row">
           <div className="col-12">
-            <h4>{ recipe.strCategory }</h4>
+            <h4 data-testid="recipe-category">{ recipe.strCategory }</h4>
           </div>
         </div>
 
+        <div className="row">
+          <div className="col-12">
+            <h1>Ingredients</h1>
+          </div>
+          {ingredients
+          && (
+            <div className="col-12">
+              <ul>
+                {ingredients.map((ingredient, index) => (
+                  <li
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                    key={ `${ingredient.ingredientName}${index}` }
+                  >
+                    {`${ingredient.ingredientName} - ${ingredient.ingredientMeasure}`}
+                  </li>
+                ))}
+              </ul>
+            </div>)}
+        </div>
+
+        <div className="row">
+          <div className="col-12">
+            <h1>Instructions</h1>
+          </div>
+          <div>
+            <p data-testid="instructions">{ recipe.strInstructions }</p>
+          </div>
+        </div>
+
+        <div className="row">
+          <video data-testid="video" className="embed-responsive">
+            <track kind="captions" />
+            <source className="embed-responsive-item" src={ recipe.strYoutube } />
+          </video>
+        </div>
+
+        <div className="row d-flex w-100">
+          <div className="d-flex flex-wrap justify-content-center">
+            <Link
+              className="custom-card col-sm-6 col-md-3"
+              style={ { width: '40vw' } }
+              data-testid="0-recomendation-card"
+              key="teste"
+              to={ `/bebidas/${recipe.idMeal}` }
+            >
+              <img
+                className="img-thumbnail"
+                src={ recipe.strMealThumb }
+                alt={ recipe.strMeal }
+                data-testid="card-img"
+                width="100px"
+              />
+              <h4 className="card-title" data-testid="card-name">
+                {recipe.strMeal}
+              </h4>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
