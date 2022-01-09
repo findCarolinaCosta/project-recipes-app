@@ -8,22 +8,25 @@ import ButtonShare from './ButtonShare';
 import ButtonFavorite from './ButtonFavorite';
 import makeIngredientsList from '../helpers/makeIngredientsList';
 
-function DrinkDetails({ props }) {
+function DrinkDetails({ props, handleClick }) {
   const { setSharedProps,
     inProgress,
     setInProgress,
     recipesInProgress,
     setRecipeInProgress,
   } = useContext(Context);
-  const { match: { params: { id } }, location: { pathname }, handleClick } = props;
+  const { match: { params: { id } }, location: { pathname } } = props;
   const [recipe, setRecipe] = useState('');
   const [ingredients, setIngredients] = useState();
 
   useEffect(() => {
+    if (pathname.includes('comidas')) {
+      fetchMealRecipeDetailsById(id).then((response) => setRecipe(response[0]));
+    }
+    if (pathname.includes('bebidas')) {
+      fetchDrinkRecipeDetailsById(id).then((response) => setRecipe(response[0]));
+    }
     setSharedProps(props);
-    return () => (pathname.includes('bebidas')
-      ? fetchDrinkRecipeDetailsById(id).then((response) => setRecipe(response[0]))
-      : fetchMealRecipeDetailsById(id).then((response) => setRecipe(response[0])));
   }, [props, setSharedProps, id, pathname]);
 
   useEffect(() => {

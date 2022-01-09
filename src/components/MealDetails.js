@@ -8,7 +8,7 @@ import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import ButtonFavorite from './ButtonFavorite';
 import ButtonShare from './ButtonShare';
 
-function MealDetails({ props }) {
+function MealDetails({ props, handleClick }) {
   const { setSharedProps,
     inProgress,
     setInProgress,
@@ -16,7 +16,7 @@ function MealDetails({ props }) {
     setRecipeInProgress,
   } = useContext(Context);
   const { match: { params: { id } },
-    location: { pathname }, handleClick } = props;
+    location: { pathname } } = props;
   const [recipe, setRecipe] = useState('');
   const [ingredients, setIngredients] = useState();
 
