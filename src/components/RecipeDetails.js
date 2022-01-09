@@ -155,7 +155,6 @@ function RecipeDetails(props) {
   }
 
   if (pathname.includes('bebidas')) {
-    console.log(recipe);
     return (
       <div
         className="container-fluid"
@@ -199,7 +198,8 @@ function RecipeDetails(props) {
 
         <div className="row">
           <div className="col-12">
-            <h4 data-testid="recipe-category">{ recipe.strCategory }</h4>
+            <h3>{ recipe.strCategory }</h3>
+            <h5 data-testid="recipe-category">{ recipe.strAlcoholic }</h5>
           </div>
         </div>
 
@@ -230,13 +230,6 @@ function RecipeDetails(props) {
           <div>
             <p data-testid="instructions">{ recipe.strInstructions }</p>
           </div>
-        </div>
-
-        <div className="row">
-          <video data-testid="video" className="embed-responsive">
-            <track kind="captions" />
-            <source className="embed-responsive-item" src={ recipe.strVideo } />
-          </video>
         </div>
 
         <div className="row d-flex w-100">
