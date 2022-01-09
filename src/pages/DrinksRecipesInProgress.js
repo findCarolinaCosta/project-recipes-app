@@ -35,7 +35,9 @@ const setIngredientsInitial = (id) => {
 
 export default function DrinksRecipesInProgress({ match: { params } }) {
   const recipeID = params.id;
+  const timeClipboard = 3000;
   const [checkedList, setCheckedList] = useState([]);
+  const [isClipboard, setIsClipboard] = useState(false);
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState({});
   const [ingredientsList, setIngredientsList] = useState(setIngredientsInitial(recipeID));
@@ -89,9 +91,9 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
         type: 'bebida',
         area: recipe.strArea ? recipe.strArea : '',
         category: recipe.strCategory ? recipe.strCategory : '',
-        alcoholicOrNot: '',
+        alcoholicOrNot: recipe.strAlcoholic,
         name: recipe.strDrink,
-        image: recipe,
+        image: recipe.strDrinkThumb,
       };
 
       const newState = [...favoriteStorage, recipeObj];
@@ -126,13 +128,19 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
         <button
           type="button"
           className="btn"
-          onClick={ () => { navigator.clipboard.writeText(window.location.href); } }
+          onClick={ () => {
+            navigator.clipboard.writeText(window.location
+              .href.replace('/in-progress', '')).then(() => {
+              setIsClipboard(true);
+              setTimeout(() => { setIsClipboard(false); }, timeClipboard);
+            });
+          } }
         >
-          <img
+          {isClipboard ? 'Link copiado!' : (<img
             src={ shareIcon }
             alt="Botão de compartilhamento"
             data-testid="share-btn"
-          />
+          />)}
         </button>
         <button
           type="button"
@@ -189,7 +197,7 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
         type="button"
         className="btn btn-outline-danger btn-lg"
         data-testid="finish-recipe-btn"
-        disabled
+        disabled={ !checkedList.every((item) => item) }
       >
         Finalizar Receita
       </button>
