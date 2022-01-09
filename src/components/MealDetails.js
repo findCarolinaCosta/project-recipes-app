@@ -5,6 +5,7 @@ import { Context } from '../context/Context';
 import makeIngredientsList from '../helpers/makeIngredientsList';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
+import fetchRandomDrinks from '../services/fetchRandomDrinks';
 import ButtonFavorite from './ButtonFavorite';
 import ButtonShare from './ButtonShare';
 
@@ -53,6 +54,13 @@ function MealDetails({ props, handleClick }) {
           .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
         : false));
   }, [pathname, setInProgress]);
+
+  useEffect(() => {
+    // função para retornar bebidas aleatoriamente
+    // implementar 6 repetições, para salvar no estado e renderizar em cards na
+    // seção de Recomendadas
+    fetchRandomDrinks().then((response) => console.log(response[0]));
+  });
 
   return (
 
