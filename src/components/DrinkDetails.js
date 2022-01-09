@@ -4,12 +4,17 @@ import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
-import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import ButtonShare from './ButtonShare';
+import ButtonFavorite from './ButtonFavorite';
 import makeIngredientsList from '../helpers/makeIngredientsList';
 
-function DrinkDetails({ props }) {
-  const { setSharedProps } = useContext(Context);
+function DrinkDetails({ props, handleClick }) {
+  const { setSharedProps,
+    inProgress,
+    setInProgress,
+    recipesInProgress,
+    setRecipeInProgress,
+  } = useContext(Context);
   const { match: { params: { id } }, location: { pathname } } = props;
   const [recipe, setRecipe] = useState('');
   const [ingredients, setIngredients] = useState();
@@ -28,6 +33,25 @@ function DrinkDetails({ props }) {
     const ingredientsList = makeIngredientsList(recipe);
     setIngredients(ingredientsList);
   }, [recipe]);
+
+  useEffect(() => (localStorage.getItem('inProgressRecipes') !== null
+    ? setRecipeInProgress(JSON.parse(localStorage.getItem('inProgressRecipes')))
+    : localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress))), []);
+
+  useEffect(() => {
+    const currentRouteName = pathname.split('/')[1];
+    const currentRecipeId = pathname.split('/')[2];
+    const verifyRecipe = currentRouteName === 'comidas'
+      ? 'meals' : 'cocktails';
+    const gettingProgressRecipes = JSON.parse(localStorage
+      .getItem('inProgressRecipes'))[verifyRecipe];
+
+    return (localStorage.getItem('inProgressRecipes') !== null
+      && setInProgress(gettingProgressRecipes
+        ? Object.keys(gettingProgressRecipes)
+          .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
+        : false));
+  }, [pathname, setInProgress]);
 
   return (
     <div
@@ -52,19 +76,10 @@ function DrinkDetails({ props }) {
             <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
           </div>
           <div className="col-3">
-            <img
-              data-testid="share-btn"
-              src={ shareIcon }
-              alt={ `Ícone para compartilhar a receita ${recipe.strDrink}` }
-            />
+            <ButtonShare props={ props } />
           </div>
           <div className="col-3">
-            <img
-              data-testid="favorite-btn"
-              src={ blackHeartIcon }
-              alt={ `Ícone em formato de coração para incluir receita 
-                ${recipe.strDrink} na lista de favoritas` }
-            />
+            <ButtonFavorite props={ props } />
           </div>
         </div>
 
@@ -130,7 +145,14 @@ function DrinkDetails({ props }) {
       </div>
 
       <div className="row">
-        <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+        <button
+          type="button"
+          className="fixed-bottom"
+          data-testid="start-recipe-btn"
+          onClick={ handleClick }
+        >
+          {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+        </button>
       </div>
 
     </div>
@@ -139,12 +161,13 @@ function DrinkDetails({ props }) {
 
 DrinkDetails.propTypes = {
   props: PropTypes.shape().isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape().isRequired,
-  }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.string.isRequired,
+  }).isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default DrinkDetails;

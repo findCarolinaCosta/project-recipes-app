@@ -2,14 +2,21 @@ import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
+import makeIngredientsList from '../helpers/makeIngredientsList';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
-import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import ButtonFavorite from './ButtonFavorite';
+import ButtonShare from './ButtonShare';
 
-function MealDetails({ props }) {
-  const { setSharedProps } = useContext(Context);
-  const { match: { params: { id } }, location: { pathname } } = props;
+function MealDetails({ props, handleClick }) {
+  const { setSharedProps,
+    inProgress,
+    setInProgress,
+    recipesInProgress,
+    setRecipeInProgress,
+  } = useContext(Context);
+  const { match: { params: { id } },
+    location: { pathname } } = props;
   const [recipe, setRecipe] = useState('');
   const [ingredients, setIngredients] = useState();
 
@@ -24,19 +31,28 @@ function MealDetails({ props }) {
   }, [props, setSharedProps, id, pathname]);
 
   useEffect(() => {
-    const makeIngredientsList = () => {
-      const MAX_INGREDIENTS_NUMBER = 20;
-      const ingredientsList = [];
-      for (let index = 1; index <= MAX_INGREDIENTS_NUMBER; index += 1) {
-        const ingredientName = recipe[`strIngredient${index}`];
-        const ingredientMeasure = recipe[`strMeasure${index}`];
-        const objectToPush = { ingredientName, ingredientMeasure };
-        if (ingredientName) ingredientsList.push(objectToPush);
-      }
-      return ingredientsList;
-    };
-    setIngredients(makeIngredientsList());
+    const ingredientsList = makeIngredientsList(recipe);
+    setIngredients(ingredientsList);
   }, [recipe]);
+
+  useEffect(() => (localStorage.getItem('inProgressRecipes') !== null
+    ? setRecipeInProgress(JSON.parse(localStorage.getItem('inProgressRecipes')))
+    : localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress))), []);
+
+  useEffect(() => {
+    const currentRouteName = pathname.split('/')[1];
+    const currentRecipeId = pathname.split('/')[2];
+    const verifyRecipe = currentRouteName === 'comidas'
+      ? 'meals' : 'cocktails';
+    const gettingProgressRecipes = JSON.parse(localStorage
+      .getItem('inProgressRecipes'))[verifyRecipe];
+
+    return (localStorage.getItem('inProgressRecipes') !== null
+      && setInProgress(gettingProgressRecipes
+        ? Object.keys(gettingProgressRecipes)
+          .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
+        : false));
+  }, [pathname, setInProgress]);
 
   return (
 
@@ -62,19 +78,10 @@ function MealDetails({ props }) {
             <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
           </div>
           <div className="col-3">
-            <img
-              data-testid="share-btn"
-              src={ shareIcon }
-              alt={ `Ícone para compartilhar a receita ${recipe.strMeal}` }
-            />
+            <ButtonShare props={ props } />
           </div>
           <div className="col-3">
-            <img
-              data-testid="favorite-btn"
-              src={ blackHeartIcon }
-              alt={ `Ícone em formato de coração para incluir receita 
-            ${recipe.strMeal} na lista de favoritas` }
-            />
+            <ButtonFavorite props={ props } />
           </div>
         </div>
 
@@ -146,7 +153,14 @@ function MealDetails({ props }) {
       </div>
 
       <div className="row">
-        <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+        <button
+          type="button"
+          className="fixed-bottom"
+          data-testid="start-recipe-btn"
+          onClick={ handleClick }
+        >
+          {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+        </button>
       </div>
 
     </div>
@@ -161,6 +175,7 @@ MealDetails.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default MealDetails;

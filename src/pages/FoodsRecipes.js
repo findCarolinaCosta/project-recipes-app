@@ -62,6 +62,7 @@ function FoodsRecipes(props) {
         <RecipeCard
           className="container-fluid"
           itemToMap="meals"
+          props={ props }
         />
       </div>
       <div>
