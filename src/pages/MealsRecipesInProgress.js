@@ -6,10 +6,39 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import checkTarget from '../helpers/checkTarget';
 
+const setStorage = (listIngredients, id) => {
+  const inProgressObj = localStorage.getItem('inProgressRecipes')
+    ? JSON.parse(localStorage.getItem('inProgressRecipes')) : {};
+  const cocktails = Object.keys(inProgressObj).includes('cocktails')
+    ? inProgressObj.cocktails : {};
+  const inProgress = localStorage.getItem('inProgressRecipes')
+    ? JSON.parse(localStorage.getItem('inProgressRecipes'))
+    : {
+      meals: {
+        [id]: [],
+      },
+      cocktails,
+    };
+  inProgress.meals[id] = listIngredients;
+  localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+};
+
+const setIngredientsInitial = (id) => {
+  if (localStorage.getItem('inProgressRecipes')) {
+    const inProgressObj = JSON.parse(localStorage.getItem('inProgressRecipes')).meals;
+    const listIngredients = Object.keys(inProgressObj).includes(id)
+      ? inProgressObj[id] : [];
+    return listIngredients;
+  }
+  return [];
+};
+
 export default function MealsRecipesInProgress({ match: { params } }) {
   const recipeID = params.id;
+  const [checkedList, setCheckedList] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState({});
+  const [ingredientsList, setIngredientsList] = useState(setIngredientsInitial(recipeID));
   const [favoriteStorage, setFavoriteStorage] = useState(localStorage
     .getItem('favoriteRecipes')
     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
@@ -28,6 +57,22 @@ export default function MealsRecipesInProgress({ match: { params } }) {
         [...prev, `${curr[1]} - ${ingredientMensure[index][1]}`]
       ), []);
     setIngredients(ingredientSetting);
+    setCheckedList(ingredientSetting.map((ingredient) => (
+      ingredientsList.includes(ingredient)
+    )));
+  };
+
+  const toggleChecked = (index) => {
+    setCheckedList((prev) => {
+      const newList = [...prev];
+      newList[index] = !newList[index];
+      const IngredientsList = ingredients.filter((ingredient, innerIndex) => (
+        newList[innerIndex]
+      ));
+      setIngredientsList(IngredientsList);
+      setStorage(IngredientsList, recipeID);
+      return newList;
+    });
   };
 
   const handleFavoriteButton = () => {
@@ -107,14 +152,16 @@ export default function MealsRecipesInProgress({ match: { params } }) {
             ingredients.map((ingredient, index) => (
               <li
                 key={ ingredient }
+                className={ checkTarget(checkedList[index]) }
                 data-testid={ `${index}-ingredient-step` }
               >
                 <label htmlFor={ ingredient } className="form-check-label">
                   <input
                     name="check"
                     className="form-check-input"
-                    id={ index }
-                    onClick={ checkTarget }
+                    id={ ingredients }
+                    checked={ checkedList[index] }
+                    onClick={ () => toggleChecked(index) }
                     type="checkbox"
                   />
                   <p

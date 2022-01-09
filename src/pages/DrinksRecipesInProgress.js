@@ -7,15 +7,30 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import checkTarget from '../helpers/checkTarget';
 
 const setStorage = (listIngredients, id) => {
+  const inProgressObj = localStorage.getItem('inProgressRecipes')
+    ? JSON.parse(localStorage.getItem('inProgressRecipes')) : {};
+  const meals = Object.keys(inProgressObj).includes('meals')
+    ? inProgressObj.meals : {};
   const inProgress = localStorage.getItem('inProgressRecipes')
     ? JSON.parse(localStorage.getItem('inProgressRecipes'))
     : {
       cocktails: {
         [id]: [],
       },
+      meals,
     };
   inProgress.cocktails[id] = listIngredients;
   localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+};
+
+const setIngredientsInitial = (id) => {
+  if (localStorage.getItem('inProgressRecipes')) {
+    const inProgressObj = JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails;
+    const listIngredients = Object.keys(inProgressObj).includes(id)
+      ? inProgressObj[id] : [];
+    return listIngredients;
+  }
+  return [];
 };
 
 export default function DrinksRecipesInProgress({ match: { params } }) {
@@ -23,14 +38,13 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
   const [checkedList, setCheckedList] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState({});
-  const [ingredientsList, setIngredientsList] = useState(localStorage
-    .getItem('inProgressRecipes') ? JSON.parse(localStorage
-      .getItem('inProgressRecipes')).cocktails[recipeID] : []);
+  const [ingredientsList, setIngredientsList] = useState(setIngredientsInitial(recipeID));
   const [favoriteStorage, setFavoriteStorage] = useState(localStorage
     .getItem('favoriteRecipes')
     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
   const [isFavorite, setIsFavorite] = useState(favoriteStorage
     .some((favorite) => favorite.id === recipeID));
+
   const fetchRecipe = async (ID) => {
     const response = await fetchDrinkRecipeDetailsById(ID);
     setRecipe(response[0]);
@@ -72,7 +86,7 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
     } else {
       const recipeObj = {
         id: recipeID,
-        type: 'comida',
+        type: 'bebida',
         area: recipe.strArea ? recipe.strArea : '',
         category: recipe.strCategory ? recipe.strCategory : '',
         alcoholicOrNot: '',
@@ -143,6 +157,7 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
               >
                 <label htmlFor={ ingredient } className="form-check-label">
                   <input
+                    name="check"
                     className="form-check-input"
                     id={ ingredient }
                     checked={ checkedList[index] }
