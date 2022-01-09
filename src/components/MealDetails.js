@@ -6,14 +6,16 @@ import makeIngredientsList from '../helpers/makeIngredientsList';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import ButtonFavorite from './ButtonFavorite';
+import ButtonProgress from './ButtonProgress';
 import ButtonShare from './ButtonShare';
 
-function MealDetails({ props, handleClick }) {
+function MealDetails({ props }) {
   const { setSharedProps,
-    inProgress,
     setInProgress,
     recipesInProgress,
     setRecipeInProgress,
+    setIsRecipesDone,
+    recipesDone,
   } = useContext(Context);
   const { match: { params: { id } },
     location: { pathname } } = props;
@@ -53,6 +55,17 @@ function MealDetails({ props, handleClick }) {
           .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
         : false));
   }, [pathname, setInProgress]);
+
+  useEffect(() => {
+    const currentRecipeId = pathname.split('/')[2];
+    const gettingRecipesDone = JSON.parse(localStorage
+      .getItem('doneRecipes'));
+    return localStorage.getItem('inProgressRecipes') !== null
+      && setIsRecipesDone(gettingRecipesDone
+        ? Array.from(gettingRecipesDone)
+          .some((recipeDoneIdStorage) => recipeDoneIdStorage.id === currentRecipeId)
+        : false);
+  }, [setIsRecipesDone, pathname, recipesDone]);
 
   return (
 
@@ -153,14 +166,7 @@ function MealDetails({ props, handleClick }) {
       </div>
 
       <div className="row">
-        <button
-          type="button"
-          className="fixed-bottom"
-          data-testid="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-        </button>
+        <ButtonProgress props={ props } />
       </div>
 
     </div>
@@ -175,7 +181,6 @@ MealDetails.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
-  handleClick: PropTypes.func.isRequired,
 };
 
 export default MealDetails;
