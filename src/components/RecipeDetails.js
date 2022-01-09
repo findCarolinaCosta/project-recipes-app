@@ -145,6 +145,127 @@ function RecipeDetails(props) {
             </Link>
           </div>
         </div>
+        
+        <div className="row">
+          <button data-testid="start-recipe-btn">Iniciar Receita</button>
+        </div>
+
+      </div>
+    );
+  }
+
+  if (pathname.includes('bebidas')) {
+    console.log(recipe);
+    return (
+      <div
+        className="container-fluid"
+        style={ { height: '100vh', width: '100vw' } }
+      >
+        <div className="row d-flex w-100">
+
+          <div className="col-12 d-flex w-100">
+            <img
+              data-testid="recipe-photo"
+              className="img-fluid"
+              src={ recipe.strDrinkThumb }
+              alt={ `Foto da receita
+                ${recipe.strDrink}, que contém ${recipe.strIngredient1} 
+                e ${recipe.strIngredient2} entre outros ingredientes.` }
+            />
+          </div>
+
+          <div className="row d-flex justify-content-between">
+            <div className="col-6">
+              <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+            </div>
+            <div className="col-3">
+              <img
+                data-testid="share-btn"
+                src={ shareIcon }
+                alt={ `Ícone para compartilhar a receita ${recipe.strDrink}` }
+              />
+            </div>
+            <div className="col-3">
+              <img
+                data-testid="favorite-btn"
+                src={ blackHeartIcon }
+                alt={ `Ícone em formato de coração para incluir receita 
+                ${recipe.strDrink} na lista de favoritas` }
+              />
+            </div>
+          </div>
+
+        </div>
+
+        <div className="row">
+          <div className="col-12">
+            <h4 data-testid="recipe-category">{ recipe.strCategory }</h4>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-12">
+            <h1>Ingredients</h1>
+          </div>
+          {ingredients
+          && (
+            <div className="col-12">
+              <ul>
+                {ingredients.map((ingredient, index) => (
+                  <li
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                    key={ `${ingredient.ingredientName}${index}` }
+                  >
+                    {`${ingredient.ingredientName} - ${ingredient.ingredientMeasure}`}
+                  </li>
+                ))}
+              </ul>
+            </div>)}
+        </div>
+
+        <div className="row">
+          <div className="col-12">
+            <h1>Instructions</h1>
+          </div>
+          <div>
+            <p data-testid="instructions">{ recipe.strInstructions }</p>
+          </div>
+        </div>
+
+        <div className="row">
+          <video data-testid="video" className="embed-responsive">
+            <track kind="captions" />
+            <source className="embed-responsive-item" src={ recipe.strVideo } />
+          </video>
+        </div>
+
+        <div className="row d-flex w-100">
+          <div className="d-flex flex-wrap justify-content-center">
+            <Link
+              className="custom-card col-sm-6 col-md-3"
+              style={ { width: '40vw' } }
+              data-testid="0-recomendation-card"
+              key="teste"
+              to={ `/comidas/${recipe.idMeal}` }
+            >
+              <img
+                className="img-thumbnail"
+                src={ recipe.strMealThumb }
+                alt={ recipe.strMeal }
+                data-testid="card-img"
+                width="100px"
+              />
+              <h4 className="card-title" data-testid="card-name">
+                {recipe.strMeal}
+              </h4>
+            </Link>
+          </div>
+        </div>
+        
+        <div className="row">
+          <button data-testid="start-recipe-btn">Iniciar Receita</button>
+        </div>
+
       </div>
     );
   }
