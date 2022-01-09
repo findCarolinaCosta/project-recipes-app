@@ -6,6 +6,7 @@ import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import makeIngredientsList from '../helpers/makeIngredientsList';
 
 function DrinkDetails({ props }) {
   const { setSharedProps } = useContext(Context);
@@ -24,18 +25,8 @@ function DrinkDetails({ props }) {
   }, [props, setSharedProps, id, pathname]);
 
   useEffect(() => {
-    const makeIngredientsList = () => {
-      const MAX_INGREDIENTS_NUMBER = 20;
-      const ingredientsList = [];
-      for (let index = 1; index <= MAX_INGREDIENTS_NUMBER; index += 1) {
-        const ingredientName = recipe[`strIngredient${index}`];
-        const ingredientMeasure = recipe[`strMeasure${index}`];
-        const objectToPush = { ingredientName, ingredientMeasure };
-        if (ingredientName) ingredientsList.push(objectToPush);
-      }
-      return ingredientsList;
-    };
-    setIngredients(makeIngredientsList());
+    const ingredientsList = makeIngredientsList(recipe);
+    setIngredients(ingredientsList);
   }, [recipe]);
 
   return (
