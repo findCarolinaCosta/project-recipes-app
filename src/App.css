@@ -118,11 +118,11 @@
 }
 
 .meal-in-progress {
-  width: 90vw;
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  width: 90vw;
 }
 
 .listIngredients {
