@@ -1,6 +1,6 @@
 * {
-  background: #0fa36b;
-  color: #c7e4cc;
+  background: #F2F2F2;
+  color: rgb(0, 0, 0);
 }
 
 .recipes-container {
@@ -117,7 +117,7 @@
   }
 }
 
-.meal-in-progress {
+.meal-in-progress, .drinks-in-progress {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -134,11 +134,19 @@
   margin-right: 3px;
 }
 
-.meal-photo {
+.meal-photo, .drink-photo {
   max-width: 100vw;
   width: 200px;
 }
 
 .ingredients-label {
   text-transform: capitalize;
+}
+
+li > * {
+  text-decoration: none solid rgb(0, 0, 0);
+}
+
+.line-class, .line-class > * {
+  text-decoration: line-through solid rgb(0, 0, 0);
 }
