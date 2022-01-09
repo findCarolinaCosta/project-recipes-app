@@ -19,7 +19,7 @@ import MealsRecipsInProgress from './pages/MealsRecipesInProgress';
 function App() {
   return (
     <div
-      className="container-sm-fluid align-items-center d-flex flex-wrap"
+      className="container-fluid align-items-center d-flex flex-wrap"
       style={ { height: '100vh', width: '100vw' } }
     >
       <Provider>
