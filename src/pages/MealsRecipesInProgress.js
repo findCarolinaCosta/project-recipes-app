@@ -6,11 +6,41 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import checkTarget from '../helpers/checkTarget';
 
+const setStorage = (listIngredients, id) => {
+  const inProgressObj = localStorage.getItem('inProgressRecipes')
+    ? JSON.parse(localStorage.getItem('inProgressRecipes')) : {};
+  const cocktails = Object.keys(inProgressObj).includes('cocktails')
+    ? inProgressObj.cocktails : {};
+  const inProgress = localStorage.getItem('inProgressRecipes')
+    ? JSON.parse(localStorage.getItem('inProgressRecipes'))
+    : {
+      meals: {
+        [id]: [],
+      },
+      cocktails,
+    };
+  inProgress.meals[id] = listIngredients;
+  localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+};
+
+const setIngredientsInitial = (id) => {
+  if (localStorage.getItem('inProgressRecipes')) {
+    const inProgressObj = JSON.parse(localStorage.getItem('inProgressRecipes')).meals;
+    const listIngredients = Object.keys(inProgressObj).includes(id)
+      ? inProgressObj[id] : [];
+    return listIngredients;
+  }
+  return [];
+};
+
 export default function MealsRecipesInProgress({ match: { params } }) {
   const recipeID = params.id;
-
+  const timeClipboard = 3000;
+  const [checkedList, setCheckedList] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recipe, setRecipe] = useState({});
+  const [ingredientsList, setIngredientsList] = useState(setIngredientsInitial(recipeID));
+  const [isClipboard, setIsClipboard] = useState(false);
   const [favoriteStorage, setFavoriteStorage] = useState(localStorage
     .getItem('favoriteRecipes')
     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
@@ -29,6 +59,22 @@ export default function MealsRecipesInProgress({ match: { params } }) {
         [...prev, `${curr[1]} - ${ingredientMensure[index][1]}`]
       ), []);
     setIngredients(ingredientSetting);
+    setCheckedList(ingredientSetting.map((ingredient) => (
+      ingredientsList.includes(ingredient)
+    )));
+  };
+
+  const toggleChecked = (index) => {
+    setCheckedList((prev) => {
+      const newList = [...prev];
+      newList[index] = !newList[index];
+      const IngredientsList = ingredients.filter((ingredient, innerIndex) => (
+        newList[innerIndex]
+      ));
+      setIngredientsList(IngredientsList);
+      setStorage(IngredientsList, recipeID);
+      return newList;
+    });
   };
 
   const handleFavoriteButton = () => {
@@ -40,6 +86,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
         return newState;
       });
     } else {
+      console.log(recipe);
       const recipeObj = {
         id: recipeID,
         type: 'comida',
@@ -47,7 +94,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
         category: recipe.strCategory ? recipe.strCategory : '',
         alcoholicOrNot: '',
         name: recipe.strMeal,
-        image: recipe,
+        image: recipe.strMealThumb,
       };
 
       const newState = [...favoriteStorage, recipeObj];
@@ -60,7 +107,6 @@ export default function MealsRecipesInProgress({ match: { params } }) {
   useEffect(() => {
     fetchRecipe(recipeID);
   }, [recipeID]);
-
   return (
     <div className="meal-in-progress">
       <img
@@ -74,12 +120,28 @@ export default function MealsRecipesInProgress({ match: { params } }) {
       >
         { recipe.strMeal }
       </h4>
-      <nav className="in-progress-butons">
+      <h5
+        data-testid="recipe-category"
+      >
+        { recipe.strCategory }
+      </h5>
+      <nav className="in-progress-butons mb-36">
         <button
           type="button"
           className="btn"
+          onClick={ () => {
+            navigator.clipboard.writeText(window.location
+              .href.replace('/in-progress', '')).then(() => {
+              setIsClipboard(true);
+              setTimeout(() => { setIsClipboard(false); }, timeClipboard);
+            });
+          } }
         >
-          <img src={ shareIcon } alt="Botão de compartilhamento" />
+          {isClipboard ? 'Link copiado!' : (<img
+            src={ shareIcon }
+            alt="Botão de compartilhamento"
+            data-testid="share-btn"
+          />)}
         </button>
         <button
           type="button"
@@ -87,6 +149,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
           onClick={ handleFavoriteButton }
         >
           <img
+            data-testid="favorite-btn"
             src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
             alt="Botão de compartilhamento"
           />
@@ -97,18 +160,22 @@ export default function MealsRecipesInProgress({ match: { params } }) {
           {
             ingredients.map((ingredient, index) => (
               <li
-                key={ index }
-                className="listIngredients"
+                key={ ingredient }
+                className={ checkTarget(checkedList[index]) }
+                data-testid={ `${index}-ingredient-step` }
               >
-                <label htmlFor={ index } className="form-check-label">
+                <label htmlFor={ ingredient } className="form-check-label">
                   <input
-                    type="checkbox"
                     name="check"
                     className="form-check-input"
-                    id={ index }
-                    onClick={ (e) => checkTarget(e) }
+                    id={ ingredients }
+                    checked={ checkedList[index] }
+                    onClick={ () => toggleChecked(index) }
+                    type="checkbox"
                   />
-                  <p className="ingredients-label">
+                  <p
+                    className="ingredients-label"
+                  >
                     { ingredient }
                   </p>
                 </label>
@@ -117,9 +184,21 @@ export default function MealsRecipesInProgress({ match: { params } }) {
           }
         </ul>
       </div>
+      <div className="row col-md-4 card-box text-center">
+        <section>
+          <p
+            data-testid="instructions"
+            className="paragraph-recipe-instructions"
+          >
+            { recipe.strInstructions }
+          </p>
+        </section>
+      </div>
       <button
         type="button"
-        disabled
+        className="btn btn-outline-danger btn-lg"
+        data-testid="finish-recipe-btn"
+        disabled={ !checkedList.every((item) => item) }
       >
         Finalizar Receita
       </button>
