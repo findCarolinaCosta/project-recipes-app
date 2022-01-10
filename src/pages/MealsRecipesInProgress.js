@@ -47,7 +47,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
   const [isFavorite, setIsFavorite] = useState(favoriteStorage
     .some((favorite) => favorite.id === recipeID));
-  const { recipesDone, setRecipesDone, setIsRecipeDone } = useContext(Context);
+  const { recipesDone, setRecipesDone, setIsRecipesDone } = useContext(Context);
 
   const fetchRecipe = async (ID) => {
     const response = await fetchMealRecipeDetailsById(ID);
@@ -108,7 +108,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
 
   const handleClick = () => {
     setRecipesDone([...recipesDone, recipe]);
-    setIsRecipeDone(true);
+    setIsRecipesDone(true);
   };
 
   useEffect(() => {
