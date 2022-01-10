@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import shareIcon from '../images/shareIcon.svg';
 
@@ -42,22 +43,26 @@ function CardRecipesMade() {
       {doneRecipes && verifyListRecipes().map((recipe, index) => (
         recipe.type === 'comida' ? (
           <div key={ recipe.id }>
-            <img
-              src={ recipe.image }
-              alt="colocar-alt-da-img"
-              data-testid={ `${index}-horizontal-image` }
-              className="img-thumbnail"
-            />
+            <Link to={ `/comidas/${recipe.id}` }>
+              <img
+                src={ recipe.image }
+                alt="colocar-alt-da-img"
+                data-testid={ `${index}-horizontal-image` }
+                className="img-thumbnail"
+              />
+            </Link>
             <p
               data-testid={ `${index}-horizontal-top-text` }
             >
               {`${recipe.area} - ${recipe.category}`}
             </p>
-            <h1
-              data-testid={ `${index}-horizontal-name` }
-            >
-              {recipe.name}
-            </h1>
+            <Link to={ `/comidas/${recipe.id}` }>
+              <h1
+                data-testid={ `${index}-horizontal-name` }
+              >
+                {recipe.name}
+              </h1>
+            </Link>
             <p
               data-testid={ `${index}-horizontal-done-date` }
             >
@@ -77,22 +82,26 @@ function CardRecipesMade() {
           </div>
         ) : (
           <div key={ recipe.id }>
-            <img
-              src={ recipe.image }
-              alt="colocar-alt-da-img"
-              data-testid={ `${index}-horizontal-image` }
-              className="img-thumbnail"
-            />
+            <Link to={ `/bebidas/${recipe.id}` }>
+              <img
+                src={ recipe.image }
+                alt="colocar-alt-da-img"
+                data-testid={ `${index}-horizontal-image` }
+                className="img-thumbnail"
+              />
+            </Link>
             <p
               data-testid={ `${index}-horizontal-top-text` }
             >
               {recipe.alcoholicOrNot}
             </p>
-            <h1
-              data-testid={ `${index}-horizontal-name` }
-            >
-              {recipe.name}
-            </h1>
+            <Link to={ `/bebidas/${recipe.id}` }>
+              <h1
+                data-testid={ `${index}-horizontal-name` }
+              >
+                {recipe.name}
+              </h1>
+            </Link>
             <p
               data-testid={ `${index}-horizontal-done-date` }
             >
