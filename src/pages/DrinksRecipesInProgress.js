@@ -50,7 +50,6 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
     .some((favorite) => favorite.id === recipeID));
   const { recipesDone, setRecipesDone, setIsRecipesDone } = useContext(Context);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchRecipe = async (ID) => {
     const response = await fetchDrinkRecipeDetailsById(ID);
     setRecipe(response[0]);
@@ -114,7 +113,7 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
 
   useEffect(() => {
     fetchRecipe(recipeID);
-  }, [fetchRecipe, recipeID]);
+  }, [recipeID]);
 
   return (
     <div className="drinks-in-progress">
