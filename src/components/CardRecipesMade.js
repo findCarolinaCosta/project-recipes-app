@@ -1,19 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Context } from '../context/Context';
 import shareIcon from '../images/shareIcon.svg';
 
-// card dinâmico das receitas feitas
 function CardRecipesMade() {
-  // pegar do contexto as feitas/finalizadas
-  // para que só assim ser dinâmico
-  // pode ser modificado
-  const [doneRecipes, setDoneRecipes] = useState([]);
+  const { doneRecipes,
+    setDoneRecipes, doneRecipesFilteredByName } = useContext(Context);
   const [wasCopied, setWasCopied] = useState(false);
   const timeClipboard = 3000;
 
   useEffect(() => {
     setDoneRecipes(JSON.parse(localStorage.getItem('doneRecipes')));
-    console.log(JSON.parse(localStorage.getItem('doneRecipes')));
   }, []);
+
+  const verifyListRecipes = () => {
+    switch (doneRecipesFilteredByName) {
+    case 'Drinks':
+      return doneRecipes.filter((item) => item.type === 'bebida');
+    case 'Foods':
+      return doneRecipes.filter((item) => item.type === 'comida');
+    default:
+      return doneRecipes;
+    }
+  };
 
   const handleClick = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -31,7 +39,7 @@ function CardRecipesMade() {
 
   return (
     <div>
-      {doneRecipes && doneRecipes.map((recipe, index) => (
+      {doneRecipes && verifyListRecipes().map((recipe, index) => (
         recipe.type === 'comida' ? (
           <div key={ recipe.id }>
             <img
