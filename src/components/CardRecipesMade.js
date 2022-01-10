@@ -24,8 +24,8 @@ function CardRecipesMade() {
     }
   };
 
-  const handleClick = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
+  const handleClickCopy = (route, id) => {
+    navigator.clipboard.writeText(`http://localhost:3000/${route}/${id}`).then(() => {
       setWasCopied(true);
       setTimeout(() => { setWasCopied(false); }, timeClipboard);
     });
@@ -74,7 +74,7 @@ function CardRecipesMade() {
               className="btn"
               data-testid={ `${index}-horizontal-share-btn` }
               src={ shareIcon }
-              onClick={ handleClick }
+              onClick={ () => handleClickCopy('comidas', recipe.id) }
             >
               {wasCopied ? 'Link copiado!'
                 : <img src={ shareIcon } alt="Botão de compartilhamento" />}
@@ -113,7 +113,7 @@ function CardRecipesMade() {
               className="btn"
               data-testid={ `${index}-horizontal-share-btn` }
               src={ shareIcon }
-              onClick={ handleClick }
+              onClick={ () => handleClickCopy('bebidas', recipe.id) }
             >
               {wasCopied ? 'Link copiado!'
                 : <img src={ shareIcon } alt="Botão de compartilhamento" />}
