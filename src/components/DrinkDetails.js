@@ -38,7 +38,8 @@ function DrinkDetails({ props }) {
 
   useEffect(() => (localStorage.getItem('inProgressRecipes') !== null
     ? setRecipeInProgress(JSON.parse(localStorage.getItem('inProgressRecipes')))
-    : localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress))), []);
+    : localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress))),
+  [recipesInProgress, setRecipeInProgress]);
 
   useEffect(() => {
     const currentRouteName = pathname.split('/')[1];

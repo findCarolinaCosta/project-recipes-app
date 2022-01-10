@@ -114,7 +114,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
 
   useEffect(() => {
     fetchRecipe(recipeID);
-  }, [recipeID]);
+  }, [fetchRecipe, recipeID]);
   return (
     <div className="meal-in-progress">
       <img
