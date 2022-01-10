@@ -1,6 +1,6 @@
 * {
-  background: #0fa36b;
-  color: #c7e4cc;
+  background: #f2f2f2;
+  color: black;
 }
 
 .recipes-container {
@@ -115,4 +115,38 @@
   * {
     font-size: 0.85rem;
   }
+}
+
+.meal-in-progress, .drinks-in-progress {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90vw;
+}
+
+.listIngredients {
+  list-style-type: none;
+  margin: 2px auto;
+}
+
+.listIngredients li {
+  margin-right: 3px;
+}
+
+.meal-photo, .drink-photo {
+  max-width: 100vw;
+  width: 200px;
+}
+
+.ingredients-label {
+  text-transform: capitalize;
+}
+
+li > * {
+  text-decoration: none solid black;
+}
+
+.line-class, .line-class > * {
+  text-decoration: line-through solid black;
 }

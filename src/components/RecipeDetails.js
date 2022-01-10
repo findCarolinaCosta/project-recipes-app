@@ -1,16 +1,20 @@
-import React, { useContext } from 'react';
-import { Context } from '../context/Context';
+import React from 'react';
+import DrinkDetails from './DrinkDetails';
+import MealDetails from './MealDetails';
 
 function RecipeDetails(props) {
-  console.log(props);
-  const { meals, drinks } = useContext(Context);
-  console.log(meals);
-  console.log(drinks);
-  return (
-    <div className="container-sm">
-      <h1>Construindo detalhes da receita</h1>
-    </div>
-  );
+  const { location: { pathname } } = props;
+  if (pathname.includes('comidas')) {
+    return (
+      <MealDetails props={ props } />
+    );
+  }
+
+  if (pathname.includes('bebidas')) {
+    return (
+      <DrinkDetails props={ props } />
+    );
+  }
 }
 
 export default RecipeDetails;

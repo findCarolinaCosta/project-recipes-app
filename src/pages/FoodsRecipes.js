@@ -23,13 +23,13 @@ function FoodsRecipes(props) {
       setnameBtn(event.target.name);
     }
   };
-
   return (
     <div className="recipes-container container-fluid">
       <header className="row">
         <Header className="container-fluid" props={ props } />
       </header>
-      { mealsCategories.map((categorizeiMeal, index) => {
+      { mealsCategories.length !== 0
+      && mealsCategories.map((categorizeiMeal, index) => {
         if (index < maxCategories) {
           return (
             <button
@@ -62,6 +62,7 @@ function FoodsRecipes(props) {
         <RecipeCard
           className="container-fluid"
           itemToMap="meals"
+          props={ props }
         />
       </div>
       <div>
