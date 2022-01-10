@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import checkTarget from '../helpers/checkTarget';
+import { Context } from '../context/Context';
 
 const setStorage = (listIngredients, id) => {
   const inProgressObj = localStorage.getItem('inProgressRecipes')
@@ -46,6 +47,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
   const [isFavorite, setIsFavorite] = useState(favoriteStorage
     .some((favorite) => favorite.id === recipeID));
+  const { recipesDone, setRecipesDone, setIsRecipeDone } = useContext(Context);
 
   const fetchRecipe = async (ID) => {
     const response = await fetchMealRecipeDetailsById(ID);
@@ -102,6 +104,11 @@ export default function MealsRecipesInProgress({ match: { params } }) {
       setIsFavorite(true);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newState));
     }
+  };
+
+  const handleClick = () => {
+    setRecipesDone([...recipesDone, recipe]);
+    setIsRecipeDone(true);
   };
 
   useEffect(() => {
@@ -199,6 +206,7 @@ export default function MealsRecipesInProgress({ match: { params } }) {
         className="btn btn-outline-danger btn-lg"
         data-testid="finish-recipe-btn"
         disabled={ !checkedList.every((item) => item) }
+        onClick={ handleClick }
       >
         Finalizar Receita
       </button>

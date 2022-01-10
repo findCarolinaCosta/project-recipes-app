@@ -8,6 +8,10 @@ import fetchMealsCategories from '../services/fetchMealsCategories';
 const Context = createContext();
 const { Provider, Consumer } = Context;
 
+const INICIAL_FAVORITE_STORAGE = localStorage
+  .getItem('favoriteRecipes')
+  ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
+
 function RecipesProvider(props) {
   const { children } = props;
   const [email, setEmail] = useState('');
@@ -18,6 +22,13 @@ function RecipesProvider(props) {
   const [areas, setAreas] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [sharedProps, setSharedProps] = useState({});
+  const [recipesInProgress, setRecipeInProgress] = useState({ cocktails: {}, meals: {} });
+  const [favoriteStorage, setFavoriteStorage] = useState(INICIAL_FAVORITE_STORAGE);
+  const [isFavorite, setIsFavorite] = useState(favoriteStorage);
+  const [recipe, setRecipe] = useState({});
+  const [inProgress, setInProgress] = useState(false);
+  const [recipesDone, setRecipesDone] = useState([]);
+  const [isRecipesDone, setIsRecipesDone] = useState(false);
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
@@ -42,6 +53,20 @@ function RecipesProvider(props) {
     setAreas,
     setIngredients,
     drinksCategories,
+    recipesInProgress,
+    setRecipeInProgress,
+    isFavorite,
+    setIsFavorite,
+    favoriteStorage,
+    setFavoriteStorage,
+    recipe,
+    setRecipe,
+    inProgress,
+    setInProgress,
+    recipesDone,
+    setRecipesDone,
+    isRecipesDone,
+    setIsRecipesDone,
   };
 
   return <Provider value={ context }>{children}</Provider>;

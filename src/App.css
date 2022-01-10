@@ -1,6 +1,6 @@
 * {
-  background: #F2F2F2;
-  color: rgb(0, 0, 0);
+  background: #f2f2f2;
+  color: black;
 }
 
 .recipes-container {
@@ -118,11 +118,11 @@
 }
 
 .meal-in-progress, .drinks-in-progress {
-  width: 90vw;
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  width: 90vw;
 }
 
 .listIngredients {
@@ -144,9 +144,9 @@
 }
 
 li > * {
-  text-decoration: none solid rgb(0, 0, 0);
+  text-decoration: none solid black;
 }
 
 .line-class, .line-class > * {
-  text-decoration: line-through solid rgb(0, 0, 0);
+  text-decoration: line-through solid black;
 }
