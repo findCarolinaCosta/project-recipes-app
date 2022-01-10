@@ -4,10 +4,10 @@ import Header from '../components/Header';
 
 function ExploreFoods() {
   return (
-    <>
+    <div>
       <Header />
       <Footer />
-    </>
+    </div>
   );
 }
 
