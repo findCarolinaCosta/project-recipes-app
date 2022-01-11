@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fetchAreas from '../services/fetchAreas';
 import fetchMeals from '../services/fetchMeals';
@@ -31,6 +32,8 @@ function ExploreFoodsAreas() {
 
   return (
     <div>
+      <Header />
+      <h3 className="text-center" data-testid="page-title">Explorar Origem</h3>
       <label htmlFor="select-area">
         <select
           className="form-select form-select-lg"
