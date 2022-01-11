@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
+import ReactPlayer from 'react-player/youtube';
 import { Context } from '../context/Context';
 import makeIngredientsList from '../helpers/makeIngredientsList';
 import Recommendeds from '../Recommendeds';
@@ -149,12 +150,11 @@ function MealDetails({ props }) {
         </div>
       </div>
 
-      <div className="row">
-        <video data-testid="video" className="embed-responsive">
-          <track kind="captions" />
-          <source className="embed-responsive-item" src={ recipe.strYoutube } />
-        </video>
-      </div>
+      <ReactPlayer
+        data-testid="video"
+        width="95%"
+        url={ recipe.strYoutube }
+      />
 
       <div
         className="row d-flex"
