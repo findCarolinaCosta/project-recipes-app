@@ -3,6 +3,21 @@ import React from 'react';
 import { Carousel, CarouselItem } from 'react-bootstrap';
 import RecommendedsCard from './RecommendedsCard';
 
+/**
+ * Consultei a PR do Grupo 10, em:
+ * https://github.com/tryber/sd-015-b-project-recipes-app/pull/79/files
+ * Para entender que para mostrar um carrossel eu deveria primeiro criar um componente para renderizar os cards
+ * e passar minha lista de items para carregar nos cards.
+ * Após isto, eu precisava criar um outro componente para renderizar um card e passar a ele qual índice deveria ser
+ * mostrado por vez.
+ * E por fim, no retorno do meu componente Recommendeds eu aprendi um pouco sobre como utilizar o Carousel do react-bootstrap
+ * para renderizar os itens da forma que o requisito do projeto pedia.
+ * Também deixo o agradecimento aos mentores Gabriel Espíndola e Arthur Procópio, sendo que o primeiro me ajudou a entender como
+ * montar a lista de receitas para enviar à seção recomendadas e o segundo me ajudou a entender que o teste não aceita que esta
+ * lista seja feita de forma aleatória.
+ * Obrigado a todas as pessoas que me ajudaram mesmo sem tomar conhecimento.
+ */
+
 function Recommendeds({ items }) {
   const cardsToCarousel = items.map((recipe, index) => (
     // renderizar o componente de card aqui.
@@ -15,11 +30,6 @@ function Recommendeds({ items }) {
   ));
 
   return (
-    // renderizar uma div com um carrossel
-    // e o carrossel terá 3 divs, sendo que
-    // uma delas será ativa por vez e cada
-    // uma delas conterá 2 card (card[0] card[1],
-    // card[2] card[3], ...)
     <div className="row">
       <Carousel indicators={ false }>
         <CarouselItem>
