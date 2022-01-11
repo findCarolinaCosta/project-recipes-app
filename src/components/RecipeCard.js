@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 
-// renderiza card simples
+// renderizaa card simples
 function RecipeCard({ itemToMap }) {
   const { meals, drinks } = useContext(Context);
   const renderedQuantity = 12;
