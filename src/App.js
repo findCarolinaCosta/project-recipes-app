@@ -43,11 +43,11 @@ function App() {
             component={ ExploreFoodsIngredients }
           />
           <Route path="/explorar/comidas/area" component={ ExploreFoodsAreas } />
-          <Route path="/explorar/comidas" component={ ExploreFoods } />
           <Route
             path="/explorar/bebidas/ingredientes"
             component={ ExploreDrinksIngredients }
           />
+          <Route path="/explorar/comidas" component={ ExploreFoods } />
           <Route path="/explorar/bebidas" component={ ExploreDrinks } />
         </Switch>
       </Provider>

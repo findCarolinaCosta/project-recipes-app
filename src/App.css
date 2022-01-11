@@ -181,3 +181,24 @@ li > * {
   flex-wrap: nowrap;
   width: auto;
 }
+
+.exp-ingred-meals-container {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 800px;
+}
+
+.card-explore-ingredient{
+  width: 120px;
+}
+
+.exp-ingredient-card {
+  border: 2px solid black;
+  border-radius: 4px;
+  height: 150px;
+  margin: 4px;
+  text-align: center;
+  width: 150px;
+}

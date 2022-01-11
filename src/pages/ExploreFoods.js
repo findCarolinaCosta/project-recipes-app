@@ -13,6 +13,7 @@ function ExploreFoods() {
   useEffect(() => {
     fetchRandom();
   }, []);
+
   return (
     <div>
       <Header />
