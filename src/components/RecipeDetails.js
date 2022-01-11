@@ -1,45 +1,20 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { Context } from '../context/Context';
+import React from 'react';
 import DrinkDetails from './DrinkDetails';
 import MealDetails from './MealDetails';
 
 function RecipeDetails(props) {
-  const { recipesInProgress,
-    setRecipeInProgress } = useContext(Context);
-  const { match: { params: { id } }, location: { pathname }, history } = props;
-
-  const handleClick = () => {
-    const currentRouteName = pathname.split('/')[1];
-    const gettingRoute = currentRouteName === 'comidas' ? 'meals' : 'cocktails';
-    const currentRecipeId = pathname.split('/')[2];
-    setRecipeInProgress((state) => ({ ...state,
-      [gettingRoute]: { [currentRecipeId]: [] } }));
-
-    localStorage.setItem('inProgressRecipes', JSON.stringify(({ ...recipesInProgress,
-      [gettingRoute]: { [currentRecipeId]: [] } })));
-
-    history.push(`/${currentRouteName}/${id}/in-progress`);
-  };
-
+  const { location: { pathname } } = props;
   if (pathname.includes('comidas')) {
     return (
-      <MealDetails props={ props } handleClick={ handleClick } />
+      <MealDetails props={ props } />
     );
   }
 
   if (pathname.includes('bebidas')) {
     return (
-      <DrinkDetails props={ props } handleClick={ handleClick } />
+      <DrinkDetails props={ props } />
     );
   }
 }
-
-RecipeDetails.propTypes = {
-  location: PropTypes.shape().isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape(),
-  }).isRequired,
-};
 
 export default RecipeDetails;
