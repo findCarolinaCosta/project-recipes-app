@@ -5,14 +5,15 @@ import fetchIngredients from '../services/fetchIngredients';
 
 function ExploreFoodsIngredients() {
   const [ingredients, setIngredients] = useState({});
+  const maxCards = 12;
   const fetchByIngredients = async () => {
     const ingredientsObj = await fetchIngredients();
-    setIngredients(ingredientsObj.meals);
+    setIngredients(ingredientsObj.meals.filter((ingredient, index) => index < maxCards));
   };
   useEffect(() => {
     fetchByIngredients();
   }, []);
-  console.log(ingredients);
+
   return (
     <div className="exp-ingred-meals-container">
       <Header />
@@ -26,7 +27,7 @@ function ExploreFoodsIngredients() {
             >
               <img
                 src={ `https://www.themealdb.com/images/ingredients/${ingredient
-                  .strIngredient}.png` }
+                  .strIngredient}-Small.png` }
                 className="card-explore-ingredient"
                 alt="Imagem do Ingrediente"
                 data-testid={ `${index}-card-img` }
