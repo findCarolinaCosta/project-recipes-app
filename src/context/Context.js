@@ -29,6 +29,8 @@ function RecipesProvider(props) {
   const [inProgress, setInProgress] = useState(false);
   const [recipesDone, setRecipesDone] = useState([]);
   const [isRecipesDone, setIsRecipesDone] = useState(false);
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [doneRecipesFilteredByName, setDoneRecipesFilteredByName] = useState('');
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
@@ -67,6 +69,10 @@ function RecipesProvider(props) {
     setRecipesDone,
     isRecipesDone,
     setIsRecipesDone,
+    doneRecipes,
+    setDoneRecipes,
+    doneRecipesFilteredByName,
+    setDoneRecipesFilteredByName,
   };
 
   return <Provider value={ context }>{children}</Provider>;
