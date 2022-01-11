@@ -150,3 +150,55 @@ li > * {
 .line-class, .line-class > * {
   text-decoration: line-through solid black;
 }
+
+.favorite-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-favorite {
+  align-items: center;
+  box-shadow: 10px 13px 6px -4px rgba(194, 194, 194, 0.5);
+  display: flex;
+  height: auto;
+  justify-content: space-evenly;
+  margin: 10px 0;
+  outline: 1px solid rgba(0, 0, 0, 0.329);
+  text-align: center;
+  width: 70vw;
+}
+
+.img-card-favorite {
+  padding: 20px auto;
+  width: 30vw;
+}
+
+.in-progress-butons {
+  display: flex;
+  flex-wrap: nowrap;
+  width: auto;
+}
+
+.exp-ingred-meals-container {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 800px;
+}
+
+.card-explore-ingredient {
+  width: 120px;
+}
+
+.exp-ingredient-card {
+  border: 2px solid black;
+  border-radius: 4px;
+  height: 150px;
+  margin: 4px;
+  text-align: center;
+  width: 150px;
+}
