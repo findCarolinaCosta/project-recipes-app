@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -47,7 +48,7 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
   const [isFavorite, setIsFavorite] = useState(favoriteStorage
     .some((favorite) => favorite.id === recipeID));
-  const { recipesDone, setRecipesDone, setIsRecipeDone } = useContext(Context);
+  const { recipesDone, setRecipesDone, setIsRecipesDone } = useContext(Context);
 
   const fetchRecipe = async (ID) => {
     const response = await fetchDrinkRecipeDetailsById(ID);
@@ -107,7 +108,7 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
 
   const handleClick = () => {
     setRecipesDone([...recipesDone, recipe]);
-    setIsRecipeDone(true);
+    setIsRecipesDone(true);
   };
 
   useEffect(() => {
@@ -201,15 +202,17 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
           </p>
         </section>
       </div>
-      <button
-        type="button"
-        className="btn btn-outline-danger btn-lg"
-        data-testid="finish-recipe-btn"
-        disabled={ !checkedList.every((item) => item) }
-        onClick={ handleClick }
-      >
-        Finalizar Receita
-      </button>
+      <Link to="/receitas-feitas">
+        <button
+          type="button"
+          className="btn btn-outline-danger btn-lg"
+          data-testid="finish-recipe-btn"
+          disabled={ !checkedList.every((item) => item) }
+          onClick={ handleClick }
+        >
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 }
