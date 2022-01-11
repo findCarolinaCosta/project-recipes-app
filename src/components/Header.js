@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import { Context } from '../context/Context';
 
 function Header() {
-  const [searchTerm, setSearchTerm] = useState('');
-
+  const { searchTerm, setSearchTerm } = useContext(Context);
   return (
     <div className="row">
       <div className="col-sm-2">
@@ -45,7 +45,7 @@ function Header() {
           onChange={ ({ target }) => setSearchTerm(target.value) }
         />
       </div>
-      <SearchBar searchTerm={ searchTerm } />
+      <SearchBar />
     </div>
   );
 }

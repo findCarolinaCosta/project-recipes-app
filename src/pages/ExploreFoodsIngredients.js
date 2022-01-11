@@ -1,46 +1,66 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { Context } from '../context/Context';
 import fetchIngredients from '../services/fetchIngredients';
 
 function ExploreFoodsIngredients() {
   const [ingredients, setIngredients] = useState({});
   const maxCards = 12;
+  const { setSearchTerm, setIsSearchByIngredient } = useContext(Context);
+
   const fetchByIngredients = async () => {
     const ingredientsObj = await fetchIngredients();
-    setIngredients(ingredientsObj.meals.filter((ingredient, index) => index < maxCards));
+    setIngredients(ingredientsObj.meals.filter(
+      (__ingredient, index) => index < maxCards,
+    ));
   };
+
   useEffect(() => {
     fetchByIngredients();
   }, []);
 
+  const handleClick = (ingredientName) => {
+    setSearchTerm(ingredientName);
+    setIsSearchByIngredient(true);
+  };
+
+
   return (
     <div className="exp-ingred-meals-container">
       <Header />
+
       {
         ingredients.length > 0
           && ingredients.map((ingredient, index) => (
-            <div
-              data-testid={ `${index}-ingredient-card` }
+            <Link
+              to="/comidas"
               key={ ingredient.idIngredient }
-              className="exp-ingredient-card"
+              onClick={ () => handleClick(ingredient.strIngredient) }
             >
-              <img
-                src={ `https://www.themealdb.com/images/ingredients/${ingredient
-                  .strIngredient}-Small.png` }
-                className="card-explore-ingredient"
-                alt="Imagem do Ingrediente"
-                data-testid={ `${index}-card-img` }
-              />
-              <p
-                data-testid={ `${index}-card-name` }
+              <div
+                data-testid={ `${index}-ingredient-card` }
+                className="exp-ingredient-card"
               >
-                { ingredient.strIngredient }
-              </p>
-            </div>
+                <img
+                  src={ `https://www.themealdb.com/images/ingredients/${ingredient
+                    .strIngredient}-Small.png` }
+                  className="card-explore-ingredient"
+                  alt="Imagem do Ingrediente"
+                  data-testid={ `${index}-card-img` }
+                />
+                <p
+                  data-testid={ `${index}-card-name` }
+                >
+                  { ingredient.strIngredient }
+                </p>
+              </div>
+            </Link>
           ))
       }
-      <Footer />
+
+      <Footer  />
     </div>
   );
 }

@@ -31,6 +31,9 @@ function RecipesProvider(props) {
   const [isRecipesDone, setIsRecipesDone] = useState(false);
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [doneRecipesFilteredByName, setDoneRecipesFilteredByName] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isSearchByIngredient, setIsSearchByIngredient] = useState(false);
+  const [routeCurrent, setRouteCurrent] = useState('');
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
@@ -73,6 +76,12 @@ function RecipesProvider(props) {
     setDoneRecipes,
     doneRecipesFilteredByName,
     setDoneRecipesFilteredByName,
+    searchTerm,
+    setSearchTerm,
+    isSearchByIngredient,
+    setIsSearchByIngredient,
+    routeCurrent,
+    setRouteCurrent,
   };
 
   return <Provider value={ context }>{children}</Provider>;

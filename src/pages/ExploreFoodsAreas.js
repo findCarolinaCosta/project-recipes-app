@@ -16,7 +16,7 @@ function ExploreFoodsAreas() {
   const fetchMealsToContext = async () => {
     const maxCards = 12;
     const fetchResponse = await fetchMeals();
-    const arrObj = fetchResponse.meals.filter((item, index) => index < maxCards);
+    const arrObj = fetchResponse.meals.filter((__item, index) => index < maxCards);
     console.log(arrObj);
     setMeals(arrObj);
   };

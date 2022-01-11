@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Context } from '../context/Context';
 import fetchDrinksByFirstLetter from '../services/fetchDrinksByFirstLetter';
@@ -8,10 +8,12 @@ import fetchMealsByFirstLetter from '../services/fetchMealsByFirstLetter';
 import fetchMealsByIngredient from '../services/fetchMealsByIngredient';
 import fetchMealsByName from '../services/fetchMealsByName';
 
-function SearchBar(props) {
+function SearchBar() {
   const [chosenSearch, setSearch] = useState({});
   const { meals, setMeals, drinks, setDrinks,
-    sharedProps: { history, match } } = useContext(Context);
+    sharedProps: { history, match },
+    searchTerm, isSearchByIngredient, routeCurrent
+  } = useContext(Context);
 
   const redirectToDetails = async (receivedResponse) => {
     if (receivedResponse === null) {
@@ -33,7 +35,7 @@ function SearchBar(props) {
     }
   };
 
-  const searchMeals = (searchTerm) => {
+  const searchMeals = () => {
     if (chosenSearch === 'ingredient') {
       fetchMealsByIngredient(searchTerm).then((response) => redirectToDetails(response));
     } else if (chosenSearch === 'name') {
@@ -49,7 +51,7 @@ function SearchBar(props) {
     return meals;
   };
 
-  const searchDrinks = async (searchTerm) => {
+  const searchDrinks = async () => {
     if (chosenSearch === 'ingredient') {
       fetchDrinksByIngredient(searchTerm).then((response) => redirectToDetails(response));
     } else if (chosenSearch === 'name') {
@@ -78,6 +80,20 @@ function SearchBar(props) {
     setSearch(value);
   };
 
+
+  useEffect(() => {
+    if (isSearchByIngredient && routeCurrent) {
+      if (routeCurrent === '/comidas') {
+        fetchMealsByIngredient(searchTerm)
+          .then((response) => redirectToDetails(response));
+      }
+      if (routeCurrent === '/bebidas') {
+        fetchDrinksByIngredient(searchTerm)
+          .then((response) => redirectToDetails(response));
+      }
+    }
+  }, [routeCurrent]);
+
   return (
     <form className="container-fluid">
       <div className="row">
@@ -87,6 +103,7 @@ function SearchBar(props) {
               data-testid="ingredient-search-radio"
               type="radio"
               name="search"
+              checked={ isSearchByIngredient }
               value="ingredient"
               id="ingredient-search"
               onClick={ ({ target }) => handleRadioClick(target) }
@@ -122,7 +139,7 @@ function SearchBar(props) {
               data-testid="exec-search-btn"
               type="button"
               className="recipes-search-btn"
-              onClick={ () => searchRecipes(props.searchTerm) }
+              onClick={ () => searchRecipes() }
             >
               Buscar
             </button>
