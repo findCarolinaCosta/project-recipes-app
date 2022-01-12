@@ -26,7 +26,6 @@ function ExploreFoodsIngredients() {
     setIsSearchByIngredient(true);
   };
 
-
   return (
     <div className="exp-ingred-meals-container">
       <Header />
@@ -60,7 +59,7 @@ function ExploreFoodsIngredients() {
           ))
       }
 
-      <Footer  />
+      <Footer />
     </div>
   );
 }

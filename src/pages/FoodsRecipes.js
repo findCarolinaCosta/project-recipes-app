@@ -8,13 +8,12 @@ import fetchMealsByCategories from '../services/fetchMealsByCategories';
 import fetchMeals from '../services/fetchMeals';
 
 function FoodsRecipes({ history }, props) {
-  const { mealsCategories, setMeals, 
+  const { mealsCategories, setMeals,
     setSharedProps, setRouteCurrent } = useContext(Context);
   const maxCategories = 5;
   const [nameBtn, setnameBtn] = useState('');
 
   useEffect(() => setSharedProps(props), [props, setSharedProps]);
-
 
   useEffect(() => {
     setRouteCurrent(history.location.pathname);

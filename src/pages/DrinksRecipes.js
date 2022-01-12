@@ -8,7 +8,8 @@ import fetchDrinks from '../services/fetchDrinks';
 import fetchDrinksByCategory from '../services/fetchDrinksByCategory';
 
 function DrinksRecipes({ history }, props) {
-  const { drinksCategories, setDrinks, setSharedProps, setRouteCurrent } = useContext(Context);
+  const { drinksCategories, setDrinks,
+    setSharedProps, setRouteCurrent } = useContext(Context);
   const maxCategories = 5;
   const [nameBtn, setnameBtn] = useState('');
 
