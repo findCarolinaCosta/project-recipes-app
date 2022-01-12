@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Context } from '../context/Context';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import { Context } from '../context/Context';
 import fetchIngredients from '../services/fetchIngredients';
 import profileIcon from '../images/profileIcon.svg';
 
