@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import ReactPlayer from 'react-player/youtube';
 import { Context } from '../context/Context';
 import makeIngredientsList from '../helpers/makeIngredientsList';
+import Recommendeds from '../Recommendeds';
 import fetchDrinkRecipeDetailsById from '../services/fetchDrinkRecipeDetailsById';
+import fetchDrinks from '../services/fetchDrinks';
 import fetchMealRecipeDetailsById from '../services/fetchMealRecipeDetailsById';
 import ButtonFavorite from './ButtonFavorite';
 import ButtonProgress from './ButtonProgress';
@@ -21,6 +23,7 @@ function MealDetails({ props }) {
     location: { pathname } } = props;
   const [recipe, setRecipe] = useState('');
   const [ingredients, setIngredients] = useState();
+  const [toAccompany, setToAccompany] = useState([]);
 
   useEffect(() => {
     if (pathname.includes('comidas')) {
@@ -55,6 +58,18 @@ function MealDetails({ props }) {
           .some((recipeIdStorage) => recipeIdStorage === currentRecipeId)
         : false));
   }, [pathname, setInProgress]);
+
+  useEffect(() => {
+    const generateAccompanimentsList = async () => {
+      const listToReturn = [];
+      const NUMBER_OF_ITEMS = 6;
+      for (let index = 0; index < NUMBER_OF_ITEMS; index += 1) {
+        fetchDrinks().then(({ drinks }) => listToReturn.push(drinks[index]));
+      }
+      setToAccompany(listToReturn);
+    };
+    generateAccompanimentsList();
+  }, []);
 
   useEffect(() => {
     const currentRecipeId = pathname.split('/')[2];
@@ -135,33 +150,24 @@ function MealDetails({ props }) {
         </div>
       </div>
 
-      <div className="row">
-        <video data-testid="video" className="embed-responsive">
-          <track kind="captions" />
-          <source className="embed-responsive-item" src={ recipe.strYoutube } />
-        </video>
-      </div>
+      <ReactPlayer
+        data-testid="video"
+        width="95%"
+        url={ recipe.strYoutube }
+      />
 
-      <div className="row d-flex w-100">
-        <div className="d-flex flex-wrap justify-content-center">
-          <Link
-            className="custom-card col-sm-6 col-md-3"
-            style={ { width: '40vw' } }
-            data-testid="0-recomendation-card"
-            key="teste"
-            to={ `/bebidas/${recipe.idMeal}` }
-          >
-            <img
-              className="img-thumbnail"
-              src={ recipe.strMealThumb }
-              alt={ recipe.strMeal }
-              data-testid="card-img"
-              width="100px"
-            />
-            <h4 className="card-title" data-testid="card-name">
-              {recipe.strMeal}
-            </h4>
-          </Link>
+      <div
+        className="row d-flex"
+        style={ { width: '100vw' } }
+      >
+        <div
+          className="d-flex flex-wrap"
+          style={ { width: '100vw' } }
+        >
+          <div className="row">
+            <h1>Recommendeds</h1>
+          </div>
+          <Recommendeds items={ toAccompany } />
         </div>
       </div>
 
