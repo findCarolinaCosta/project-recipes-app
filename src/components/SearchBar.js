@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Context } from '../context/Context';
 import fetchDrinksByFirstLetter from '../services/fetchDrinksByFirstLetter';
 import fetchDrinksByIngredient from '../services/fetchDrinksByIngredient';
@@ -12,7 +11,7 @@ function SearchBar() {
   const [chosenSearch, setSearch] = useState({});
   const { meals, setMeals, drinks, setDrinks,
     sharedProps: { history, match },
-    searchTerm, isSearchByIngredient, routeCurrent
+    searchTerm, isSearchByIngredient, routeCurrent,
   } = useContext(Context);
 
   const redirectToDetails = async (receivedResponse) => {
@@ -67,19 +66,18 @@ function SearchBar() {
     return drinks;
   };
 
-  const searchRecipes = async (receivedTerm) => {
+  const searchRecipes = async () => {
     if (match.path === '/comidas') {
-      await searchMeals(receivedTerm);
+      await searchMeals();
     }
     if (match.path === '/bebidas') {
-      await searchDrinks(receivedTerm);
+      await searchDrinks();
     }
   };
 
   const handleRadioClick = ({ value }) => {
     setSearch(value);
   };
-
 
   useEffect(() => {
     if (isSearchByIngredient && routeCurrent) {
@@ -149,9 +147,5 @@ function SearchBar() {
     </form>
   );
 }
-
-SearchBar.propTypes = {
-  searchTerm: PropTypes.string.isRequired,
-};
 
 export default SearchBar;
