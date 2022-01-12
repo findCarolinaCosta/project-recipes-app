@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import FoodsRecipes from './pages/FoodsRecipes';
@@ -18,6 +18,7 @@ import MealsRecipsInProgress from './pages/MealsRecipesInProgress';
 import ExploreDrinksIngredients from './pages/ExploreDrinksIngredients';
 import ExploreFoodsIngredients from './pages/ExploreFoodsIngredients';
 import ExploreFoodsAreas from './pages/ExploreFoodsAreas';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
             path="/explorar/bebidas/ingredientes"
             component={ ExploreDrinksIngredients }
           />
+          <Route path="/explorar/bebidas/area" component={ ErrorPage } />
           <Route path="/explorar/comidas" component={ ExploreFoods } />
           <Route path="/explorar/bebidas" component={ ExploreDrinks } />
         </Switch>

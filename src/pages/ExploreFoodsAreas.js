@@ -8,6 +8,8 @@ import fetchMeals from '../services/fetchMeals';
 function ExploreFoodsAreas() {
   const [areas, setAreas] = useState({});
   const [meals, setMeals] = useState([]);
+  const [filterArea, setFilterArea] = useState('all');
+  const maxCards = 12;
 
   const fetchAreasToState = async () => {
     const fetchResponse = await fetchAreas();
@@ -15,9 +17,8 @@ function ExploreFoodsAreas() {
   };
 
   const fetchMealsToContext = async () => {
-    const maxCards = 12;
     const fetchResponse = await fetchMeals();
-    const arrObj = fetchResponse.meals.filter((item, index) => index < maxCards);
+    const arrObj = fetchResponse.meals;
     console.log(arrObj);
     setMeals(arrObj);
   };
@@ -40,44 +41,55 @@ function ExploreFoodsAreas() {
           name="area"
           id="select-area"
           data-testid="explore-by-area-dropdown"
+          onChange={ ({ target }) => setFilterArea(target.value) }
         >
           {
             areas.length > 0
-          && areas.map((area, index) => (
-            <option
-              value={ area.strArea }
-              key={ `${index} - ${area.strArea}` }
-              data-testid={ `${area.strArea}-option` }
-            >
-              { area.strArea }
-            </option>
-          ))
+          && areas
+            .map((area, index) => (
+              <option
+                value={ area.strArea }
+                key={ `${index} - ${area.strArea}` }
+                data-testid={ `${area.strArea}-option` }
+              >
+                { area.strArea }
+              </option>
+            ))
           }
+          <option
+            value="all"
+            data-testid="All-option"
+          >
+            All
+          </option>
         </select>
       </label>
       {
-        meals.map((meal, index) => (
-          <Link
-            className="custom-card col-sm-6 col-md-3"
-            style={ { width: '40vw' } }
-            data-testid={ `${index}-recipe-card` }
-            key={ meal.idMeal }
-            to={ `/comidas/${meal.idMeal}` }
-          >
-            <img
-              className="img-thumbnail"
-              src={ meal.strMealThumb }
-              alt={ meal.strMeal }
-              data-testid={ `${index}-card-img` }
-              width="100px"
-            />
-            <h4 className="card-title" data-testid={ `${index}-card-name` }>
-              {meal.strMeal}
-            </h4>
-          </Link>
-        ))
+        meals
+          .filter((item) => (filterArea === 'all'
+            ? true : item.strArea === filterArea))
+          .filter((item, index) => index < maxCards)
+          .map((meal, index) => (
+            <Link
+              className="custom-card col-sm-6 col-md-3"
+              style={ { width: '40vw' } }
+              data-testid={ `${index}-recipe-card` }
+              key={ meal.idMeal }
+              to={ `/comidas/${meal.idMeal}` }
+            >
+              <img
+                className="img-thumbnail"
+                src={ meal.strMealThumb }
+                alt={ meal.strMeal }
+                data-testid={ `${index}-card-img` }
+                width="100px"
+              />
+              <h4 className="card-title" data-testid={ `${index}-card-name` }>
+                {meal.strMeal}
+              </h4>
+            </Link>
+          ))
       }
-
       <Footer />
     </div>
   );
