@@ -12,11 +12,11 @@ function RecipeCard({ itemToMap }) {
       {itemToMap === 'meals' && meals
         ? (
           <div className="row">
-            <h1 className="text-center">Receitas de comidas</h1>
+            <h3 className="text-center" data-testid="page-title">Comidas</h3>
           </div>)
         : (
           <div className="row">
-            <h1 className="text-center">Receitas de bebidas</h1>
+            <h3 className="text-center" data-testid="page-title">Bebidas</h3>
           </div>)}
 
       <div className="d-flex row w-100">

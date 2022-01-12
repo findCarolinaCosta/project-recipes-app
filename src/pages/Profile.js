@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import getExit from '../helpers/getExit';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Context } from '../context/Context';
+import profileIcon from '../images/profileIcon.svg';
 
 function Profile(props) {
   const { history } = props;
@@ -13,9 +14,20 @@ function Profile(props) {
   useEffect(() => setSharedProps(props), [props, setSharedProps]);
 
   return (
-    <section>
-      <Header props={ props } />
-      <h1> Página de perfil</h1>
+    <div className="row">
+      <div className="col-sm-2">
+        <Link to="/perfil">
+          <button type="button">
+            <img
+              src={ profileIcon }
+              alt="profile-icon"
+              className="header-profile-icon"
+              data-testid="profile-top-btn"
+            />
+          </button>
+        </Link>
+      </div>
+      <h3 className="text-center" data-testid="page-title">Perfil</h3>
       <p data-testid="profile-email">{emailByLocalStorage}</p>
       <button
         type="button"
@@ -42,7 +54,7 @@ function Profile(props) {
 
       </button>
       <Footer />
-    </section>
+    </div>
   );
 }
 

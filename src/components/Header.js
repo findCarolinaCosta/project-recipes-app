@@ -6,6 +6,10 @@ import SearchBar from './SearchBar';
 
 function Header() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+  function handleClick() {
+    return !isVisible ? setIsVisible(true) : setIsVisible(false);
+  }
 
   return (
     <div className="row">
@@ -22,12 +26,15 @@ function Header() {
         </Link>
       </div>
       <div className="col-sm-4">
-        <h3 data-testid="page-title">
-          Titulo do Header
-        </h3>
+        {/* <h3 data-testid="page-title">
+          Comidas
+        </h3> */}
       </div>
       <div className="col-sm-6">
-        <button type="button">
+        <button
+          type="button"
+          onClick={ handleClick }
+        >
           <img
             src={ searchIcon }
             alt="search-icon"
@@ -35,7 +42,7 @@ function Header() {
             data-testid="search-top-btn"
           />
         </button>
-        <input
+        { isVisible && <input
           data-testid="search-input"
           id="search-input"
           type="text"
@@ -43,7 +50,7 @@ function Header() {
           className="recipes-search-input"
           value={ searchTerm }
           onChange={ ({ target }) => setSearchTerm(target.value) }
-        />
+        /> }
       </div>
       <SearchBar searchTerm={ searchTerm } />
     </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fetchRandomDrinks from '../services/fetchRandomDrinks';
+import profileIcon from '../images/profileIcon.svg';
 
 function ExploreDrinks() {
   const [randomRecipeID, setRandomRecipeID] = useState({});
@@ -15,8 +15,20 @@ function ExploreDrinks() {
   }, []);
   console.log(randomRecipeID);
   return (
-    <div>
-      <Header />
+    <div className="row">
+      <div className="col-sm-2">
+        <Link to="/perfil">
+          <button type="button">
+            <img
+              src={ profileIcon }
+              alt="profile-icon"
+              className="header-profile-icon"
+              data-testid="profile-top-btn"
+            />
+          </button>
+        </Link>
+        <h3 className="text-center" data-testid="page-title">Explorar Bebidas</h3>
+      </div>
       <Link to="/explorar/bebidas/ingredientes">
         <button
           type="button"
