@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/findCarolinaCosta.github.io/project-recipes-app/static/css/main.a02942bd.chunk.css",
+    "main.js": "/findCarolinaCosta.github.io/project-recipes-app/static/js/main.796f5964.chunk.js",
+    "main.js.map": "/findCarolinaCosta.github.io/project-recipes-app/static/js/main.796f5964.chunk.js.map",
+    "runtime-main.js": "/findCarolinaCosta.github.io/project-recipes-app/static/js/runtime-main.1a792c95.js",
+    "runtime-main.js.map": "/findCarolinaCosta.github.io/project-recipes-app/static/js/runtime-main.1a792c95.js.map",
+    "static/css/2.3661fc73.chunk.css": "/findCarolinaCosta.github.io/project-recipes-app/static/css/2.3661fc73.chunk.css",
+    "static/js/2.7ed29211.chunk.js": "/findCarolinaCosta.github.io/project-recipes-app/static/js/2.7ed29211.chunk.js",
+    "static/js/2.7ed29211.chunk.js.map": "/findCarolinaCosta.github.io/project-recipes-app/static/js/2.7ed29211.chunk.js.map",
+    "index.html": "/findCarolinaCosta.github.io/project-recipes-app/index.html",
+    "precache-manifest.46793e56706c484ffadd4c9c638fc0bc.js": "/findCarolinaCosta.github.io/project-recipes-app/precache-manifest.46793e56706c484ffadd4c9c638fc0bc.js",
+    "service-worker.js": "/findCarolinaCosta.github.io/project-recipes-app/service-worker.js",
+    "static/css/2.3661fc73.chunk.css.map": "/findCarolinaCosta.github.io/project-recipes-app/static/css/2.3661fc73.chunk.css.map",
+    "static/css/main.a02942bd.chunk.css.map": "/findCarolinaCosta.github.io/project-recipes-app/static/css/main.a02942bd.chunk.css.map",
+    "static/js/2.7ed29211.chunk.js.LICENSE.txt": "/findCarolinaCosta.github.io/project-recipes-app/static/js/2.7ed29211.chunk.js.LICENSE.txt",
+    "static/media/blackHeartIcon.svg": "/findCarolinaCosta.github.io/project-recipes-app/static/media/blackHeartIcon.b8913346.svg",
+    "static/media/drinkIcon.svg": "/findCarolinaCosta.github.io/project-recipes-app/static/media/drinkIcon.f87c47c3.svg",
+    "static/media/exploreIcon.svg": "/findCarolinaCosta.github.io/project-recipes-app/static/media/exploreIcon.157945ff.svg",
+    "static/media/mealIcon.svg": "/findCarolinaCosta.github.io/project-recipes-app/static/media/mealIcon.b27ba19e.svg",
+    "static/media/profileIcon.svg": "/findCarolinaCosta.github.io/project-recipes-app/static/media/profileIcon.74e487e5.svg",
+    "static/media/searchIcon.svg": "/findCarolinaCosta.github.io/project-recipes-app/static/media/searchIcon.db812135.svg",
+    "static/media/shareIcon.svg": "/findCarolinaCosta.github.io/project-recipes-app/static/media/shareIcon.06215ed4.svg",
+    "static/media/whiteHeartIcon.svg": "/findCarolinaCosta.github.io/project-recipes-app/static/media/whiteHeartIcon.ea3b6ba8.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1a792c95.js",
+    "static/css/2.3661fc73.chunk.css",
+    "static/js/2.7ed29211.chunk.js",
+    "static/css/main.a02942bd.chunk.css",
+    "static/js/main.796f5964.chunk.js"
+  ]
+}
