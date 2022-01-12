@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
@@ -149,7 +148,6 @@ export default function FavoritesRecipes() {
           </div>
         ))
       }
-      <Footer />
     </div>
   );
 }
