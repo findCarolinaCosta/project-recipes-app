@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Context } from '../context/Context';
 import { Link } from 'react-router-dom';
+import { Context } from '../context/Context';
 import Footer from '../components/Footer';
 import fetchIngredients from '../services/fetchIngredients';
 import profileIcon from '../images/profileIcon.svg';

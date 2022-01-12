@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
+import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
-import Header from '../components/Header';
 import fetchAreas from '../services/fetchAreas';
 import fetchMeals from '../services/fetchMeals';
+import Header from '../components/Header';
 
 function ExploreFoodsAreas() {
   const [areas, setAreas] = useState({});
