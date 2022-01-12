@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import CardRecipesMade from '../components/CardRecipesMade';
-import Header from '../components/Header';
+import Footer from '../components/Footer';
+import profileIcon from '../images/profileIcon.svg';
 
-function RecipesMade(props) {
+function RecipesMade() {
   const { setDoneRecipesFilteredByName } = useContext(Context);
 
   const handleClickFiltered = ({ target }) => {
@@ -22,8 +24,17 @@ function RecipesMade(props) {
 
   return (
     <div>
-      <Header props={ props } />
-      <h1>Receitas feitas</h1>
+      <Link to="/perfil">
+        <button type="button">
+          <img
+            src={ profileIcon }
+            alt="profile-icon"
+            className="header-profile-icon"
+            data-testid="profile-top-btn"
+          />
+        </button>
+      </Link>
+      <h3 className="text-center" data-testid="page-title">Receitas Feitas</h3>
       <button
         type="button"
         data-testid="filter-by-all-btn"
@@ -49,6 +60,7 @@ function RecipesMade(props) {
         Drinks
       </button>
       <CardRecipesMade />
+      <Footer />
     </div>
   );
 }

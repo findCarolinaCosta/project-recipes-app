@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import Header from '../components/Header';
 import { Context } from '../context/Context';
 import fetchIngredients from '../services/fetchIngredients';
+import profileIcon from '../images/profileIcon.svg';
 
 function ExploreFoodsIngredients() {
   const [ingredients, setIngredients] = useState({});
@@ -28,8 +28,19 @@ function ExploreFoodsIngredients() {
 
   return (
     <div className="exp-ingred-meals-container">
-      <Header />
-
+      <div>
+        <Link to="/perfil">
+          <button type="button">
+            <img
+              src={ profileIcon }
+              alt="profile-icon"
+              className="header-profile-icon"
+              data-testid="profile-top-btn"
+            />
+          </button>
+        </Link>
+      </div>
+      <h3 className="text-center" data-testid="page-title">Explorar Ingredientes</h3>
       {
         ingredients.length > 0
           && ingredients.map((ingredient, index) => (

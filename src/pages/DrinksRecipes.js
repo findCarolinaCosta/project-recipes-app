@@ -32,7 +32,6 @@ function DrinksRecipes(props) {
 
   return (
     <div className="recipes-container container-fluid">
-      <h1>Receitas de comidas</h1>
       <header className="row">
         <Header className="container-fluid" props={ props } />
       </header>
