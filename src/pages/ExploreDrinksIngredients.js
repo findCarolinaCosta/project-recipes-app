@@ -21,7 +21,6 @@ function ExploreDrinksIngredients() {
   }, []);
 
   const handleClick = (ingredientName) => {
-    console.log(ingredientName);
     setSearchTerm(ingredientName);
     setIsSearchByIngredient(true);
   };

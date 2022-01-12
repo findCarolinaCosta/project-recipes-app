@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 import fetchDrinks from '../services/fetchDrinks';
 import fetchDrinksByCategory from '../services/fetchDrinksByCategory';
 
-function DrinksRecipes({ history }, props) {
+function DrinksRecipes(props) {
   const { drinksCategories, setDrinks,
     setSharedProps, setRouteCurrent, setHistoryCurrent } = useContext(Context);
   const maxCategories = 5;
@@ -15,8 +15,8 @@ function DrinksRecipes({ history }, props) {
 
   useEffect(() => setSharedProps(props), [props, setSharedProps]);
   useEffect(() => {
-    setRouteCurrent(history.location.pathname);
-    setHistoryCurrent(history);
+    setRouteCurrent(props.history.location.pathname);
+    setHistoryCurrent(props.history);
   }, []);
 
   const filteredByCategory = (categoryName, event) => {
