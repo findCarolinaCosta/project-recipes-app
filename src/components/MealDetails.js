@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
-import ReactPlayer from 'react-player/youtube';
+import ReactPlayer from 'react-player';
 import { Context } from '../context/Context';
 import makeIngredientsList from '../helpers/makeIngredientsList';
 import Recommendeds from '../Recommendeds';

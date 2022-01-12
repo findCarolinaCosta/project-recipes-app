@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import { Context } from '../context/Context';
 
 function Header() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const { searchTerm, setSearchTerm } = useContext(Context);
   const [isVisible, setIsVisible] = useState(false);
   function handleClick() {
     return !isVisible ? setIsVisible(true) : setIsVisible(false);
@@ -52,7 +53,7 @@ function Header() {
           onChange={ ({ target }) => setSearchTerm(target.value) }
         /> }
       </div>
-      <SearchBar searchTerm={ searchTerm } />
+      <SearchBar />
     </div>
   );
 }

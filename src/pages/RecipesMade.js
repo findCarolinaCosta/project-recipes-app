@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Context } from '../context/Context';
 import CardRecipesMade from '../components/CardRecipesMade';
-import Footer from '../components/Footer';
 import profileIcon from '../images/profileIcon.svg';
 
 function RecipesMade() {
@@ -60,7 +59,6 @@ function RecipesMade() {
         Drinks
       </button>
       <CardRecipesMade />
-      <Footer />
     </div>
   );
 }

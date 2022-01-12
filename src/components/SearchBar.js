@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../context/Context';
 import fetchDrinksByFirstLetter from '../services/fetchDrinksByFirstLetter';
 import fetchDrinksByIngredient from '../services/fetchDrinksByIngredient';
@@ -8,10 +7,11 @@ import fetchMealsByFirstLetter from '../services/fetchMealsByFirstLetter';
 import fetchMealsByIngredient from '../services/fetchMealsByIngredient';
 import fetchMealsByName from '../services/fetchMealsByName';
 
-function SearchBar(props) {
+function SearchBar() {
   const [chosenSearch, setSearch] = useState({});
   const { meals, setMeals, drinks, setDrinks,
-    sharedProps: { history, match } } = useContext(Context);
+    searchTerm, isSearchByIngredient, routeCurrent, historyCurrent,
+  } = useContext(Context);
 
   const redirectToDetails = async (receivedResponse) => {
     if (receivedResponse === null) {
@@ -22,61 +22,77 @@ function SearchBar(props) {
     if (Object.keys(receivedResponse[0]).includes('idMeal')) {
       await setMeals(receivedResponse);
       if (receivedResponse.length === 1) {
-        history.push(`/comidas/${receivedResponse[0].idMeal}`);
+        historyCurrent.push(`/comidas/${receivedResponse[0].idMeal}`);
       }
     }
     if (Object.keys(receivedResponse[0]).includes('idDrink')) {
       await setDrinks(receivedResponse);
       if (receivedResponse.length === 1) {
-        history.push(`/bebidas/${receivedResponse[0].idDrink}`);
+        historyCurrent.push(`/bebidas/${receivedResponse[0].idDrink}`);
       }
     }
   };
 
-  const searchMeals = (searchTerm) => {
+  const searchMeals = (searchTermParam) => {
     if (chosenSearch === 'ingredient') {
-      fetchMealsByIngredient(searchTerm).then((response) => redirectToDetails(response));
+      fetchMealsByIngredient(searchTermParam)
+        .then((response) => redirectToDetails(response));
     } else if (chosenSearch === 'name') {
-      fetchMealsByName(searchTerm).then(async (response) => redirectToDetails(response));
+      fetchMealsByName(searchTermParam)
+        .then(async (response) => redirectToDetails(response));
     } else if (chosenSearch === 'firstletter') {
-      if (searchTerm.length > 1) {
+      if (searchTermParam.length > 1) {
         global.alert('Sua busca deve conter somente 1 (um) caracter');
       } else {
-        const letter = searchTerm.slice(0, 1);
+        const letter = searchTermParam.slice(0, 1);
         fetchMealsByFirstLetter(letter).then((response) => redirectToDetails(response));
       }
     }
     return meals;
   };
 
-  const searchDrinks = async (searchTerm) => {
+  const searchDrinks = async (searchTermParam) => {
     if (chosenSearch === 'ingredient') {
-      fetchDrinksByIngredient(searchTerm).then((response) => redirectToDetails(response));
+      fetchDrinksByIngredient(searchTermParam)
+        .then((response) => redirectToDetails(response));
     } else if (chosenSearch === 'name') {
-      fetchDrinksByName(searchTerm).then((response) => redirectToDetails(response));
+      fetchDrinksByName(searchTermParam).then((response) => redirectToDetails(response));
     } else if (chosenSearch === 'firstletter') {
-      if (searchTerm.length > 1) {
+      if (searchTermParam.length > 1) {
         global.alert('Sua busca deve conter somente 1 (um) caracter');
       } else {
-        const letter = searchTerm.slice(0, 1);
+        const letter = searchTermParam.slice(0, 1);
         fetchDrinksByFirstLetter(letter).then((response) => redirectToDetails(response));
       }
     }
     return drinks;
   };
 
-  const searchRecipes = async (receivedTerm) => {
-    if (match.path === '/comidas') {
-      await searchMeals(receivedTerm);
+  const searchRecipes = async (searchTermParam) => {
+    if (routeCurrent === '/comidas') {
+      await searchMeals(searchTermParam);
     }
-    if (match.path === '/bebidas') {
-      await searchDrinks(receivedTerm);
+    if (routeCurrent === '/bebidas') {
+      await searchDrinks(searchTermParam);
     }
   };
 
   const handleRadioClick = ({ value }) => {
     setSearch(value);
   };
+
+  useEffect(() => {
+    if (isSearchByIngredient && routeCurrent) {
+      if (routeCurrent === '/comidas') {
+        fetchMealsByIngredient(searchTerm)
+          .then((response) => redirectToDetails(response));
+      }
+      if (routeCurrent === '/bebidas') {
+        fetchDrinksByIngredient(searchTerm)
+          .then((response) => redirectToDetails(response));
+      }
+    }
+  }, [routeCurrent]);
 
   return (
     <form className="container-fluid">
@@ -87,6 +103,7 @@ function SearchBar(props) {
               data-testid="ingredient-search-radio"
               type="radio"
               name="search"
+              checked={ isSearchByIngredient }
               value="ingredient"
               id="ingredient-search"
               onClick={ ({ target }) => handleRadioClick(target) }
@@ -122,7 +139,7 @@ function SearchBar(props) {
               data-testid="exec-search-btn"
               type="button"
               className="recipes-search-btn"
-              onClick={ () => searchRecipes(props.searchTerm) }
+              onClick={ () => searchRecipes(searchTerm) }
             >
               Buscar
             </button>
@@ -132,9 +149,5 @@ function SearchBar(props) {
     </form>
   );
 }
-
-SearchBar.propTypes = {
-  searchTerm: PropTypes.string.isRequired,
-};
 
 export default SearchBar;

@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import RecipeCard from '../components/RecipeCard';
 import { Context } from '../context/Context';
 import Footer from '../components/Footer';
@@ -7,11 +8,17 @@ import fetchMealsByCategories from '../services/fetchMealsByCategories';
 import fetchMeals from '../services/fetchMeals';
 
 function FoodsRecipes(props) {
-  const { mealsCategories, setMeals, setSharedProps } = useContext(Context);
+  const { mealsCategories, setMeals,
+    setSharedProps, setRouteCurrent, setHistoryCurrent } = useContext(Context);
   const maxCategories = 5;
   const [nameBtn, setnameBtn] = useState('');
 
   useEffect(() => setSharedProps(props), [props, setSharedProps]);
+
+  useEffect(() => {
+    setRouteCurrent(props.history.location.pathname);
+    setHistoryCurrent(props.history);
+  }, []);
 
   const filteredByCategory = (categoryName, event) => {
     if (nameBtn === event.target.name) {
@@ -73,3 +80,11 @@ function FoodsRecipes(props) {
 }
 
 export default FoodsRecipes;
+
+FoodsRecipes.propTypes = {
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }).isRequired,
+};
