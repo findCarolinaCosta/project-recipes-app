@@ -9,13 +9,14 @@ import fetchDrinksByCategory from '../services/fetchDrinksByCategory';
 
 function DrinksRecipes({ history }, props) {
   const { drinksCategories, setDrinks,
-    setSharedProps, setRouteCurrent } = useContext(Context);
+    setSharedProps, setRouteCurrent, setHistoryCurrent } = useContext(Context);
   const maxCategories = 5;
   const [nameBtn, setnameBtn] = useState('');
 
   useEffect(() => setSharedProps(props), [props, setSharedProps]);
   useEffect(() => {
     setRouteCurrent(history.location.pathname);
+    setHistoryCurrent(history);
   }, []);
 
   const filteredByCategory = (categoryName, event) => {

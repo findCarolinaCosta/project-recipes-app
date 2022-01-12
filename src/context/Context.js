@@ -34,6 +34,7 @@ function RecipesProvider(props) {
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchByIngredient, setIsSearchByIngredient] = useState(false);
   const [routeCurrent, setRouteCurrent] = useState('');
+  const [historyCurrent, setHistoryCurrent] = useState('');
 
   useEffect(() => {
     fetchMeals().then((response) => setMeals(response.meals));
@@ -82,6 +83,8 @@ function RecipesProvider(props) {
     setIsSearchByIngredient,
     routeCurrent,
     setRouteCurrent,
+    historyCurrent,
+    setHistoryCurrent,
   };
 
   return <Provider value={ context }>{children}</Provider>;

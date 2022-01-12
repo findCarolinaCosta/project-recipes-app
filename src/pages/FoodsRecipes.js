@@ -9,7 +9,7 @@ import fetchMeals from '../services/fetchMeals';
 
 function FoodsRecipes({ history }, props) {
   const { mealsCategories, setMeals,
-    setSharedProps, setRouteCurrent } = useContext(Context);
+    setSharedProps, setRouteCurrent, setHistoryCurrent } = useContext(Context);
   const maxCategories = 5;
   const [nameBtn, setnameBtn] = useState('');
 
@@ -17,6 +17,7 @@ function FoodsRecipes({ history }, props) {
 
   useEffect(() => {
     setRouteCurrent(history.location.pathname);
+    setHistoryCurrent(history);
   }, []);
 
   const filteredByCategory = (categoryName, event) => {
