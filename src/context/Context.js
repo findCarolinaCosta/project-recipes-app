@@ -32,7 +32,7 @@ function RecipesProvider(props) {
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [doneRecipesFilteredByName, setDoneRecipesFilteredByName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const [isSearchByIngredient, setIsSearchByIngredient] = useState(false);
+  const [isSearchByIngredient, setIsSearchByIngredient] = useState('');
   const [routeCurrent, setRouteCurrent] = useState('');
   const [historyCurrent, setHistoryCurrent] = useState('');
 
