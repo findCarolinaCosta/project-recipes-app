@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "652e3530b1f4e33e28eda410d42fdce1",
+    "revision": "6376ba3878bd0c35ad293cd46cff71d0",
     "url": "/findCarolinaCosta.github.io/project-recipes-app/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/findCarolinaCosta.github.io/project-recipes-app/static/css/2.3661fc73.chunk.css"
   },
   {
-    "revision": "c0365c422768d5a704e6",
+    "revision": "25cd922193dcb41eda6e",
     "url": "/findCarolinaCosta.github.io/project-recipes-app/static/css/main.a02942bd.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/findCarolinaCosta.github.io/project-recipes-app/static/js/2.7ed29211.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c0365c422768d5a704e6",
-    "url": "/findCarolinaCosta.github.io/project-recipes-app/static/js/main.796f5964.chunk.js"
+    "revision": "25cd922193dcb41eda6e",
+    "url": "/findCarolinaCosta.github.io/project-recipes-app/static/js/main.152705d9.chunk.js"
   },
   {
     "revision": "0da6c833361613e3d559",

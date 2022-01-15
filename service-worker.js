@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/findCarolinaCosta.github.io/project-recipes-app/precache-manifest.46793e56706c484ffadd4c9c638fc0bc.js"
+  "/findCarolinaCosta.github.io/project-recipes-app/precache-manifest.3b01a250b2fdc0b7776a9d652297a7bd.js"
 );
 
 self.addEventListener('message', (event) => {
