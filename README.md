@@ -1,7 +1,7 @@
 # Recipes App
 ## _Practical recipes for day to day_
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://findcarolinacosta.github.io/project-recipes-app/)
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://project-recipes-app-by-findcalinacosta.surge.sh)
 
 This is a recipe application, a project developed in a group at Trybe. And its main objective is to put into practice learnings from ReactJS, Context Api and react-redux.
 
