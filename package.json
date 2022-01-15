@@ -26,7 +26,7 @@
     "react-scripts": "3.4.1",
     "websocket-extensions": ">=0.1.4"
   },
-  "homepage": "https:findCarolinaCosta.github.io/project-recipes-app",
+  "homepage": "https://findCarolinaCosta.github.io/project-recipes-app",
   "scripts": {
     "cy": "cypress run",
     "cy:open": "cypress open",
