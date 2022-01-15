@@ -103,7 +103,7 @@ function SearchBar() {
               data-testid="ingredient-search-radio"
               type="radio"
               name="search"
-              checked={ isSearchByIngredient }
+              checked={ isSearchByIngredient || null }
               value="ingredient"
               id="ingredient-search"
               onClick={ ({ target }) => handleRadioClick(target) }
