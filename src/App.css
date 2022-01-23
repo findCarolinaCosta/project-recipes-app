@@ -86,28 +86,6 @@
   color: #c9f0cf;
 }
 
-.custom-card {
-  align-items: center;
-  background-color: #f523146e;
-  border: none;
-  border-radius: 5px;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: space-around;
-  margin: 3px;
-  padding: 10px;
-}
-
-.custom-card h4 {
-  background: none;
-}
-
-.custom-card img {
-  align-self: center;
-  border: none;
-  margin-top: 7px;
-}
-
 /* Para telas com largura menor que 365px */
 
 @media screen and ( max-width : 365px ) {
