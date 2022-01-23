@@ -23,7 +23,7 @@ import ErrorPage from './pages/ErrorPage';
 function App() {
   return (
     <div
-      className="container-fluid align-items-center d-flex flex-wrap"
+      className="container-fluid align-items-center d-flex flex-wrap bg-red-700"
       style={ { height: '100vh', width: '100vw' } }
     >
       <Provider>

@@ -26,45 +26,51 @@ function Login({ history }) {
   };
 
   return (
-    <main
-      className="recipes-row"
-    >
-      <section>
-        <h1>Login</h1>
-        <form>
-          <label htmlFor="email">
-            Email:
+    <section className="flex flex-column m-auto rounded-md w-11/12">
+      <div
+        className="bg-white rounded-md decoration-black
+      text-base font-normal leading-6 p-12 relative"
+      >
+        <h1 className="text-center bg-white mb-4 text-danger font-bold">Login</h1>
+        <form className="bg-white">
+          <div className="bg-white mb-1">
+            <span className="bg-white">Email</span>
+          </div>
+          <div className="wrap-input input-group label form-label mb-0 bg-white">
             <input
-              id="email"
-              type="email"
+              className="form-control mb-4"
               data-testid="email-input"
-              name="emailInput"
-              value={ email }
+              aria-label="email"
+              type="email"
+              name="email"
               onChange={ ({ target }) => setEmail(target.value) }
             />
-          </label>
-          <label htmlFor="password">
-            Senha:
+          </div>
+          <div className="bg-white mb-1">
+            <span className="bg-white">Password</span>
+          </div>
+          <div className="wrap-input input-group label form-label mb-4">
             <input
               id="password"
-              type="password"
+              className="form-control"
               data-testid="password-input"
+              type="password"
               value={ password }
               onChange={ ({ target }) => setPassword(target.value) }
             />
-          </label>
+          </div>
           <button
-            className="recipes-button"
             type="submit"
             data-testid="login-submit-btn"
             disabled={ !getDisabled(email, password) }
             onClick={ handleClick }
+            className="btn btn-danger"
           >
             Entrar
           </button>
         </form>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }
 
