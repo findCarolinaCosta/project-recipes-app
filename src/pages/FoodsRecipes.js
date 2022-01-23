@@ -32,11 +32,12 @@ function FoodsRecipes(props) {
   };
   return (
     <div className="recipes-container container-fluid p-0 bg-red-700">
-      <header className="border-0">
-        <Header className="container-fluid" props={ props } />
-      </header>
-      <section className="btn-group flex-wrap" role="group">
-        { mealsCategories.length !== 0
+      <div className="mb-52">
+        <header className="border-0">
+          <Header className="container-fluid" props={ props } />
+        </header>
+        <section className="btn-group flex-wrap" role="group">
+          { mealsCategories.length !== 0
       && mealsCategories.map((categorizeiMeal, index) => {
         if (index < maxCategories) {
           return (
@@ -57,24 +58,25 @@ function FoodsRecipes(props) {
         }
         return null;
       })}
-        <button
-          type="button"
-          data-testid="All-category-filter"
-          onClick={
-            () => fetchMeals()
-              .then((response) => setMeals(response.meals))
-          }
-          className="btn btn-outline-danger"
-        >
-          All
-        </button>
-      </section>
-      <div className="row">
-        <RecipeCard
-          className="container-fluid"
-          itemToMap="meals"
-          props={ props }
-        />
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={
+              () => fetchMeals()
+                .then((response) => setMeals(response.meals))
+            }
+            className="btn btn-outline-danger"
+          >
+            All
+          </button>
+        </section>
+        <div className="row">
+          <RecipeCard
+            className="container-fluid"
+            itemToMap="meals"
+            props={ props }
+          />
+        </div>
       </div>
       <div>
         <Footer />

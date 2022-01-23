@@ -33,29 +33,34 @@ function RecipeCard({ itemToMap }) {
             </h3>
           </div>)}
 
-      <div className="d-flex row w-100">
-        <div className="d-flex flex-wrap justify-content-center">
+      <div className="d-flex row w-100 mb-40">
+        <div className="d-flex flex-wrap justify-content-center gap-5">
           {(itemToMap === 'meals' && meals) ? meals.map((meal, index) => {
             if (index < renderedQuantity) {
               return (
-                <Link
-                  className="custom-card col-sm-6 col-md-3"
-                  style={ { width: '40vw' } }
-                  data-testid={ `${index}-recipe-card` }
-                  key={ meal.idMeal }
-                  to={ `/comidas/${meal.idMeal}` }
-                >
-                  <img
-                    className="img-thumbnail"
-                    src={ meal.strMealThumb }
-                    alt={ meal.strMeal }
-                    data-testid={ `${index}-card-img` }
-                    width="100px"
-                  />
-                  <h4 className="card-title" data-testid={ `${index}-card-name` }>
-                    {meal.strMeal}
-                  </h4>
-                </Link>
+                <section className="card shadow-lg bg-body rounded">
+                  <Link
+                    style={ { width: '40vw' } }
+                    data-testid={ `${index}-recipe-card` }
+                    key={ meal.idMeal }
+                    to={ `/comidas/${meal.idMeal}` }
+                  >
+                    <img
+                      className="card-img-top"
+                      src={ meal.strMealThumb }
+                      alt={ meal.strMeal }
+                      data-testid={ `${index}-card-img` }
+                    />
+                    <div className="card-body bg-white">
+                      <h4
+                        className="card-title bg-transparent"
+                        data-testid={ `${index}-card-name` }
+                      >
+                        {meal.strMeal}
+                      </h4>
+                    </div>
+                  </Link>
+                </section>
               );
             }
             return null;
@@ -63,24 +68,30 @@ function RecipeCard({ itemToMap }) {
             : drinks.map((drink, index) => {
               if (index < renderedQuantity) {
                 return (
-                  <Link
-                    className="custom-card col-sm-6 col-md-3"
-                    style={ { width: '40vw' } }
-                    data-testid={ `${index}-recipe-card` }
-                    key={ drink.idDrink }
-                    to={ `/bebidas/${drink.idDrink}` }
-                  >
-                    <img
-                      className="img-thumbnail"
-                      src={ drink.strDrinkThumb }
-                      alt={ drink.strDrink }
-                      data-testid={ `${index}-card-img` }
-                      width="100px"
-                    />
-                    <h4 className="card-title" data-testid={ `${index}-card-name` }>
-                      {drink.strDrink}
-                    </h4>
-                  </Link>
+                  <section className="card shadow-lg bg-body rounded">
+                    <Link
+                      style={ { width: '40vw' } }
+                      data-testid={ `${index}-recipe-card` }
+                      key={ drink.idDrink }
+                      to={ `/bebidas/${drink.idDrink}` }
+                    >
+                      <img
+                        className="card-img-top"
+                        src={ drink.strDrinkThumb }
+                        alt={ drink.strDrink }
+                        data-testid={ `${index}-card-img` }
+                        width="100px"
+                      />
+                      <div className="card-body bg-white">
+                        <h4
+                          className="card-title bg-transparent"
+                          data-testid={ `${index}-card-name` }
+                        >
+                          {drink.strDrink}
+                        </h4>
+                      </div>
+                    </Link>
+                  </section>
                 );
               }
               return null;
