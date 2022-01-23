@@ -95,10 +95,14 @@ function SearchBar() {
   }, [routeCurrent]);
 
   return (
-    <form className="container-fluid">
-      <div className="row">
-        <div className="col-sm-12">
-          <label className="recipes-radio" htmlFor="ingredient-search">
+    <form>
+      <div className="bg-red-700 p-1">
+        <div className="bg-red-700">
+          <label
+            className="recipes-radio bg-red-700
+          text-white"
+            htmlFor="ingredient-search"
+          >
             <input
               data-testid="ingredient-search-radio"
               type="radio"
@@ -108,10 +112,10 @@ function SearchBar() {
               id="ingredient-search"
               onClick={ ({ target }) => handleRadioClick(target) }
             />
-            Ingrediente
+            <span className="ml-1 bg-red-700 text-white">Ingrediente</span>
           </label>
 
-          <label className="recipes-radio" htmlFor="name-search">
+          <label className="recipes-radio bg-red-700 text-white" htmlFor="name-search">
             <input
               data-testid="name-search-radio"
               type="radio"
@@ -120,10 +124,14 @@ function SearchBar() {
               id="name-search"
               onClick={ ({ target }) => handleRadioClick(target) }
             />
-            Nome
+            <span className="ml-1 bg-red-700 text-white">Nome</span>
           </label>
 
-          <label className="recipes-radio" htmlFor="first-letter-search">
+          <label
+            className="recipes-radio bg-red-700
+          text-white"
+            htmlFor="first-letter-search"
+          >
             <input
               data-testid="first-letter-search-radio"
               type="radio"
@@ -132,9 +140,9 @@ function SearchBar() {
               id="first-letter-search"
               onClick={ ({ target }) => handleRadioClick(target) }
             />
-            Primeira letra
+            <span className="ml-1 bg-red-700 text-white">Primeira letra</span>
           </label>
-          <div className="col-sm-12">
+          <div className="col-sm-12 bg-red-700 p-2">
             <button
               data-testid="exec-search-btn"
               type="button"
