@@ -70,7 +70,7 @@ function FoodsRecipes(props) {
             All
           </button>
         </section>
-        <div className="row">
+        <div>
           <RecipeCard
             className="container-fluid"
             itemToMap="meals"

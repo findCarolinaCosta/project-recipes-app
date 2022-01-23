@@ -66,7 +66,7 @@ function DrinksRecipes(props) {
         >
           All
         </button>
-        <div className="row">
+        <div>
           <RecipeCard
             className="container-fluid"
             itemToMap="drinks"
