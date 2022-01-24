@@ -81,90 +81,75 @@ function DrinkDetails({ props }) {
   }, [setIsRecipesDone, pathname, recipesDone]);
 
   return (
-    <div
-      className="container-fluid"
-      style={ { height: '100vh', width: '100vw' } }
-    >
-      <div className="row d-flex w-100">
+    <div className="container-fluid p-0 w-screen">
 
-        <div className="col-12 d-flex w-100">
-          <img
-            data-testid="recipe-photo"
-            className="img-fluid"
-            src={ recipe.strDrinkThumb }
-            alt={ `Foto da receita
+      <section>
+        <img
+          data-testid="recipe-photo"
+          className="w-full"
+          src={ recipe.strDrinkThumb }
+          alt={ `Foto da receita
                 ${recipe.strDrink}, que contém ${recipe.strIngredient1} 
                 e ${recipe.strIngredient2} entre outros ingredientes.` }
-          />
-        </div>
+        />
+      </section>
 
-        <div className="row d-flex justify-content-between">
-          <div className="col-6">
-            <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-          </div>
-          <div className="col-3">
+      <div className="p-3">
+
+        <section className="flex justify-between pr-4 pt-3">
+          <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+          <div className="flex">
             <ButtonShare props={ props } />
-          </div>
-          <div className="col-3">
             <ButtonFavorite props={ props } />
           </div>
-        </div>
+        </section>
+        <section>
+          <h4
+            data-testid="recipe-category"
+            className="text-muted"
+          >
+            { recipe.strAlcoholic }
+          </h4>
 
-      </div>
-
-      <div className="row">
-        <div className="col-12">
-          <h3>{ recipe.strCategory }</h3>
-          <h5 data-testid="recipe-category">{ recipe.strAlcoholic }</h5>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-12">
-          <h1>Ingredients</h1>
-        </div>
-        {ingredients
+          <div>
+            <h1>Ingredients</h1>
+            {ingredients
           && (
-            <div className="col-12">
-              <ul>
+            <div>
+              <ul className="bg-neutral mr-2 rounded-md">
                 {ingredients.map((ingredient, index) => (
                   <li
                     data-testid={ `${index}-ingredient-name-and-measure` }
                     key={ `${ingredient.ingredientName}${index}` }
+                    className="bg-transparent p-1 pl-3"
                   >
                     {`${ingredient.ingredientName} - ${ingredient.ingredientMeasure}`}
                   </li>
                 ))}
               </ul>
             </div>)}
-      </div>
-
-      <div className="row">
-        <div className="col-12">
-          <h1>Instructions</h1>
-        </div>
-        <div>
-          <p data-testid="instructions">{ recipe.strInstructions }</p>
-        </div>
-      </div>
-
-      <div
-        className="row d-flex"
-        style={ { width: '100vw' } }
-      >
-        <div
-          className="d-flex flex-wrap"
-          style={ { width: '100vw' } }
-        >
-          <div className="row">
-            <h1>Recommendeds</h1>
           </div>
-          <Recommendeds items={ toAccompany } />
-        </div>
-      </div>
 
-      <div className="row">
-        <ButtonProgress props={ props } />
+          <div className="">
+            <h1>Instructions</h1>
+            <p
+              data-testid="instructions"
+              className="bg-neutral rounded-md p-4 mb-7"
+            >
+              { recipe.strInstructions }
+
+            </p>
+          </div>
+
+          <div className="flex flex-col w-full">
+            <h1>Recommendeds</h1>
+
+            <Recommendeds items={ toAccompany } />
+          </div>
+        </section>
+        <div className="mb-40">
+          <ButtonProgress props={ props } />
+        </div>
       </div>
 
     </div>

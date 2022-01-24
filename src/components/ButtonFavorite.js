@@ -55,7 +55,6 @@ function ButtonFavorite(props) {
   return (
     <button
       type="button"
-      className="btn"
       data-testid="favorite-btn"
       src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
       onClick={ handleFavoriteButton }
