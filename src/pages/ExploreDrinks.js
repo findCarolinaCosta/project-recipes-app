@@ -16,7 +16,7 @@ function ExploreDrinks() {
 
   return (
     <div className="bg-red-700 w-screen">
-      <div className=" p-3 bg-red-700 m-0">
+      <div className="p-3 bg-red-700 m-0">
         <Link to="/perfil">
           <button type="button">
             <img
