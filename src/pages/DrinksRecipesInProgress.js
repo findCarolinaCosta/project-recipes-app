@@ -48,7 +48,7 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
   const [isFavorite, setIsFavorite] = useState(favoriteStorage
     .some((favorite) => favorite.id === recipeID));
-  const { recipesDone, setRecipesDone, setIsRecipesDone } = useContext(Context);
+  const { setIsRecipesDone } = useContext(Context);
 
   const fetchRecipe = async (ID) => {
     const response = await fetchDrinkRecipeDetailsById(ID);
@@ -107,8 +107,20 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
   };
 
   const handleClick = () => {
-    setRecipesDone([...recipesDone, recipe]);
     setIsRecipesDone(true);
+    const data = new Date();
+    localStorage.setItem('doneRecipes',
+      JSON.stringify([{
+        id: recipe.idDrink,
+        type: 'bebida',
+        area: '',
+        category: recipe.strCategory,
+        alcoholicOrNot: recipe.strAlcoholic,
+        name: recipe.strDrink,
+        image: recipe.strDrinkThumb,
+        doneDate: `${data.getDate()}/${data.getMonth()}/${data.getFullYear()}`,
+        tags: [],
+      }]));
   };
 
   useEffect(() => {
@@ -219,6 +231,6 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
 
 DrinksRecipesInProgress.propTypes = {
   match: PropTypes.shape({
-    params: PropTypes.shape().isRequired,
+    params: PropTypes.any.isRequired,
   }).isRequired,
 };
