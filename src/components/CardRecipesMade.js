@@ -42,36 +42,42 @@ function CardRecipesMade() {
     <div>
       {doneRecipes && verifyListRecipes().map((recipe, index) => (
         recipe.type === 'comida' ? (
-          <div key={ recipe.id }>
+          <section
+            key={ recipe.id }
+            className="card shadow-lg bg-body rounded"
+          >
             <Link to={ `/comidas/${recipe.id}` }>
               <img
+                className="card-img-top"
                 src={ recipe.image }
                 alt="colocar-alt-da-img"
                 data-testid={ `${index}-horizontal-image` }
-                className="img-thumbnail"
               />
             </Link>
             <p
+              className="card-title bg-transparent"
               data-testid={ `${index}-horizontal-top-text` }
             >
               {`${recipe.area} - ${recipe.category}`}
             </p>
             <Link to={ `/comidas/${recipe.id}` }>
               <h1
+                className="card-title bg-transparent"
                 data-testid={ `${index}-horizontal-name` }
               >
                 {recipe.name}
               </h1>
             </Link>
             <p
+              className="card-title bg-transparent"
               data-testid={ `${index}-horizontal-done-date` }
             >
               {`Receita feita em: ${recipe.doneDate}`}
             </p>
             {gettingRecipeTags(recipe, index)}
             <button
+              className="card-title bg-transparent"
               type="button"
-              className="btn"
               data-testid={ `${index}-horizontal-share-btn` }
               src={ shareIcon }
               onClick={ () => handleClickCopy('comidas', recipe.id) }
@@ -79,30 +85,36 @@ function CardRecipesMade() {
               {wasCopied ? 'Link copiado!'
                 : <img src={ shareIcon } alt="Botão de compartilhamento" />}
             </button>
-          </div>
+          </section>
         ) : (
-          <div key={ recipe.id }>
+          <section
+            key={ recipe.id }
+            className="card shadow-lg bg-body rounded"
+          >
             <Link to={ `/bebidas/${recipe.id}` }>
               <img
                 src={ recipe.image }
                 alt="colocar-alt-da-img"
                 data-testid={ `${index}-horizontal-image` }
-                className="img-thumbnail"
+                className="card-img-top"
               />
             </Link>
             <p
+              className="card-title bg-transparent"
               data-testid={ `${index}-horizontal-top-text` }
             >
               {recipe.alcoholicOrNot}
             </p>
             <Link to={ `/bebidas/${recipe.id}` }>
               <h1
+                className="card-title bg-transparent"
                 data-testid={ `${index}-horizontal-name` }
               >
                 {recipe.name}
               </h1>
             </Link>
             <p
+              className="card-title bg-transparent"
               data-testid={ `${index}-horizontal-done-date` }
             >
               {`Receita feita em: ${recipe.doneDate}`}
@@ -110,7 +122,7 @@ function CardRecipesMade() {
             {gettingRecipeTags(recipe, index)}
             <button
               type="button"
-              className="btn"
+              className="card-title bg-transparent"
               data-testid={ `${index}-horizontal-share-btn` }
               src={ shareIcon }
               onClick={ () => handleClickCopy('bebidas', recipe.id) }
@@ -118,7 +130,7 @@ function CardRecipesMade() {
               {wasCopied ? 'Link copiado!'
                 : <img src={ shareIcon } alt="Botão de compartilhamento" />}
             </button>
-          </div>
+          </section>
         )
       ))}
     </div>
