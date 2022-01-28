@@ -110,8 +110,33 @@ export default function MealsRecipesInProgress({ match: { params } }) {
   const handleClick = () => {
     setRecipesDone([...recipesDone, recipe]);
     setIsRecipesDone(true);
+    const data = new Date();
+    const storageList = JSON.parse(localStorage.getItem('doneRecipes'));
+    localStorage.setItem('doneRecipes',
+      JSON.stringify([...storageList, {
+        id: recipe.idMeal,
+        type: 'comida',
+        area: recipe.strArea,
+        category: recipe.strCategory,
+        alcoholicOrNot: '',
+        name: recipe.strMeal,
+        image: recipe.strMealThumb,
+        doneDate: `${data.getDate()}/${data.getMonth()}/${data.getFullYear()}`,
+        tags: [recipe.strTags],
+      }]));
+    return storageList === null && localStorage.setItem('doneRecipes',
+      JSON.stringify([{
+        id: recipe.idMeal,
+        type: 'comida',
+        area: recipe.strArea,
+        category: recipe.strCategory,
+        alcoholicOrNot: '',
+        name: recipe.strMeal,
+        image: recipe.strMealThumb,
+        doneDate: `${data.getDate()}/${data.getMonth()}/${data.getFullYear()}`,
+        tags: [recipe.strTags],
+      }]));
   };
-
   useEffect(() => {
     fetchRecipe(recipeID);
   }, [recipeID]);

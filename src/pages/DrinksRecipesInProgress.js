@@ -109,7 +109,20 @@ export default function DrinksRecipesInProgress({ match: { params } }) {
   const handleClick = () => {
     setIsRecipesDone(true);
     const data = new Date();
+    const storageList = JSON.parse(localStorage.getItem('doneRecipes'));
     localStorage.setItem('doneRecipes',
+      JSON.stringify([...storageList, {
+        id: recipe.idDrink,
+        type: 'bebida',
+        area: '',
+        category: recipe.strCategory,
+        alcoholicOrNot: recipe.strAlcoholic,
+        name: recipe.strDrink,
+        image: recipe.strDrinkThumb,
+        doneDate: `${data.getDate()}/${data.getMonth()}/${data.getFullYear()}`,
+        tags: [],
+      }]));
+    return storageList === null && localStorage.setItem('doneRecipes',
       JSON.stringify([{
         id: recipe.idDrink,
         type: 'bebida',
