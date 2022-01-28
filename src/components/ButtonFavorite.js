@@ -58,6 +58,7 @@ function ButtonFavorite(props) {
       data-testid="favorite-btn"
       src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
       onClick={ handleFavoriteButton }
+      className="ml-4"
     >
       <img
         src={ isFavorite ? blackHeartIcon : whiteHeartIcon }

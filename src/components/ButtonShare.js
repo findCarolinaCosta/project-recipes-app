@@ -8,7 +8,7 @@ function ButtonShare() {
   return (
     <button
       type="button"
-      className="p-3"
+      className="align-middle"
       data-testid="share-btn"
       onClick={ () => {
         navigator.clipboard.writeText(window.location.href).then(() => {
@@ -18,7 +18,11 @@ function ButtonShare() {
       } }
     >
       {wasCopied ? 'Link copiado!'
-        : <img src={ shareIcon } alt="Botão de compartilhamento" />}
+        : <img
+          src={ shareIcon }
+          alt="Botão de compartilhamento"
+          className="bg-transparent"
+        />}
     </button>
   );
 }
