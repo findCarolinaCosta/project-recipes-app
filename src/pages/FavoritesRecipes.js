@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
+import ButtonShare from '../components/ButtonShare';
 
 const setFavoritesToState = () => {
   if (localStorage.getItem('favoriteRecipes')) {
@@ -25,30 +25,32 @@ export default function FavoritesRecipes() {
   };
 
   const handleFilter = ({ target }) => { setCurrFilter(target.name); };
-  const handleShareBtn = (recipeID) => {
-    const element = document.getElementById(`favorite-${recipeID}`);
-    element.innerText = 'Link copiado!';
-  };
 
   return (
-    <div className="favorite-container">
-      <div>
+    <div className="h-screen w-screen flex flex-col">
+      <section className="p-3 bg-red-700 m-0 grid grid-cols-4 grid-rows-1">
         <Link to="/perfil">
           <button type="button">
             <img
               src={ profileIcon }
               alt="profile-icon"
-              className="header-profile-icon"
+              className="bg-transparent mt-1"
               data-testid="profile-top-btn"
             />
           </button>
         </Link>
-        <h3 className="text-center" data-testid="page-title">Receitas Favoritas</h3>
-      </div>
-      <nav>
+        <h3
+          className="bg-transparent col-start-2 col-span-4 mt-auto mb-auto"
+          data-testid="page-title"
+        >
+          Receitas Favoritas
+
+        </h3>
+      </section>
+      <section className="btn-group p-3">
         <button
           type="button"
-          className="btn btn-outline-info btn-sm"
+          className="btn btn-outline-danger"
           data-testid="filter-by-all-btn"
           name="all"
           onClick={ handleFilter }
@@ -57,7 +59,7 @@ export default function FavoritesRecipes() {
         </button>
         <button
           type="button"
-          className="btn btn-outline-info btn-sm"
+          className="btn btn-outline-danger"
           data-testid="filter-by-food-btn"
           name="foods"
           onClick={ handleFilter }
@@ -66,88 +68,81 @@ export default function FavoritesRecipes() {
         </button>
         <button
           type="button"
-          className="btn btn-outline-info btn-sm"
+          className="btn btn-outline-danger"
           data-testid="filter-by-drink-btn"
           name="drinks"
           onClick={ handleFilter }
         >
           Drinks
         </button>
-      </nav>
-      {
-        favoriteStorage.filter((favorite) => {
-          if (currFilter === 'foods') {
-            return favorite.type === 'comida';
-          }
+      </section>
+      <section className="d-flex flex-wrap justify-content-center gap-5 p-3">
+        {
+          favoriteStorage.filter((favorite) => {
+            if (currFilter === 'foods') {
+              return favorite.type === 'comida';
+            }
 
-          if (currFilter === 'drinks') {
-            return favorite.type === 'bebida';
-          }
+            if (currFilter === 'drinks') {
+              return favorite.type === 'bebida';
+            }
 
-          return true;
-        }).map((favorite, index) => (
-          <div
-            className="card-favorite"
-            key={ favorite.name }
-          >
-            <Link to={ `/${favorite.type}s/${favorite.id}` }>
-              <img
-                src={ favorite.image }
-                alt="Imagem da receita"
-                className="img-card-favorite"
-                data-testid={ `${index}-horizontal-image` }
-              />
-            </Link>
-            <div className="card-text">
-              <p
-                data-testid={ `${index}-horizontal-top-text` }
+            return true;
+          }).map((favorite, index) => (
+            <section
+              key={ favorite.id }
+              className="card flex-row shadow-lg bg-body rounded w-full"
+            >
+              <Link
+                to={ `/${favorite.type}s/${favorite.id}` }
+                style={ { width: '40vw' } }
               >
-                { `${favorite.area} - ${favorite.category}`}
-                {` ${favorite.alcoholicOrNot}`}
-              </p>
-              <Link to={ `/${favorite.type}s/${favorite.id}` }>
-                <h5
-                  data-testid={ `${index}-horizontal-name` }
-                >
-                  { favorite.name }
-                </h5>
+                <img
+                  src={ favorite.image }
+                  alt="Imagem da receita"
+                  className="img-card-favorite"
+                  data-testid={ `${index}-horizontal-image` }
+                />
               </Link>
-              <nav className="in-progress-butons mb-36">
-                <button
-                  type="button"
-                  className="btn"
-                  id={ `favorite-${favorite.id}` }
-                  onClick={ () => {
-                    navigator.clipboard.writeText(window.location
-                      .href.replace('/receitas-favoritas', `/${favorite
-                        .type}s/${favorite.id}`))
-                      .then(() => { handleShareBtn(favorite.id); });
-                  } }
-                >
-                  <img
-                    src={ shareIcon }
-                    alt="Botão de compartilhamento"
-                    data-testid={ `${index}-horizontal-share-btn` }
-                  />
-                </button>
-                <button
-                  type="button"
-                  className="btn"
-                  name={ favorite.name }
-                  onClick={ () => handleFavoriteButton(favorite.id) }
-                >
-                  <img
-                    data-testid={ `${index}-horizontal-favorite-btn` }
-                    src={ blackHeartIcon }
-                    alt="Botão de compartilhamento"
-                  />
-                </button>
-              </nav>
-            </div>
-
-          </div>
-        ))
-      }
+              <div className="card-body bg-white">
+                <div className="bg-white flex justify-between gap-6">
+                  <p
+                    className="card-title bg-transparent
+                    text-muted m-auto text-xs align-middle"
+                    data-testid={ `${index}-horizontal-top-text` }
+                  >
+                    { `${favorite.area} - ${favorite.category}`}
+                    {` ${favorite.alcoholicOrNot}`}
+                  </p>
+                  <nav className="in-progress-butons mb-36">
+                    <ButtonShare />
+                    <button
+                      type="button"
+                      className="btn"
+                      name={ favorite.name }
+                      onClick={ () => handleFavoriteButton(favorite.id) }
+                    >
+                      <img
+                        data-testid={ `${index}-horizontal-favorite-btn` }
+                        src={ blackHeartIcon }
+                        alt="Botão de compartilhamento"
+                      />
+                    </button>
+                  </nav>
+                </div>
+                <Link to={ `/${favorite.type}s/${favorite.id}` }>
+                  <h1
+                    className="card-title bg-transparent m-auto"
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    { favorite.name }
+                  </h1>
+                </Link>
+              </div>
+            </section>
+          ))
+        }
+      </section>
     </div>
   );
 }
