@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import ButtonShare from '../components/ButtonShare';
-
-const setFavoritesToState = () => {
-  if (localStorage.getItem('favoriteRecipes')) {
-    return JSON.parse(localStorage.getItem('favoriteRecipes'));
-  }
-  return [];
-};
+import { Context } from '../context/Context';
+import returnImgFavorite from '../helpers/returnImgFavorite';
 
 export default function FavoritesRecipes() {
   const [favoriteStorage, setFavoriteStorage] = useState(setFavoritesToState());
   const [currFilter, setCurrFilter] = useState('all');
+  const { favoriteStorage, setFavoriteStorage } = useContext(Context);
 
   const handleFavoriteButton = (id) => {
     setFavoriteStorage((prev) => {
@@ -122,11 +118,7 @@ export default function FavoritesRecipes() {
                       name={ favorite.name }
                       onClick={ () => handleFavoriteButton(favorite.id) }
                     >
-                      <img
-                        data-testid={ `${index}-horizontal-favorite-btn` }
-                        src={ blackHeartIcon }
-                        alt="Botão de compartilhamento"
-                      />
+                      {returnImgFavorite(index)}
                     </button>
                   </nav>
                 </div>
