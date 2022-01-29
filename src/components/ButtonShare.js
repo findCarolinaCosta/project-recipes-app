@@ -8,7 +8,7 @@ function ButtonShare() {
   return (
     <button
       type="button"
-      className="align-middle"
+      className="align-middle h-4/6 w-10/12"
       data-testid="share-btn"
       onClick={ () => {
         navigator.clipboard.writeText(window.location.href).then(() => {

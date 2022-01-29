@@ -1,13 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import ButtonShare from '../components/ButtonShare';
 import { Context } from '../context/Context';
 import returnImgFavorite from '../helpers/returnImgFavorite';
 
 export default function FavoritesRecipes() {
-  const [favoriteStorage, setFavoriteStorage] = useState(setFavoritesToState());
   const [currFilter, setCurrFilter] = useState('all');
   const { favoriteStorage, setFavoriteStorage } = useContext(Context);
 
@@ -87,7 +85,7 @@ export default function FavoritesRecipes() {
           }).map((favorite, index) => (
             <section
               key={ favorite.id }
-              className="card flex-row shadow-lg bg-body rounded w-full"
+              className="card flex-row shadow-lg bg-body rounded"
             >
               <Link
                 to={ `/${favorite.type}s/${favorite.id}` }
@@ -101,7 +99,10 @@ export default function FavoritesRecipes() {
                 />
               </Link>
               <div className="card-body bg-white">
-                <div className="bg-white flex justify-between gap-6">
+                <div
+                  className="bg-white flex justify-between gap-6"
+                  style={ { height: '25px' } }
+                >
                   <p
                     className="card-title bg-transparent
                     text-muted m-auto text-xs align-middle"
@@ -110,25 +111,25 @@ export default function FavoritesRecipes() {
                     { `${favorite.area} - ${favorite.category}`}
                     {` ${favorite.alcoholicOrNot}`}
                   </p>
-                  <nav className="in-progress-butons mb-36">
+                  <section className="in-progress-butons mb-36 bg-transparent">
                     <ButtonShare />
                     <button
                       type="button"
-                      className="btn"
+                      className="ml-2 h-full w-full"
                       name={ favorite.name }
                       onClick={ () => handleFavoriteButton(favorite.id) }
                     >
                       {returnImgFavorite(index)}
                     </button>
-                  </nav>
+                  </section>
                 </div>
                 <Link to={ `/${favorite.type}s/${favorite.id}` }>
-                  <h1
-                    className="card-title bg-transparent m-auto"
+                  <h5
+                    className="card-title bg-transparent mt-3"
                     data-testid={ `${index}-horizontal-name` }
                   >
                     { favorite.name }
-                  </h1>
+                  </h5>
                 </Link>
               </div>
             </section>
