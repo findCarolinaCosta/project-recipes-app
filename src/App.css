@@ -93,7 +93,7 @@
 .style__btn {
   background-color: #6CE34F;
   color: black;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 8px;
   font-weight: 400;
   width: 90%;
@@ -104,6 +104,26 @@
 
 .style__btn:hover {
   background-color: rgb(0, 255, 0);
+}
+
+.style__btn-done {
+  background-color: rgb(0, 255, 0);
+  color: black;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 400;
+  width: 90%;
+  text-align: center;
+  margin: auto;
+  font-size: 29px;
+}
+
+.style__btn-done:disabled {
+  background-color: #6CE34F;
+}
+
+.style__btn-done:active {
+  background-color: #6CE34F;
 }
 
 /* Para telas com largura menor que 365px */
