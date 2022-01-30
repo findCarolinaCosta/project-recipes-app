@@ -146,7 +146,7 @@ function SearchBar() {
             <button
               data-testid="exec-search-btn"
               type="button"
-              className="recipes-search-btn"
+              className="btn btn-success"
               onClick={ () => searchRecipes(searchTerm) }
             >
               Buscar

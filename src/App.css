@@ -68,19 +68,6 @@
   padding: 7px;
   width: 95%;
 }
-
-.recipes-search-btn {
-  background-color: #d6e7d6;
-  border: none;
-  border-radius: 5px;
-  color: #a36c63;
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin: 10px 5px;
-  padding: 4px;
-  width: 25%;
-}
-
 .recipes-button[ disabled ] {
   background-color: #99b09d;
   color: #c9f0cf;
