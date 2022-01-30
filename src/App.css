@@ -42,7 +42,7 @@
 }
 
 .recipes-radio {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   margin: 2px 8px;
 }
 
@@ -243,4 +243,8 @@ li > * {
   height: 48px;
   margin-top: 50vw;
   margin-left: 20px;
+}
+
+.container-explore-area {
+  height: calc(2.2 * 100vh);
 }

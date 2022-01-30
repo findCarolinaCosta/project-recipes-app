@@ -13,7 +13,7 @@ function Header() {
   }
 
   return (
-    <div className="bg-red-700 p-2 w-screen top-0">
+    <div className="bg-red-700 p-2 w-screen top-0 text-center">
       <div className="flex justify-between p-3 bg-red-700">
         <Link to="/perfil">
           <button type="button">
