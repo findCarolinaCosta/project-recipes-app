@@ -24,6 +24,8 @@ In Recipes APP the following technologies are used::
 - [ReactJS](https://reactjs.org/) - A JavaScript library for building user interfaces!
 - [Bootstrap](https://getbootstrap.com/) - Bootstrap, the world’s most popular front-end.
 - [CSS](https://www.w3schools.com/css/css_intro.asp) - CSS is the language we use to style a Web page.
+- [TheMealDB API](https://www.themealdb.com/) An open, crowd-sourced database of Recipes from around the world.
+- [ThCockTailDB API](https://www.thecocktaildb.com/api.php) Database of drinks.
 
 ## Installation
 
@@ -44,6 +46,21 @@ npm start
 
 - Delete the .git folder to start with a new history.
 
+
+## Future implementations
+- Style application. ✅
+- Fix the withdrawal bug, which is directly linked to whether or not you have access to props at the time of redirection;
+- Desktop version;
+- Improve explore recipes screen;
+- Finalize visual requirements and screens for full operation;
+- Implement error page for when not found page;
+- Loading animation for when there is a wait on api queries;
+- Refactor code;
+- Add redux as an additional form of state manipulation for the application;
+
 ## Project report
 It was very good to do this project as a group, making an end-to-end web application was a challenge and being able to do it as a team made it a lot easier, breaking the big problems into small ones and thus reducing its complexity and making it easy to solve. 
 I thank all the members of the group, Trybe and myself for having managed to progress with always help and a lot of resilience.
+
+## Status report
+:waning_gibbous_moon: In progress
