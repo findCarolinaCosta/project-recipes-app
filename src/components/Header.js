@@ -13,25 +13,18 @@ function Header() {
   }
 
   return (
-    <div className="row">
-      <div className="col-sm-2">
+    <div className="bg-red-700 p-2 w-screen top-0 text-center">
+      <div className="flex justify-between p-3 bg-red-700">
         <Link to="/perfil">
           <button type="button">
             <img
               src={ profileIcon }
               alt="profile-icon"
-              className="header-profile-icon"
+              className="bg-red-700"
               data-testid="profile-top-btn"
             />
           </button>
         </Link>
-      </div>
-      <div className="col-sm-4">
-        {/* <h3 data-testid="page-title">
-          Comidas
-        </h3> */}
-      </div>
-      <div className="col-sm-6">
         <button
           type="button"
           onClick={ handleClick }
@@ -39,20 +32,23 @@ function Header() {
           <img
             src={ searchIcon }
             alt="search-icon"
-            className="header-search-icon"
+            className="bg-red-700"
             data-testid="search-top-btn"
           />
         </button>
-        { isVisible && <input
-          data-testid="search-input"
-          id="search-input"
-          type="text"
-          placeholder="Busca..."
-          className="recipes-search-input"
-          value={ searchTerm }
-          onChange={ ({ target }) => setSearchTerm(target.value) }
-        /> }
       </div>
+      { isVisible && <input
+        className="self-center border-2 border-danger bg-red transition px-2 h-10
+        rounded-md focus:outline-none text-black text-lg sm:px-5 pr-10 sm:pr-16
+        m-2 p-2 sm:h-12"
+        type="search"
+        name="search"
+        placeholder="Search"
+        id="search__input"
+        data-testid="search-input"
+        value={ searchTerm }
+        onChange={ ({ target }) => setSearchTerm(target.value) }
+      /> }
       <SearchBar />
     </div>
   );

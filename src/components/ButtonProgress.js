@@ -22,7 +22,7 @@ function ButtonProgress({ props }) {
   return (
     <button
       type="button"
-      className={ `fixed-bottom ${isRecipesDone && 'invisible'}` }
+      className={ `fixed-bottom ${isRecipesDone && 'invisible'} style__btn` }
       data-testid="start-recipe-btn"
       onClick={ handleClick }
     >

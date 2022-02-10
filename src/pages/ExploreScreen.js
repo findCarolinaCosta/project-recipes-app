@@ -6,36 +6,48 @@ import Footer from '../components/Footer';
 
 function ExploreScreen({ history }) {
   return (
-    <div className="row">
-      <div className="col-sm-2">
+    <div className="bg-red-700 w-screen">
+      <div className=" p-3 bg-red-700 m-0">
         <Link to="/perfil">
           <button type="button">
             <img
               src={ profileIcon }
               alt="profile-icon"
-              className="header-profile-icon"
+              className="bg-red-700"
               data-testid="profile-top-btn"
             />
           </button>
         </Link>
       </div>
-      <h3 className="text-center" data-testid="page-title">Explorar</h3>
-      <button
-        type="button"
-        data-testid="explore-food"
-        onClick={ () => history.push('/explorar/comidas') }
-      >
-        Explorar Comidas
+      <section className="w-screen h-screen flex flex-col">
+        <h3
+          className="text-center
+      text-red-900 font-black  p-3"
+          data-testid="page-title"
+        >
+          Explorar
+        </h3>
+        <div className="btn-group gap-4 p-3">
+          <button
+            type="button"
+            data-testid="explore-food"
+            onClick={ () => history.push('/explorar/comidas') }
+            className="btn btn-outline-danger"
+          >
+            Explorar Comidas
 
-      </button>
-      <button
-        type="button"
-        data-testid="explore-drinks"
-        onClick={ () => history.push('/explorar/bebidas') }
-      >
-        Explorar Bebidas
+          </button>
+          <button
+            type="button"
+            data-testid="explore-drinks"
+            onClick={ () => history.push('/explorar/bebidas') }
+            className="btn btn-outline-danger"
+          >
+            Explorar Bebidas
 
-      </button>
+          </button>
+        </div>
+      </section>
       <Footer />
     </div>
   );

@@ -10,7 +10,7 @@ import fetchMeals from '../services/fetchMeals';
 function FoodsRecipes(props) {
   const { mealsCategories, setMeals,
     setSharedProps, setRouteCurrent, setHistoryCurrent } = useContext(Context);
-  const maxCategories = 5;
+  const maxCategories = 8;
   const [nameBtn, setnameBtn] = useState('');
 
   useEffect(() => setSharedProps(props), [props, setSharedProps]);
@@ -31,11 +31,13 @@ function FoodsRecipes(props) {
     }
   };
   return (
-    <div className="recipes-container container-fluid">
-      <header className="row">
-        <Header className="container-fluid" props={ props } />
-      </header>
-      { mealsCategories.length !== 0
+    <div className="recipes-container container-fluid p-0 bg-red-700">
+      <div className="mb-52">
+        <header className="border-0">
+          <Header className="container-fluid" props={ props } />
+        </header>
+        <section className="btn-group flex-wrap" role="group">
+          { mealsCategories.length !== 0
       && mealsCategories.map((categorizeiMeal, index) => {
         if (index < maxCategories) {
           return (
@@ -47,6 +49,7 @@ function FoodsRecipes(props) {
               onClick={
                 (event) => filteredByCategory(categorizeiMeal.strCategory, event)
               }
+              className="btn btn-outline-danger"
             >
               {categorizeiMeal.strCategory}
 
@@ -55,22 +58,25 @@ function FoodsRecipes(props) {
         }
         return null;
       })}
-      <button
-        type="button"
-        data-testid="All-category-filter"
-        onClick={
-          () => fetchMeals()
-            .then((response) => setMeals(response.meals))
-        }
-      >
-        All
-      </button>
-      <div className="row">
-        <RecipeCard
-          className="container-fluid"
-          itemToMap="meals"
-          props={ props }
-        />
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={
+              () => fetchMeals()
+                .then((response) => setMeals(response.meals))
+            }
+            className="btn btn-outline-danger"
+          >
+            All
+          </button>
+        </section>
+        <div>
+          <RecipeCard
+            className="container-fluid"
+            itemToMap="meals"
+            props={ props }
+          />
+        </div>
       </div>
       <div>
         <Footer />
