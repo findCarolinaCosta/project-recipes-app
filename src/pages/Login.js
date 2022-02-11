@@ -27,11 +27,14 @@ function Login({ history }) {
 
   return (
     <section className="flex flex-column m-auto rounded-md w-11/12">
+      <span className="bg-white text-center">Versão mobile, por enquanto</span>
       <div
         className="bg-white rounded-md decoration-black
       text-base font-normal leading-6 p-12 relative"
       >
-        <h1 className="text-center bg-white mb-4 text-danger font-bold">Login</h1>
+        <h1 className="text-center bg-white mb-4 text-danger font-bold">
+          Login
+        </h1>
         <form className="bg-white">
           <div className="bg-white mb-1">
             <span className="bg-white">Email</span>
